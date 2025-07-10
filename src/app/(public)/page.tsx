@@ -1,11 +1,28 @@
-import React from 'react';
+import { ContactComponent, Container } from '@/components';
+import { StatsSection } from '@/components/wrappers/StartSection';
+import { HeroBanner } from '@/components/layout/DefaultLayout/Hero';
+import { BlogSection, ServicesTabs } from '@/components/pages';
+import { IndustrialIntro } from '@/components/pages/home/introduce';
+import ProductShowcase from '@/components/pages/home/product-showcase';
+import ProjectCarousel from '@/components/pages/home/project-carousel';
 
-const Pages = () => {
+export default function Home() {
   return (
-    <div>
-      <h1>Public Pages</h1>
-    </div>
-  );
-};
+    <main>
+      <HeroBanner />
+      <Container className="mt-16">
+        <IndustrialIntro />
+      </Container>
 
-export default Pages;
+      <StatsSection />
+      <Container>
+        <ServicesTabs />
+        <ProductShowcase />
+        <ProjectCarousel />
+
+        <BlogSection />
+        <ContactComponent />
+      </Container>
+    </main>
+  );
+}
