@@ -3,10 +3,9 @@
 import type React from 'react';
 import { useState } from 'react';
 //UI components
-import { Loader2, Plus } from 'lucide-react';
 
 //Components
-import { RefreshButton } from '@/components/button/RefreshButton';
+import { RefreshButton } from '@/components/button/refresh.button';
 import { CustomPagination } from '@/components/design/pagination';
 import {
   Button,
@@ -28,24 +27,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  LoadingSpin,
 } from '@/components';
 //Data
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Container } from '@/components/wrappers/Container';
-import { CategoryList } from '@/lib/responses/categoriesLib';
-import {
-  useCreateCategory,
-  useDeleteCategory,
-} from '@/hooks/category/useCategory';
-import ConfirmDialog from '@/components/design/Dialog';
+import { CategoryList } from '@/lib';
+import { useCreateCategory, useDeleteCategory } from '@/hooks';
+import { ConfirmDialog } from '@/components/design/Dialog';
 import { CategoryTable } from '@/components/pages/admin/table/CategoryTable';
 import { CreateCategoryItem } from '@/types';
 import { Form } from '@/components/ui/form';
 import { useAuthStore } from '@/store/authStore';
 import SelectCategoryFilter from '@/components/pages/admin/categoryFilter';
 import { Heading } from '@/components/design/Heading';
+import { Icons } from '@/assetts/icons';
 
 const formSchema = z.object({
   name: z.string().min(1, 'name is required'),
@@ -221,7 +219,7 @@ export default function CategoryManager() {
             >
               <DialogTrigger asChild>
                 <Button>
-                  <Plus className="mr-2 h-4 w-4" /> Tạo Thể Loại Mới
+                  <Icons.Plus className="mr-2 h-4 w-4" /> Tạo Thể Loại Mới
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px] bg-white">
@@ -295,9 +293,7 @@ export default function CategoryManager() {
                         </Button>
                         {userInfo?.role === 'admin' && (
                           <Button type="submit" disabled={isSubmitting}>
-                            {isSubmitting && (
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            )}
+                            {isSubmitting && <LoadingSpin />}
                             {isSubmitting ? 'Creating...' : 'Tạo Mới'}
                           </Button>
                         )}

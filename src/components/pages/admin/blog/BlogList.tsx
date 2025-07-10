@@ -3,20 +3,20 @@
 import { useState } from 'react';
 import { BlogCard } from './BlogCard';
 import { BlogPopularCard } from './BlogPopularCard';
-import CategoryCard from './BlogCategory';
-import { BlogList } from '@/lib/responses/blogLib';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { BlogList } from '@/lib';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { RefreshButton } from '@/components/button/RefreshButton';
+  Container,
+  CategoryCard,
+} from '@/components';
+import { RefreshButton } from '@/components/button/refresh.button';
 import { CustomPagination } from '@/components/design/pagination';
 import { DraftBlogCard } from './DraftBlogCard';
-import { Container } from '@/components/wrappers/Container';
 
 export enum BlogStatus {
   Show = 'show',
@@ -106,7 +106,7 @@ export default function BlogListData() {
 
         {/* Category Cards */}
         <div className="border-b border-gray-200 mb-8">
-          <CategoryCard onCategorySelect={setSelectedCategory} />
+          <CategoryCard type="blogs" onCategorySelect={setSelectedCategory} />
         </div>
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           {/* Filter status */}

@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { ProductList } from '@/lib/responses/productLib';
 import { useState } from 'react';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
-import { RefreshButton } from '@/components/button/RefreshButton';
-import Container from '@/components/wrappers/Container';
+import { RefreshButton } from '@/components/button/refresh.button';
+import { Container } from '@/components/wrappers/Container';
 import { CustomPagination } from '@/components/design/pagination';
 import {
   Select,
@@ -18,7 +18,8 @@ import {
 import { BlogStatus } from '../blog/BlogList';
 import AdminProductCategoryCard from './product-cateogry.admin';
 import { useDeleteProduct } from '@/hooks/product/useProduct';
-import ConfirmDialog from '@/components/design/Dialog';
+import { ConfirmDialog } from '@/components/design/Dialog';
+
 export default function ProductListPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -250,7 +251,7 @@ export default function ProductListPage() {
 
           <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-200">
             <div className="text-sm text-gray-500">
-              {pagination.current_page} of {pagination.total_page}
+              {pagination.total} of {pagination.total_page}
             </div>
             <div className="flex space-x-2">
               <CustomPagination

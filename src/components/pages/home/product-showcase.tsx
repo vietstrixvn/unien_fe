@@ -1,21 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import {
   CategoryCard,
-  CustomImage,
   ErrorLoading,
   LoadingSpin,
   SectionHeader,
 } from '@/components';
-import ProductCategoryCard from './ProductCategory';
 import { ProductList } from '@/lib/responses/productLib';
-import { Icons } from '@/assetts/icons';
 import ProductCard from '../product/product-card';
 import { MoreButton } from '@/components/button/more.button';
 import { ROUTES } from '@/lib';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 
 const EXCHANGE_RATE = 25500;
 
@@ -43,17 +39,19 @@ export default function ProductShowcase() {
       <div className="mx-auto">
         <CategoryCard onCategorySelect={setSelectedCategory} type="products" />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {isLoading ? (
-          <LoadingSpin />
-        ) : isError ? (
-          <ErrorLoading />
-        ) : (
-          products.map((product) => (
+      {isLoading ? (
+        <LoadingSpin message="Đang tải dịch vụ..." />
+      ) : isError ? (
+        <ErrorLoading message="Không thể tải dữ liệu dịch vụ. Vui lòng thử lại sau." />
+      ) : products.length === 0 ? (
+        <NoResultsFound />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
             <ProductCard key={product._id} product={product} />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

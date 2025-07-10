@@ -67,7 +67,13 @@ export interface ConfirmDialogProps {
  * ==========================
  * @PushButtonProps
  * ==========================
- */ export interface PushButtonProps {
+ */
+export interface PushButtonProps {
   href: string;
   label: string;
+}
+
+export interface RefreshButtonProps {
+  onClick: () => void;
+  className?: string;
 }

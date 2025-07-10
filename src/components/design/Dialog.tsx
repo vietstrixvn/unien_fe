@@ -10,7 +10,7 @@ import {
 } from '@/components';
 import { ConfirmDialogProps } from '@/types';
 
-const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
+export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   open,
   onOpenChange,
   question,
@@ -37,5 +37,3 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     </AlertDialog>
   );
 };
-
-export default ConfirmDialog;

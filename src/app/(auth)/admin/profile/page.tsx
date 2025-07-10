@@ -1,18 +1,21 @@
 'use client';
 
-import BackButton from '@/components/button/back.button';
+import {
+  BackButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Badge,
+} from '@/components';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useAuthStore } from '@/store/authStore';
 import { User, Phone, Mail, Shield } from 'lucide-react';
 
 const ProfilePage = () => {
-  // This would typically come from an API or context
   const userInfo = useAuthStore((state) => state.userInfo);
 
-  // Get initials for avatar fallback
   const getInitials = (name: string | undefined) => {
     if (!name) return '';
     return name
@@ -24,17 +27,17 @@ const ProfilePage = () => {
 
   return (
     <main className="mx-auto py-8 px-4">
-      <BackButton />
+      <BackButton href="/admin" />
 
       <div className="container mx-auto py-8 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto">
           <div className="flex flex-col md:flex-row gap-8">
             {/* Left column - Avatar and basic info */}
             <div className="md:w-1/3">
               <Card>
                 <CardContent className="pt-6 flex flex-col items-center">
                   <Avatar className="h-32 w-32 mb-4">
-                    <AvatarImage src="/Logo.png" alt={userInfo?.name} />
+                    <AvatarImage src="/Logo.svg" alt={userInfo?.name} />
                     <AvatarFallback className="text-2xl">
                       {getInitials(userInfo?.name)}
                     </AvatarFallback>
@@ -64,7 +67,7 @@ const ProfilePage = () => {
             <div className="md:w-2/3">
               <Card className="h-full">
                 <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
+                  <CardTitle>Thông tin hồ sơ</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
@@ -86,7 +89,7 @@ const ProfilePage = () => {
                   <Separator />
 
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium">Contact Information</h3>
+                    <h3 className="text-lg font-medium">Thông Tin Liên Hệ</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex items-center gap-3">
@@ -106,8 +109,6 @@ const ProfilePage = () => {
                       </div>
                     </div>
                   </div>
-
-                  <Separator />
                 </CardContent>
               </Card>
             </div>

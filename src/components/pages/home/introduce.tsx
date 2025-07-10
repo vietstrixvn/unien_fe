@@ -4,6 +4,7 @@ import { CustomImage } from '@/components/design/image.component';
 import { SectionHeader } from '@/components';
 import { ROUTES } from '@/lib';
 import AboutData from '@/data/about.data.json';
+import ContactData from '@/data/contact.data.json';
 
 export function IndustrialIntro() {
   return (
@@ -37,7 +38,7 @@ export function IndustrialIntro() {
             </p>
 
             {/* Services list */}
-            <ul className="mb-8 space-y-2">
+            <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
               {[
                 'Sản xuất kinh doanh',
                 'Công nghệ tiên tiến',
@@ -62,6 +63,15 @@ export function IndustrialIntro() {
                 Xem Thêm
                 <ArrowRight className="h-4 w-4" />
               </Link>
+              <div>
+                <h3 className="font-semibold">Liên Hệ Ngay Với Chúng Tôi</h3>
+                <a
+                  href={`tel:0906723985`}
+                  className="text-muted-foreground hover:text-main"
+                >
+                  {ContactData.ContactData.tel}
+                </a>
+              </div>
             </div>
           </div>
         </div>

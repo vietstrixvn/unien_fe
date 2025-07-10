@@ -25,11 +25,11 @@ import {
 } from '@/components/ui/form';
 import { Loader2, Trash2, Upload } from 'lucide-react';
 import { cn } from '@/utils/helpers/utils';
-import { CreateProductItem } from '@/types/types';
+import { CreateProductItem } from '@/types';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 import Image from 'next/image';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import {
@@ -185,10 +185,10 @@ export default function Page() {
   }
 
   return (
-    <Card className="w-full max-w-7xl mx-auto">
+    <Card className="w-full mx-auto">
       <CardHeader>
         <Heading
-          name="Create New Service"
+          name="Tạo Sản Phẩm"
           desc="Fill in the details below to publish a new service."
         />
       </CardHeader>

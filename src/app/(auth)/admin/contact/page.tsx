@@ -2,29 +2,30 @@
 
 import type React from 'react';
 import { useState } from 'react';
-//UI components
+
+import { ContactList } from '@/lib';
+import { useDeleteContact } from '@/hooks';
 
 //Components
-import { RefreshButton } from '@/components/button/RefreshButton';
-import { CustomPagination } from '@/components/design/pagination';
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select';
-import { Container } from '@/components/wrappers/Container';
-import { ContactList } from '@/lib/responses/contactLib';
-import { useDeleteContact } from '@/hooks/contact/useContact';
-import ConfirmDialog from '@/components/design/Dialog';
+  Container,
+  RefreshButton,
+  CustomPagination,
+  Heading,
+} from '@/components';
+
+import { ConfirmDialog } from '@/components/design/Dialog';
 import { ContactTable } from '@/components/pages/admin/table/ContactTable';
-import { Heading } from '@/components/design/Heading';
 import SelectStatus from '@/components/pages/admin/contact/selectStatus';
 
 export default function ProductManager() {
   const [selectedStatus, setSelectedStatus] = useState<string>();
-  const [refreshKey, setRefreshKey] = useState(0); // State to refresh data
+  const [refreshKey, setRefreshKey] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [selectedContact, setSelectedContact] = useState<string>();
@@ -33,8 +34,8 @@ export default function ProductManager() {
   const { mutate: deleteContact } = useDeleteContact();
 
   const handleDeleteClick = (id: string) => {
-    setSelectedContact(id); // Chọn contact cần xóa
-    setDeleteDialogOpen(true); // Mở dialog xác nhận xóa
+    setSelectedContact(id);
+    setDeleteDialogOpen(true);
   };
 
   const handleDeleteConfirm = () => {
@@ -73,7 +74,6 @@ export default function ProductManager() {
 
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1);
-    setRefreshKey((prev) => prev + 1); // Refresh data manually
   };
 
   return (
@@ -88,7 +88,7 @@ export default function ProductManager() {
           <div className="flex items-center gap-4">
             <RefreshButton onClick={handleRefresh} />
             <div className="flex items-center gap-4">
-              <span className="text-16 font-semibold">Show:</span>
+              <span className="text-16 font-semibold">Số Lượng:</span>
               <Select
                 onValueChange={handlePageSizeChange}
                 defaultValue={String(pageSize)}
@@ -105,7 +105,7 @@ export default function ProductManager() {
               </Select>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-16 font-semibold">Status:</span>
+              <span className="text-16 font-semibold">Trạng Thái:</span>
 
               <SelectStatus
                 selectedStatus={selectedStatus}
@@ -133,8 +133,8 @@ export default function ProductManager() {
       <ConfirmDialog
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
-        question="Are you sure"
-        description="This action cannot be undone. This will permanently delete the contact."
+        question="Bạn có chắc không ?"
+        description="Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn liên hệ."
         onConfirm={handleDeleteConfirm}
       />
     </>

@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { Pen, Trash } from 'lucide-react';
 import { useState } from 'react';
-import ConfirmDialog from '@/components/design/Dialog';
+import { ConfirmDialog } from '@/components/design/Dialog';
 import { useDeleteBlog } from '@/hooks/blog/useBlog';
 import { useAuthStore } from '@/store/authStore';
 

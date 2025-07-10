@@ -1,6 +1,6 @@
 'use client';
 
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 import { ServiceList } from '@/lib/responses/serviceLib';
 import { ServiceCard } from './ServiceCard';
 import { useState } from 'react';
@@ -10,13 +10,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components';
 import { PopularServiceCard } from './PopularServiceCard';
 import { CustomPagination } from '@/components/design/pagination';
-import { RefreshButton } from '@/components/button/RefreshButton';
+import { RefreshButton } from '@/components/button/refresh.button';
 import { DraftServiceCard } from './DraftServiceCard';
-import Heading from '@/components/design/Heading';
-import Container from '@/components/wrappers/Container';
+import { Heading } from '@/components/design/Heading';
+import { Container } from '@/components/wrappers/Container';
 import AdminServiceCategoryCard from './ServiceCategory';
 
 export enum ServiceStatus {

@@ -13,6 +13,7 @@ import {
   TabsContent,
 } from '@/components';
 import { MoreButton } from '@/components/button/more.button';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 
 export function ServicesTabs() {
   const { services, isLoading, isError } = ServiceList(
@@ -36,13 +37,15 @@ export function ServicesTabs() {
               {servicesData.ServiceData.description}
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {isLoading ? (
-              <LoadingSpin message="Đang tải dịch vụ..." />
-            ) : isError ? (
-              <ErrorLoading message="Không thể tải dữ liệu dịch vụ. Vui lòng thử lại sau." />
-            ) : (
-              services.map((service) => (
+          {isLoading ? (
+            <LoadingSpin message="Đang tải dịch vụ..." />
+          ) : isError ? (
+            <ErrorLoading message="Không thể tải dữ liệu dịch vụ. Vui lòng thử lại sau." />
+          ) : services.length === 0 ? (
+            <NoResultsFound />
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map((service) => (
                 <PostCard
                   key={service.title}
                   _id={service._id}
@@ -52,9 +55,9 @@ export function ServicesTabs() {
                   file={service.file}
                   type="service"
                 />
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>

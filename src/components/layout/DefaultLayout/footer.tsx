@@ -65,16 +65,28 @@ export default function Footer() {
           <div className="space-y-6">
             <h3 className="text-lg font-bold"></h3>
             <div className="grid grid-cols gap-x-8 gap-y-2">
-              <Link href="#" className="hover:text-main transition-colors">
+              <Link
+                href={ROUTES.COMPANY}
+                className="hover:text-main transition-colors"
+              >
                 Về Chúng Tôi
               </Link>
-              <Link href="#" className="hover:text-main transition-colors">
+              <Link
+                href={ROUTES.SERVICE.ROOT}
+                className="hover:text-main transition-colors"
+              >
                 Dịch Vụ & Công Nghiệp
               </Link>
-              <Link href="#" className="hover:text-main transition-colors">
+              <Link
+                href={ROUTES.PROJECT.ROOT}
+                className="hover:text-main transition-colors"
+              >
                 Dự Án
               </Link>
-              <Link href="#" className="hover:text-main transition-colors">
+              <Link
+                href={ROUTES.BLOG.ROOT}
+                className="hover:text-main transition-colors"
+              >
                 Bài Viết
               </Link>
             </div>
@@ -85,14 +97,15 @@ export default function Footer() {
             <div className="flex flex-col space-y-2">
               <p className="text-gray-400 ">
                 Người Đại Diện :
-                <span className="text-white"> Nguyễn Đức Hiệp</span>
+                <span className="text-white"> {appData.AppData.CEO}</span>
               </p>
               <p className="text-gray-400">
                 Địa Chỉ :
                 <span className="text-white"> {appData.AppData.address}</span>
               </p>
               <p className="text-gray-400 ">
-                Email:<span className="text-white"> unienvn@gmail.com</span>
+                Email:
+                <span className="text-white"> {appData.AppData.mail}</span>
               </p>
               <p className="text-gray-400 ">Tel:</p>
               <p className="text-gray-400 ">

@@ -2,32 +2,30 @@
 
 import React, { useState } from 'react';
 // UI Components
-import { ChevronDown, ChevronRight, Trash } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Icons } from '@/assetts/icons';
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components';
 import { Skeleton } from '@/components/ui/skeleton';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 // Hooks & Utils
 import { toast } from 'sonner';
-import { useUpdateStatus } from '@/hooks/contact/useContact';
+import { useUpdateStatus } from '@/hooks';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 // Types
 import { ContactColumns } from '@/types/columns';
-import type { ContactTableProps } from '@/types/types';
+import type { ContactTableProps } from '@/types';
 
 const statusColors = {
   approved: 'text-green-600 bg-green-100',
@@ -111,9 +109,9 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                           className="h-8 w-8"
                         >
                           {expandedRows[contact._id] ? (
-                            <ChevronDown className="h-4 w-4" />
+                            <Icons.Eye className="h-4 w-4" />
                           ) : (
-                            <ChevronRight className="h-4 w-4" />
+                            <Icons.EyeClosed className="h-4 w-4" />
                           )}
                         </Button>
                       )}
@@ -163,7 +161,7 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                       onClick={() => onDelete(contact._id)}
                       className="bg-red-500 hover:bg-red-600"
                     >
-                      <Trash className="h-4 w-4 text-white" />
+                      <Icons.Trash className="h-4 w-4 text-white" />
                     </Button>
                   </TableCell>
                 </TableRow>

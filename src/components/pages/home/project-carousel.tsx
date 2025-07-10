@@ -6,15 +6,20 @@ import {
   SectionHeader,
   Tabs,
   TabsContent,
+  MoreButton,
+  NoResultsFound,
 } from '@/components';
-import { ProjectList } from '@/lib/responses/projectLib';
+import { ProjectList } from '@/lib';
 import { ProjectListData } from '@/types';
 import Link from 'next/link';
 import { ROUTES } from '@/lib';
-import { MoreButton } from '@/components/button/more.button';
 
-export default function ProjectCarousel() {
-  const { projects, isLoading, isError } = ProjectList(1, { limit: 3 }, 0);
+export function ProjectCarousel() {
+  const prams = {
+    limit: 3,
+  };
+
+  const { projects, isLoading, isError } = ProjectList(1, prams, 0);
 
   return (
     <div className="mx-auto px-4 py-12">
@@ -22,24 +27,23 @@ export default function ProjectCarousel() {
         <TabsContent value="services" className="space-y-8">
           <div>
             <div className="flex items-center justify-between mb-6">
-              <SectionHeader
-                title="Các Dự Án
-Tiêu Biểu"
-              />
-              <MoreButton href="/company/project" />
+              <SectionHeader title="Các Dự Án Tiêu Biểu" />
+              <MoreButton href={ROUTES.PROJECT.ROOT} />
             </div>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {isLoading ? (
-              <LoadingSpin message="Đang tải dịch vụ..." />
-            ) : isError ? (
-              <ErrorLoading message="Không thể tải dữ liệu dịch vụ. Vui lòng thử lại sau." />
-            ) : (
-              projects.map((service) => (
+          {isLoading ? (
+            <LoadingSpin message="Đang tải dịch vụ..." />
+          ) : isError ? (
+            <ErrorLoading message="Không thể tải dữ liệu dịch vụ. Vui lòng thử lại sau." />
+          ) : projects.length === 0 ? (
+            <NoResultsFound />
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {projects.map((service) => (
                 <ServiceCard key={service.title} service={service} />
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>
@@ -49,7 +53,7 @@ Tiêu Biểu"
 function ServiceCard({ service }: { service: ProjectListData }) {
   return (
     <Link
-      href={service.slug}
+      href={ROUTES.PROJECT.DETAIL(service.slug)}
       className="group relative overflow-hidden lg:aspect-[3/2]"
     >
       <div

@@ -1,15 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import BackButton from '@/components/button/back.button';
-import Container from '@/components/wrappers/Container';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { BackButton, Container, Input, Button, Label } from '@/components';
 import { CreateManagerData } from '@/types/types';
 import { toast } from 'sonner';
 import { useCreateManager } from '@/hooks/auth/useManager';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 
 const Page = () => {
   const { mutate: createManager } = useCreateManager();
@@ -116,7 +112,7 @@ const Page = () => {
 
   return (
     <Container>
-      <BackButton />
+      <BackButton href="/admin/user" />
       <div className="flex justify-between items-center">
         <Heading name="Tạo quản trị viên" desc="Tạo tài khoản quản lý mới" />
         <Button onClick={handleCreateManager} disabled={loading}>

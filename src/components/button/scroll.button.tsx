@@ -1,5 +1,6 @@
 'use client';
 
+import { Icons } from '@/assetts/icons';
 import { ArrowUp, Facebook } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -40,6 +41,16 @@ export const ScrollToTopButton: React.FC = () => {
         aria-label="Zalo"
       >
         <Image src="/icons/zalo.svg" alt="zalo icon" width={40} height={40} />
+      </a>
+
+      <a
+        href="tel:0906723985"
+        className="w-12 h-12 bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition duration-300 call-glow"
+        aria-label="Gọi ngay"
+      >
+        <span className="call-wiggle">
+          <Icons.PhoneCall size={24} />
+        </span>
       </a>
 
       {isVisible && (

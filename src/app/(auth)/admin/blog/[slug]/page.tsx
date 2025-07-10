@@ -1,20 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { BackButton } from '@/components/button/back.button';
-import { BlogDetailData } from '@/lib/responses/blogLib';
+import { BlogDetailData } from '@/lib';
 import remarkGfm from 'remark-gfm';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
 import ReactMarkdown from 'react-markdown';
-import { CustomImage } from '@/components';
+import { CustomImage, LoadingSpin } from '@/components';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
-
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center h-96">
-    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-);
 
 export default function Page() {
   const { slug } = useParams();
@@ -23,7 +16,7 @@ export default function Page() {
   const { blog, isLoading, isError } = BlogDetailData(blogSlug, 0);
 
   // Kiểm tra nếu blog là undefined
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpin />;
   if (isError || !blog) return <NoResultsFound />;
 
   return (

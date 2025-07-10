@@ -3,7 +3,6 @@
 import type React from 'react';
 //UI components
 import { Pencil, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 import {
   Table,
@@ -12,20 +11,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+  Button,
+} from '@/components';
 
-//Data
 //Types
-import { CategoryColumns, CategoryTableProps } from '@/types/types';
+import { CategoryColumns, CategoryTableProps } from '@/types';
 //Hooks
 
 import { Skeleton } from '@/components/ui/skeleton';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 import {
   SelectCategoryStatus,
   VisibilityCategoryOption,
 } from '../categryStatus';
-import { useUpdateCategoryStatus } from '@/hooks/category/useCategory';
+import { useUpdateCategoryStatus } from '@/hooks';
 import { toast } from 'sonner';
 import { useAuthStore } from '@/store/authStore';
 

@@ -57,17 +57,19 @@ export function HeroBanner() {
       <div className="relative z-10 h-full flex flex-col justify-end pb-20">
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8 ">
           <div className="animate-fadeIn space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight max-w-3xl leading-tight">
-              <span>
-                <Image src="/logo.svg" alt="Logo" width={80} height={80} />
-                UNIEN
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight max-w-3xl leading-tight">
+              <span className="flex items-center gap-2">
+                <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+                <span className="text-xl sm:text-2xl md:text-4xl lg:text-5xl">
+                  UNIEN
+                </span>
               </span>
-              <span className="block text-2xl md:text-4xl lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground to-primary-foreground/80 dark:from-primary-foreground dark:to-primary-foreground/80 animate-gradient">
+              <span className="block text-base sm:text-xl md:text-3xl lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground to-primary-foreground/80 dark:from-primary-foreground dark:to-primary-foreground/80 animate-gradient">
                 {AppData.AppData.slogan}
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-white/90 max-w-2xl leading-relaxed">
               {AppData.AppData.intro}
             </p>
 
@@ -75,7 +77,7 @@ export function HeroBanner() {
               <Button
                 size="lg"
                 className={cn(
-                  'group text-base rounded-none transition-all duration-300 ease-in-out ',
+                  'group text-base rounded-none transition-all duration-300 ease-in-out',
                   'hover:shadow-lg hover:scale-105 active:scale-95 bg-main hover:bg-main/80'
                 )}
                 onClick={() => router.push(ROUTES.CONTACT)}
@@ -90,7 +92,6 @@ export function HeroBanner() {
                 className="bg-background/10 backdrop-blur-sm border-white/20 text-white hover:bg-background/20 hover:text-white text-base rounded-none transition-all duration-300 ease-in-out hover:shadow-lg"
                 onClick={() => router.push(ROUTES.SERVICE.ROOT)}
               >
-                {/* button content */}
                 Dịch Vụ
               </Button>
             </div>

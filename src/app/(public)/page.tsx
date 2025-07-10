@@ -4,7 +4,7 @@ import { HeroBanner } from '@/components/layout/DefaultLayout/Hero';
 import { BlogSection, ServicesTabs } from '@/components/pages';
 import { IndustrialIntro } from '@/components/pages/home/introduce';
 import ProductShowcase from '@/components/pages/home/product-showcase';
-import ProjectCarousel from '@/components/pages/home/project-carousel';
+import { ProjectCarousel } from '@/components/pages/home/project-carousel';
 
 export default function Home() {
   return (

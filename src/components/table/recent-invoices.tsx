@@ -2,24 +2,17 @@
 
 import { Badge } from '@/components/ui/badge';
 import { ContactList } from '@/lib/responses/contactLib';
-import { Loader2 } from 'lucide-react';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
+import { LoadingSpin } from '../loading/loading';
 
 export function RecentInvoices() {
-  const { contacts, isLoading, isError } = ContactList(
-    1,
-    {
-      limit: 5,
-    },
-    0
-  );
+  const params = {
+    limit: 5,
+  };
+  const { contacts, isLoading, isError } = ContactList(1, params, 0);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
-    );
+    return <LoadingSpin />;
   }
 
   if (isError) {
@@ -55,7 +48,7 @@ export function RecentInvoices() {
                 {invoice.email}
               </td>
               <td className="px-4 py-3 text-muted-foreground">
-                {invoice.createdAt}
+                {/* {invoice.createdAt} */}
               </td>
               <td className="px-4 py-3">
                 <Badge

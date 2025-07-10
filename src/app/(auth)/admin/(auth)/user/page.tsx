@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Trash2, Filter, Plus, AlertCircle } from 'lucide-react';
-import { RefreshButton } from '@/components/button/RefreshButton';
+import { RefreshButton } from '@/components/button/refresh.button';
 import {
   Container,
   Select,
@@ -26,7 +26,7 @@ import {
 import { CustomPagination } from '@/components/design/pagination';
 import { UserList } from '@/lib/';
 import { useDeleteManager } from '@/hooks/auth/useManager';
-import ConfirmDialog from '@/components/design/Dialog';
+import { ConfirmDialog } from '@/components/design/Dialog';
 import UserRolesChart from '@/components/pages/admin/chart/user-roles-chart';
 import { Badge } from '@/components/ui/badge';
 import { Heading } from '@/components/design/Heading';
@@ -73,7 +73,7 @@ const Page = () => {
     setRefreshKey((prev) => prev + 1);
   };
 
-  const getRoleColor = (role) => {
+  const getRoleColor = (role: any) => {
     switch (role?.toLowerCase()) {
       case 'admin':
         return 'bg-purple-100 text-purple-800';

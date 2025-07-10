@@ -1,8 +1,6 @@
 'use client';
 
-import PushButton from '@/components/button/push.button';
-import Container from '@/components/wrappers/Container';
-import Heading from '@/components/design/Heading';
+import { PushButton, Container, Heading } from '@/components';
 import ServiceListDataAdmin from '@/components/pages/admin/service/ServiceList';
 import React from 'react';
 

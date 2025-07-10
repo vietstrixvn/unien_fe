@@ -10,11 +10,14 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
   type,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const { categories, isLoading, isError } = CategoryList(
-    1,
-    { limit: 20, type: type },
-    0
-  );
+
+  const prams = {
+    limit: 20,
+    type: type,
+    status: 'show',
+  };
+
+  const { categories, isLoading, isError } = CategoryList(1, prams, 0);
 
   const handleCategoryClick = (categoryId: string | null) => {
     setSelectedCategory(categoryId);

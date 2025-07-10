@@ -48,6 +48,13 @@ import {
   AlertTriangle,
   ChevronRight,
   ArrowRight,
+  ArrowUp,
+  PhoneCall,
+  RefreshCcwDot,
+  Eye,
+  EyeClosed,
+  Trash,
+  Plus,
 } from 'lucide-react';
 import { Box, ShoppingBag, ClipboardList } from 'lucide-react';
 
@@ -57,9 +64,19 @@ import { Box, ShoppingBag, ClipboardList } from 'lucide-react';
 //   logoNameW,
 // };
 
-export const Arrows = { ArrowRight };
+export const Arrows = { ArrowRight, ArrowUp };
 
-export const Icons = { Loader2, AlertTriangle, ChevronRight };
+export const Icons = {
+  Loader2,
+  AlertTriangle,
+  ChevronRight,
+  PhoneCall,
+  RefreshCcwDot,
+  Eye,
+  EyeClosed,
+  Trash,
+  Plus,
+};
 
 export const ComponentsIcons = {
   Search,
