@@ -1,42 +1,28 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { BlogCard } from './BlogCard';
-import { BlogPopularCard } from './BlogPopularCard';
 import { BlogList } from '@/lib';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Container,
-  CategoryCard,
-} from '@/components';
-import { RefreshButton } from '@/components/button/refresh.button';
+import { Container, LoadingSpin } from '@/components';
 import { CustomPagination } from '@/components/design/pagination';
-import { DraftBlogCard } from './DraftBlogCard';
-
-export enum BlogStatus {
-  Show = 'show',
-  Hide = 'hide',
-  Popular = 'popular',
-  Draft = 'draft',
-}
+import { AdminFilter } from '@/components/design/filter.design';
 
 export default function BlogListData() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStatus, setSelectedStatus] = useState('all');
-  const [refreshKey, setRefreshKey] = useState(0); // State to refresh data
+  const [refreshKey, setRefreshKey] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const params = {
-    ...(selectedStatus !== 'all' && { status: selectedStatus }),
-    category: selectedCategory ?? undefined,
-    limit: pageSize,
-  };
+  const params = useMemo(
+    () => ({
+      ...(selectedStatus !== 'all' && { status: selectedStatus }),
+      category: selectedCategory ?? undefined,
+      page_size: pageSize,
+    }),
+    [selectedStatus, selectedCategory, pageSize]
+  );
 
   // Lấy danh sách blogs
   const { blogs, isLoading, isError, pagination } = BlogList(
@@ -44,22 +30,23 @@ export default function BlogListData() {
     params,
     refreshKey
   );
-  const { blogs: popularBlogs } = BlogList(
-    1,
-    { limit: 100, status: 'popular' },
-    0
+
+  const filter = useMemo(
+    () => ({
+      button: {
+        href: '/admin/blog/create-blog',
+        title: 'Tạo Dịch Vụ',
+      },
+      values: 'vll',
+      type: 'blogs',
+    }),
+    []
   );
-
-  const { blogs: draftBlogs } = BlogList(1, { limit: 100, status: 'draft' }, 0);
-
-  // Lấy danh sách categories
-
-  if (isLoading || isError) return <p>Loading...</p>;
 
   const handlePageSizeChange = (value: string) => {
     const newSize = parseInt(value, 10);
     setPageSize(newSize);
-    setCurrentPage(1); // Reset về trang đầu tiên khi đổi số lượng
+    setCurrentPage(1);
   };
 
   const handlePageChange = (page: number) => {
@@ -72,101 +59,51 @@ export default function BlogListData() {
     setRefreshKey((prev) => prev + 1);
   };
 
+  const handleCategoryChange = useCallback((value: string) => {
+    setSelectedCategory(value === 'all' ? null : value);
+    setCurrentPage(1);
+  }, []);
+
+  const handleStatusChange = useCallback((value: string) => {
+    setSelectedStatus(value);
+    setCurrentPage(1);
+  }, []);
+
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <Container className="mx-auto">
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Bài Viết Nháp
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {draftBlogs.map((blog) => (
-              <DraftBlogCard key={blog._id} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {isLoading ? (
+          <LoadingSpin />
+        ) : isError ? (
+          <NoResultsFound />
+        ) : (
+          <>
+            <AdminFilter
+              filter={filter}
+              handleRefresh={handleRefresh}
+              onPageSizeChange={handlePageSizeChange}
+              onCategoryChange={handleCategoryChange}
+              onStatusChange={handleStatusChange}
+            />
 
-        {/* Popular Blogs */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Bài Viết Phổ Biến
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {popularBlogs && popularBlogs.length > 0 ? (
-              popularBlogs.map((post) => (
-                <BlogPopularCard key={post._id} blog={post} />
-              ))
-            ) : (
-              <div className="col-span-full flex items-center justify-center py-24">
-                <NoResultsFound />
+            <section className="mb-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {blogs && blogs.length > 0 ? (
+                  blogs.map((blog) => <BlogCard key={blog._id} blog={blog} />)
+                ) : (
+                  <div className="col-span-full flex items-center justify-center py-24">
+                    <NoResultsFound />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </section>
-
-        {/* Category Cards */}
-        <div className="border-b border-gray-200 mb-8">
-          <CategoryCard type="blogs" onCategorySelect={setSelectedCategory} />
-        </div>
-        <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          {/* Filter status */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-            <Select
-              onValueChange={(value) => setSelectedStatus(value)}
-              value={selectedStatus}
-            >
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Lọc theo trạng thái" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value={BlogStatus.Show}>Hiện</SelectItem>
-                <SelectItem value={BlogStatus.Hide}>Ẩn</SelectItem>
-                <SelectItem value={BlogStatus.Popular}>Phổ Biến</SelectItem>
-                <SelectItem value={BlogStatus.Draft}>Nháp</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <RefreshButton onClick={handleRefresh} />
-          </div>
-
-          {/* Page size */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium whitespace-nowrap">Show:</span>
-            <Select
-              onValueChange={handlePageSizeChange}
-              defaultValue={String(pageSize)}
-            >
-              <SelectTrigger className="w-[80px]">
-                <SelectValue placeholder={pageSize} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="5">5</SelectItem>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-                <SelectItem value="50">50</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        {/* All Blogs */}
-        <section className="mb-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {blogs && blogs.length > 0 ? (
-              blogs.map((blog) => <BlogCard key={blog._id} blog={blog} />)
-            ) : (
-              <div className="col-span-full flex items-center justify-center py-24">
-                <NoResultsFound />
-              </div>
-            )}
-          </div>
-          <CustomPagination
-            currentPage={currentPage}
-            totalPage={pagination.total_page}
-            onPageChange={handlePageChange}
-          />
-        </section>
+              <CustomPagination
+                currentPage={currentPage}
+                totalPage={pagination.total_page}
+                onPageChange={handlePageChange}
+              />
+            </section>
+          </>
+        )}
       </Container>
     </main>
   );

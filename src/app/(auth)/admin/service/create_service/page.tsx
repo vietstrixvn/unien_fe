@@ -30,7 +30,7 @@ import { CreateServiceItem } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 import Image from 'next/image';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import {

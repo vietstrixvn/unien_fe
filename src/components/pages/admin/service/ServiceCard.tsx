@@ -5,7 +5,8 @@ import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { Pen, Trash } from 'lucide-react';
 import { useDeleteService } from '@/hooks/service/useService';
 import { useState } from 'react';
-import ConfirmDialog from '@/components/design/Dialog';
+import { ConfirmDialog } from '@/components/design/Dialog';
+import { truncateText } from '@/utils';
 
 interface Post {
   _id: string;
@@ -33,8 +34,8 @@ export function ServiceCard({ post }: PostCardProps) {
   const { mutate: deleteService } = useDeleteService();
 
   const handleDeleteClick = (id: string) => {
-    setSelectedService(id); // Chọn contact cần xóa
-    setDeleteDialogOpen(true); // Mở dialog xác nhận xóa
+    setSelectedService(id);
+    setDeleteDialogOpen(true);
   };
 
   const handleDeleteConfirm = () => {
@@ -70,7 +71,9 @@ export function ServiceCard({ post }: PostCardProps) {
         <div className="p-4">
           <Link href={`/admin/service/${post.slug}`}>
             <h3 className="font-semibold text-gray-800 mb-2">{post.title}</h3>
-            <p className="text-gray-600 text-sm mb-4">{post.content}</p>
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+              {truncateText(post.content, 300)}
+            </p>
           </Link>
           <div className="flex items-start justify-between w-full">
             {/* Avatar + Info */}
