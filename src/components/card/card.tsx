@@ -12,7 +12,7 @@ export function PostCard({ _id, title, slug, content, file, type }: CardProps) {
   return (
     <article
       key={_id}
-      className="overflow-hidden shadow-lg hover:shadow-md transition-shadow duration-300 hover:bg-main group"
+      className="overflow-hidden shadow-lg hover:shadow-md transition-shadow duration-300 hover:bg-main group hover:text-white"
     >
       <Link href={href} className="block">
         <div className="relative overflow-hidden">

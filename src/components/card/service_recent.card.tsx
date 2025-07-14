@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React from 'react';
-import NoResultsFound from '../design/NoResultsFound';
+import { NoResultsFound } from '../design/NoResultsFound';
 import { ServiceList } from '@/lib';
 import { LoadingSpin } from '../loading/loading';
 

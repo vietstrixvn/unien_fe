@@ -40,7 +40,7 @@ import { CategoryList } from '@/lib/responses/categoriesLib';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
 const ACCEPTED_IMAGE_TYPES = [

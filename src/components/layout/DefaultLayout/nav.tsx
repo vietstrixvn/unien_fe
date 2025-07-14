@@ -16,7 +16,7 @@ const navItems = [
   { name: 'Sản Phẩm', href: '/products' },
 ];
 
-export default function Navbar() {
+export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();

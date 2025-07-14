@@ -1,10 +1,13 @@
 import { ContactComponent, Container } from '@/components';
 import { StatsSection } from '@/components/wrappers/StartSection';
 import { HeroBanner } from '@/components/layout/DefaultLayout/Hero';
-import { BlogSection, ServicesTabs } from '@/components/pages';
-import { IndustrialIntro } from '@/components/pages/home/introduce';
-import ProductShowcase from '@/components/pages/home/product-showcase';
-import { ProjectCarousel } from '@/components/pages/home/project-carousel';
+import {
+  IndustrialIntro,
+  ProjectCarousel,
+  ProductShowcase,
+  BlogSection,
+  ServicesTabs,
+} from '@/components/pages';
 
 export default function Home() {
   return (
@@ -19,7 +22,6 @@ export default function Home() {
         <ServicesTabs />
         <ProductShowcase />
         <ProjectCarousel />
-
         <BlogSection />
         <ContactComponent />
       </Container>

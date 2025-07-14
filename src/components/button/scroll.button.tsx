@@ -34,7 +34,7 @@ export const ScrollToTopButton: React.FC = () => {
       </a>
 
       <a
-        href="https://zalo.me/your_zalo_id"
+        href="https://zaloapp.com/qr/p/jjcnb0x5v67k"
         target="_blank"
         rel="noopener noreferrer"
         className="w-12 h-12 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 flex items-center justify-center transition duration-300"

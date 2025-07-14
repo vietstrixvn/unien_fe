@@ -15,7 +15,7 @@ import { NoResultsFound } from '@/components/design/NoResultsFound';
 
 const EXCHANGE_RATE = 25500;
 
-export default function ProductShowcase() {
+export function ProductShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const params = {
     category: selectedCategory ?? undefined,

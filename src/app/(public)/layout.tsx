@@ -1,7 +1,7 @@
 'use client';
 
 import { ScrollToTopButton } from '@/components/button/scroll.button';
-import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout';
+import { DefaultLayout } from '@/components/layout/DefaultLayout/DefaultLayout';
 import { RadiatingLoader } from '@/components';
 import React, { useState } from 'react';
 

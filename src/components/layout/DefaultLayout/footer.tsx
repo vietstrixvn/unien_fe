@@ -4,7 +4,7 @@ import Image from 'next/image';
 import appData from '@/data/app.data.json';
 import { ROUTES } from '@/lib';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="container mx-auto px-4 py-12">

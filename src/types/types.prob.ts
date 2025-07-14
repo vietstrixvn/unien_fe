@@ -77,3 +77,7 @@ export interface RefreshButtonProps {
   onClick: () => void;
   className?: string;
 }
+
+export interface DefaultLayoutProps {
+  children: ReactNode;
+}
