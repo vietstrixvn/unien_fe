@@ -7,7 +7,7 @@
 import { Pagination } from '../base/base.type';
 import { ChildCategory, UserDataComponents } from '../types';
 
-interface BlogList {
+export interface BlogList {
   _id: string;
   title: string;
   content: string;

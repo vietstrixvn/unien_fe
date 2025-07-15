@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
 import RelatedPosts from '@/components/pages/blog/RelatedPosts';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
@@ -16,7 +16,7 @@ import {
   SEO,
 } from '@/components';
 import { ROUTES, ServiceDetailData } from '@/lib';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 import { ServiceRecent } from '@/components/card/service_recent.card';
 
 export default function Page() {
@@ -131,7 +131,7 @@ export default function Page() {
 
         <div className="mt-16">
           <ContactSection href={ROUTES.BLOG.ROOT} title="Bài Viết" />
-          <RelatedPosts />\
+          <RelatedPosts />
         </div>
       </Container>
     </>

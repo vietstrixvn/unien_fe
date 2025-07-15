@@ -8,7 +8,7 @@ import { cn } from '@/utils/helpers/utils';
 import SidebarFilters from './product-side-filters';
 import ProductCard from './product-card';
 import { ProductList } from '@/lib/responses/productLib';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { NoResultsFound } from '@/components';
 import { LoadingSpin } from '@/components/loading/loading';
 
 export function ProductListingPage() {

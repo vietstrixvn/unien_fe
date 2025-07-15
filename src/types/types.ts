@@ -220,7 +220,7 @@ export interface CreateProjectItem {
  * ==========================
  */
 
-interface ServiceList {
+export interface ServiceList {
   _id: string;
   title: string;
   content: string;

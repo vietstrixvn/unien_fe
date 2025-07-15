@@ -15,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { BlogStatus } from '../blog/BlogList';
 import AdminProductCategoryCard from './product-cateogry.admin';
 import { useDeleteProduct } from '@/hooks/product/useProduct';
 import { ConfirmDialog } from '@/components/design/Dialog';
@@ -116,13 +115,13 @@ export default function ProductListPage() {
               <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="Lọc theo trạng thái" />
               </SelectTrigger>
-              <SelectContent>
+              {/* <SelectContent>
                 <SelectItem value="all">All</SelectItem>
                 <SelectItem value={BlogStatus.Show}>Hiện</SelectItem>
                 <SelectItem value={BlogStatus.Hide}>Ẩn</SelectItem>
                 <SelectItem value={BlogStatus.Popular}>Phổ Biến</SelectItem>
                 <SelectItem value={BlogStatus.Draft}>Nháp</SelectItem>
-              </SelectContent>
+              </SelectContent> */}
             </Select>
 
             <RefreshButton onClick={handleRefresh} />

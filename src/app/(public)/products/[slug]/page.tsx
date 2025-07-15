@@ -5,11 +5,12 @@ import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProductGallery } from '@/components/pages/product/product-gallery';
-import { ProductDetailData } from '@/lib/responses/productLib';
-import NoResultsFound from '@/components/design/NoResultsFound';
+import { ProductDetailData } from '@/lib';
+import { NoResultsFound } from '@/components';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { Container } from '@/components/wrappers/Container';
 import Link from 'next/link';
+import RelatedProducts from '@/components/pages/admin/product/RelatedProduct';
 
 export default function Page() {
   const { slug } = useParams();
@@ -88,13 +89,14 @@ export default function Page() {
             >
               Liên Hệ Ngay
             </Button>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Chi tiết</h3>
+              <p className="text-muted-foreground">{product?.description}</p>
+            </div>
           </div>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Chi tiết</h3>
-          <p className="text-muted-foreground">{product?.description}</p>
-        </div>
       </div>
+      <RelatedProducts />
     </Container>
   );
 }

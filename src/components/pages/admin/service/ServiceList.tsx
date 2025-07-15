@@ -2,12 +2,12 @@
 
 import { NoResultsFound } from '@/components/design/NoResultsFound';
 import { ServiceList } from '@/lib/responses/serviceLib';
-import { ServiceCard } from './ServiceCard';
 import { useState, useCallback, useMemo } from 'react';
 import { CustomPagination } from '@/components/design/pagination';
 import { Container } from '@/components/wrappers/Container';
 import { AdminFilter } from '@/components/design/filter.design';
 import { LoadingSpin } from '@/components/loading/loading';
+import { ServiceTable } from '@/components/table/service.table';
 
 export default function ServiceListDataAdmin() {
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -89,27 +89,17 @@ export default function ServiceListDataAdmin() {
             onCategoryChange={handleCategoryChange}
             onStatusChange={handleStatusChange}
           />
-
           <section className="mb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {services && services.length > 0 ? (
-                services.map((post) => (
-                  <ServiceCard key={post._id} post={post} />
-                ))
-              ) : (
-                <div className="col-span-full flex items-center justify-center py-24">
-                  <NoResultsFound />
-                </div>
-              )}
-            </div>
-
-            {pagination && (
-              <CustomPagination
-                currentPage={currentPage}
-                totalPage={pagination.total_page}
-                onPageChange={handlePageChange}
-              />
-            )}
+            <ServiceTable
+              services={services}
+              isLoading={isLoading}
+              isError={isError}
+            />
+            <CustomPagination
+              currentPage={currentPage}
+              totalPage={pagination.total_page}
+              onPageChange={handlePageChange}
+            />
           </section>
         </>
       )}

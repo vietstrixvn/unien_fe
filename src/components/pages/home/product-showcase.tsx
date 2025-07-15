@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CategoryCard,
   ErrorLoading,
@@ -13,22 +13,24 @@ import { MoreButton } from '@/components/button/more.button';
 import { ROUTES } from '@/lib';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
 
-const EXCHANGE_RATE = 25500;
-
 export function ProductShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const params = {
     category: selectedCategory ?? undefined,
-    limit: 8,
+    limit: 16,
   };
 
-  const { products, isLoading, isError } = ProductList(1, params, 0);
+  const { products, isLoading, isError } = ProductList(1, params, refreshKey);
 
-  // Convert USD to VND and format with commas
-  const formatVND = (usd: number) => {
-    const vnd = usd * EXCHANGE_RATE;
-    return ` ${new Intl.NumberFormat('vi-VN').format(vnd)} VND`;
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    setRefreshKey((prev) => prev + 1);
+  }, [selectedCategory]);
 
   return (
     <section className="my-12">
@@ -46,8 +48,8 @@ export function ProductShowcase() {
       ) : products.length === 0 ? (
         <NoResultsFound />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
+          {products.slice(0, 8).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>

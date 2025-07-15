@@ -1,12 +1,12 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
-import { BlogCard } from './BlogCard';
 import { BlogList } from '@/lib';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
 import { Container, LoadingSpin } from '@/components';
 import { CustomPagination } from '@/components/design/pagination';
 import { AdminFilter } from '@/components/design/filter.design';
+import { BlogTable } from '@/components/table/blog.table';
 
 export default function BlogListData() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -35,7 +35,7 @@ export default function BlogListData() {
     () => ({
       button: {
         href: '/admin/blog/create-blog',
-        title: 'Tạo Dịch Vụ',
+        title: 'Tạo Bài Viết',
       },
       values: 'vll',
       type: 'blogs',
@@ -87,15 +87,11 @@ export default function BlogListData() {
             />
 
             <section className="mb-12">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {blogs && blogs.length > 0 ? (
-                  blogs.map((blog) => <BlogCard key={blog._id} blog={blog} />)
-                ) : (
-                  <div className="col-span-full flex items-center justify-center py-24">
-                    <NoResultsFound />
-                  </div>
-                )}
-              </div>
+              <BlogTable
+                blogs={blogs}
+                isLoading={isLoading}
+                isError={isError}
+              />
               <CustomPagination
                 currentPage={currentPage}
                 totalPage={pagination.total_page}
