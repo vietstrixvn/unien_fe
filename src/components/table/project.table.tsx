@@ -16,24 +16,18 @@ import {
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/assetts/icons';
 import React, { useState } from 'react';
-import { useDeleteBlog, useUpdateBlogStatus } from '@/hooks';
+import { useDeleteService, useUpdateProjectStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';
-import { BlogTableProps } from '@/types/blog/blog.prob';
-import { BlogColumns } from '@/types/blog/blog.colum';
+import { ProjectColumns } from '@/types/project/project.colum';
+import { ProjectTableProps } from '@/types/project/project.prob';
+import { statusColorMap } from './blog.table';
 import { useAuthStore } from '@/store/authStore';
 import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
 import { VisibilityCategoryOption } from '@/types';
 
-export const statusColorMap: Record<string, string> = {
-  show: 'bg-green-100 text-green-800 hover:bg-green-100',
-  hide: 'bg-gray-100 text-gray-800 hover:bg-gray-100',
-  popular: 'bg-blue-100 text-blue-800 hover:bg-blue-100',
-  draft: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-100',
-};
-
-export const BlogTable: React.FC<BlogTableProps> = ({
-  blogs,
+export const ProjectTable: React.FC<ProjectTableProps> = ({
+  projects,
   isLoading,
   isError,
 }) => {
@@ -43,9 +37,10 @@ export const BlogTable: React.FC<BlogTableProps> = ({
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>();
 
-  const { mutate: deleteBlog } = useDeleteBlog();
-  const { mutate: updateStatus } = useUpdateBlogStatus();
+  const { mutate: deleteService } = useDeleteService();
+  const { mutate: updateStatus } = useUpdateProjectStatus();
 
+  // Hàm cập nhật trạng thái
   const handleStatusChange = (postId: string, newStatus: string) => {
     if (!postId) {
       toast.error('Invalid contact ID!');
@@ -62,14 +57,14 @@ export const BlogTable: React.FC<BlogTableProps> = ({
 
   const handleDeleteConfirm = () => {
     if (selectedService) {
-      deleteBlog(selectedService);
+      deleteService(selectedService);
       setSelectedService(undefined);
       setDeleteDialogOpen(false);
     }
   };
 
   const handleViewDetail = (slug: string) => {
-    router.push(`/admin/blog/${slug}`);
+    router.push(`/admin/service/${slug}`);
   };
 
   return (
@@ -79,7 +74,7 @@ export const BlogTable: React.FC<BlogTableProps> = ({
           <Table>
             <TableHeader className="bg-main/60">
               <TableRow>
-                {BlogColumns.map((col) => (
+                {ProjectColumns.map((col) => (
                   <TableHead key={col.key} className={col.className}>
                     {col.label}
                   </TableHead>
@@ -90,18 +85,18 @@ export const BlogTable: React.FC<BlogTableProps> = ({
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={BlogColumns.length + 1}>
+                  <TableCell colSpan={ProjectColumns.length + 1}>
                     <LoadingSpin />
                   </TableCell>
                 </TableRow>
               ) : isError ? (
                 <TableRow>
-                  <TableCell colSpan={BlogColumns.length + 1}>
+                  <TableCell colSpan={ProjectColumns.length + 1}>
                     <ErrorLoading />
                   </TableCell>
                 </TableRow>
-              ) : blogs && blogs.length > 0 ? (
-                blogs.map((item, index) => (
+              ) : projects && projects.length > 0 ? (
+                projects.map((item, index) => (
                   <React.Fragment key={item._id}>
                     <TableRow key={item._id} className="border-b">
                       <TableCell className="font-medium">{index + 1}</TableCell>
@@ -129,11 +124,21 @@ export const BlogTable: React.FC<BlogTableProps> = ({
                           </Badge>
                         )}
                       </TableCell>
+                      <TableCell>{item.client}</TableCell>
+
                       <TableCell>
-                        <div className="flex items-center gap-2">
-                          <span>{item.category.name}</span>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {item.service.map((srv) => (
+                            <span
+                              key={srv._id}
+                              className="px-2 py-1 bg-gray-100 rounded-md text-sm"
+                            >
+                              {srv.title}
+                            </span>
+                          ))}
                         </div>
                       </TableCell>
+
                       <TableCell>
                         <Button
                           size="sm"
@@ -208,7 +213,7 @@ export const BlogTable: React.FC<BlogTableProps> = ({
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={BlogColumns.length + 1}>
+                  <TableCell colSpan={ProjectColumns.length + 1}>
                     <div className="flex justify-center items-center py-16">
                       <NoResultsFound />
                     </div>

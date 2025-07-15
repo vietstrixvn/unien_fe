@@ -76,10 +76,12 @@ export const Icons = {
   EyeClosed,
   Trash,
   Plus,
+  Search,
 };
 
 export const ComponentsIcons = {
   Search,
+
   CircleUserRound,
   BadgeCheck,
   Bell,

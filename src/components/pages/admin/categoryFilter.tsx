@@ -16,7 +16,7 @@ const status = [
   { id: 'hide', label: 'Hide' },
 ];
 const SelectCategoryFilter = ({
-  selectedStatus = 'all', // Mặc định là 'pending' nếu không có giá trị
+  selectedStatus = 'all',
   onStatusChange,
 }: {
   selectedStatus?: string;

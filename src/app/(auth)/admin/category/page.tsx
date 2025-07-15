@@ -37,7 +37,7 @@ import { Container } from '@/components/wrappers/Container';
 import { CategoryList } from '@/lib';
 import { useCreateCategory, useDeleteCategory } from '@/hooks';
 import { ConfirmDialog } from '@/components/design/Dialog';
-import { CategoryTable } from '@/components/pages/admin/table/CategoryTable';
+import { CategoryTable } from '@/components/table/category.table';
 import { CreateCategoryItem } from '@/types';
 import { Form } from '@/components/ui/form';
 import { useAuthStore } from '@/store/authStore';

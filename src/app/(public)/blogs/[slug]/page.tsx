@@ -65,7 +65,7 @@ export default function Page() {
               </div>
             </header>
 
-            <div className="mb-8 bg-black relative h-[400px] w-full overflow-hidden">
+            <div className="mb-8  relative h-[400px] w-full overflow-hidden">
               <CustomImage
                 src={blog?.file || '/logo.svg'}
                 alt={`Featured image for ${blog?.title}`}
@@ -73,10 +73,9 @@ export default function Page() {
                 className="object-contain"
               />
             </div>
+            <h2 className="text-xl mt-12 mb-6">{blog?.content}</h2>
 
             <div className="prose prose-lg max-w-none">
-              <h2 className="text-3xl font-bold mt-12 mb-6">{blog?.content}</h2>
-
               <div className="leading-relaxed">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}

@@ -1,8 +1,6 @@
 'use client';
 
-import PushButton from '@/components/button/push.button';
-import Container from '@/components/wrappers/Container';
-import Heading from '@/components/design/Heading';
+import { Heading, Container, PushButton } from '@/components';
 import ProjectListDataAdmin from '@/components/pages/admin/project/ProjectList';
 import React from 'react';
 
@@ -11,8 +9,7 @@ const Page = () => {
     <Container>
       {/* Heading */}
       <div className="flex items-center justify-between mb-4">
-        <Heading name="Project Page" desc="Manage your projects here" />
-        <PushButton href="/admin/project/create_project" label="Thêm dự án" />
+        <Heading name="Trang Dự Án" desc="Manage your projects here" />
       </div>
       {/* Link tạo bài viết */}
       <ProjectListDataAdmin />

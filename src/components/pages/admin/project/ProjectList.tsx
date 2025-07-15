@@ -1,22 +1,12 @@
 'use client';
 
-import NoResultsFound from '@/components/design/NoResultsFound';
-import { useState } from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
+import { useCallback, useMemo, useState } from 'react';
+import { LoadingSpin } from '@/components';
 import { CustomPagination } from '@/components/design/pagination';
-import { RefreshButton } from '@/components/button/refresh.button';
 import { ProjectList } from '@/lib/responses/projectLib';
-import { PopularProjectCard } from './PopularProjectCard';
-import { ProjectCard } from './ProjectCard';
-import { DraftProjectCard } from './DraftProjectCard';
-import ServiceCateCard from './ServiceCate';
-import Heading from '@/components/design/Heading';
+import { ProjectFilter } from '@/components/design/project.filter.design';
+import { ProjectTable } from '@/components/table/project.table';
 
 export enum ServiceStatus {
   Show = 'show',
@@ -45,32 +35,17 @@ export default function ProjectListDataAdmin() {
     refreshKey
   );
 
-  const {
-    projects: popularProjects,
-    isLoading: Loading,
-    isError: Error,
-  } = ProjectList(
-    1,
-    {
-      status: 'popular',
-    },
-    0
+  const filter = useMemo(
+    () => ({
+      button: {
+        href: '/admin/project/create_project',
+        title: 'Thêm Dự Án',
+      },
+      values: 'vll',
+      type: 'services',
+    }),
+    []
   );
-
-  const {
-    projects: draftProjects,
-    isLoading: draftLoading,
-    isError: draftError,
-  } = ProjectList(
-    1,
-    {
-      status: 'draft',
-    },
-    0
-  );
-
-  if (isLoading || isError || Loading || Error || draftLoading || draftError)
-    return <p>Loading...</p>;
 
   const handlePageSizeChange = (value: string) => {
     const newSize = parseInt(value, 10);
@@ -89,101 +64,47 @@ export default function ProjectListDataAdmin() {
     setRefreshKey((prev) => prev + 1); // Refresh data manually
   };
 
+  const handleStatusChange = useCallback((value: string) => {
+    setSelectedStatus(value);
+    setCurrentPage(1);
+  }, []);
+
+  const handleCategoryChange = useCallback((value: string) => {
+    setSelectedCategory(value === 'all' ? null : value);
+    setCurrentPage(1);
+  }, []);
+
   return (
     <main>
-      <section className="mb-12">
-        <Heading name="Dự án nháp " />
+      {isLoading ? (
+        <LoadingSpin />
+      ) : isError ? (
+        <NoResultsFound />
+      ) : (
+        <section>
+          <ProjectFilter
+            filter={filter}
+            handleRefresh={handleRefresh}
+            onPageSizeChange={handlePageSizeChange}
+            onStatusChange={handleStatusChange}
+            onCategoryChange={handleCategoryChange}
+          />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {draftProjects && draftProjects.length > 0 ? (
-            draftProjects.map((post) => (
-              <DraftProjectCard key={post._id} post={post} />
-            ))
-          ) : (
-            <div className="col-span-full flex items-center justify-center py-24">
-              <NoResultsFound />
-            </div>
-          )}
-        </div>
-
-        <Heading name="Dự án tiêu biểu " />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {popularProjects && popularProjects.length > 0 ? (
-            popularProjects.map((post) => (
-              <PopularProjectCard key={post._id} post={post} />
-            ))
-          ) : (
-            <div className="col-span-full flex items-center justify-center py-24">
-              <NoResultsFound />
-            </div>
-          )}
-        </div>
-      </section>
-      <Heading name="Toàn bộ dự án " />
-      <div className="border-b border-gray-200 mb-8">
-        <ServiceCateCard onCategorySelect={setSelectedCategory} />
-      </div>
-      {/* Filter status */}
-      <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        {/* Filter status */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-          <Select
-            onValueChange={(value) => setSelectedStatus(value)}
-            value={selectedStatus}
-          >
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Lọc theo trạng thái" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value={ServiceStatus.Show}>Hiện</SelectItem>
-              <SelectItem value={ServiceStatus.Hide}>Ẩn</SelectItem>
-              <SelectItem value={ServiceStatus.Popular}>Phổ Biến</SelectItem>
-              <SelectItem value={ServiceStatus.Draft}>Nháp</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <RefreshButton onClick={handleRefresh} />
-        </div>
-
-        {/* Page size */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium whitespace-nowrap">Show:</span>
-          <Select
-            onValueChange={handlePageSizeChange}
-            defaultValue={String(pageSize)}
-          >
-            <SelectTrigger className="w-[80px]">
-              <SelectValue placeholder={pageSize} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="5">5</SelectItem>
-              <SelectItem value="10">10</SelectItem>
-              <SelectItem value="20">20</SelectItem>
-              <SelectItem value="50">50</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      {/* Services list */}
-      <section className="mb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {projects && projects.length > 0 ? (
-            projects.map((post) => <ProjectCard key={post._id} post={post} />)
-          ) : (
-            <div className="col-span-full flex items-center justify-center py-24">
-              <NoResultsFound />
-            </div>
-          )}
-        </div>
-        <CustomPagination
-          currentPage={currentPage}
-          totalPage={pagination.total_page}
-          onPageChange={handlePageChange}
-        />
-      </section>
+          {/* Services list */}
+          <section className="mb-12">
+            <ProjectTable
+              projects={projects}
+              isLoading={isLoading}
+              isError={isError}
+            />
+            <CustomPagination
+              currentPage={currentPage}
+              totalPage={pagination.total_page}
+              onPageChange={handlePageChange}
+            />
+          </section>
+        </section>
+      )}
     </main>
   );
 }

@@ -65,7 +65,7 @@ export default function Page() {
               </div>
             </header>
 
-            <div className="mb-8 bg-black relative h-[400px] w-full overflow-hidden">
+            <div className="mb-8  relative h-[400px] w-full overflow-hidden">
               <CustomImage
                 src={service?.file || '/logo.svg'}
                 alt={`Featured image for ${service?.title}`}

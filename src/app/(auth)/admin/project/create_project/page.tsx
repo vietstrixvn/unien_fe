@@ -8,15 +8,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Loader2, Upload, X } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -25,7 +16,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+  Heading,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Button,
+  CustomImage,
+} from '@/components';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/pages/admin/project/multi-select';
@@ -34,8 +34,6 @@ import { useCreateProject } from '@/hooks/project/useProject';
 import { CreateProjectItem } from '@/types/types';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
-import Heading from '@/components/design/Heading';
-import Image from 'next/image';
 
 // Maximum file size: 5MB
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -300,7 +298,7 @@ export default function CreateProjectPage() {
                             </>
                           ) : (
                             <div className="relative w-full">
-                              <Image
+                              <CustomImage
                                 src={imagePreview || '/placeholder.svg'}
                                 alt="Thumbnail preview"
                                 width={300}
@@ -444,14 +442,21 @@ export default function CreateProjectPage() {
                     variant="outline"
                     onClick={() => {
                       const values = form.getValues();
-                      onSubmit(values, 'draft'); // Set status to 'draft'
+                      onSubmit(values, 'draft');
                     }}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Saving...' : 'Lưu nháp'}
                   </Button>
                   {userInfo?.role === 'admin' && (
-                    <Button type="submit" disabled={isSubmitting}>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      onClick={() => {
+                        const values = form.getValues();
+                        onSubmit(values, 'show');
+                      }}
+                    >
                       {isSubmitting && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       )}

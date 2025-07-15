@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { AdmimnFilter } from './types';
 
 export interface LoadingProps {
   size?: number;
@@ -81,3 +82,19 @@ export interface RefreshButtonProps {
 export interface DefaultLayoutProps {
   children: ReactNode;
 }
+
+export type VisibilityCategoryOption = 'show' | 'hide' | 'draft';
+
+export interface VisibilitySelectProps {
+  value: VisibilityCategoryOption;
+  onChange: (value: VisibilityCategoryOption) => void;
+}
+
+export type AdminFilterProps = {
+  filter: AdmimnFilter;
+  onPageSizeChange?: (value: string) => void;
+  handleRefresh?: () => void;
+  onCategoryChange?: (value: string) => void;
+  onStatusChange?: (value: string) => void;
+  onSearchChange?: (value: string) => void;
+};

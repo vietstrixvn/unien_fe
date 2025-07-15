@@ -23,7 +23,7 @@ import { NoResultsFound } from '@/components/design/NoResultsFound';
 import {
   SelectCategoryStatus,
   VisibilityCategoryOption,
-} from '../categryStatus';
+} from '../pages/admin/categryStatus';
 import { useUpdateCategoryStatus } from '@/hooks';
 import { toast } from 'sonner';
 import { useAuthStore } from '@/store/authStore';

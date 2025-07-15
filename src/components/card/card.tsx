@@ -29,14 +29,14 @@ export function PostCard({ _id, title, slug, content, file, type }: CardProps) {
       </Link>
 
       <div className="p-5 flex items-center justify-between gap-4">
-        <div className="flex-1">
+        <Link href={href} className="flex-1">
           <h3 className="text-sm md:text-base lg:text-lg font-bold mt-2 mb-3">
             {title}
           </h3>
           <p className="text-gray-800 text-sm line-clamp-3">
             {truncateText(content, 300)}
           </p>
-        </div>
+        </Link>
 
         <Link
           href={href}

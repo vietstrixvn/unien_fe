@@ -18,26 +18,36 @@ import { ServiceColumns } from '@/types/service/service.colum';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/assetts/icons';
 import React, { useState } from 'react';
-import { useDeleteService } from '@/hooks';
+import { useDeleteService, useUpdateServiceStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';
-
-const statusColorMap: Record<string, string> = {
-  show: 'bg-green-100 text-green-800 hover:bg-green-100',
-  hide: 'bg-gray-100 text-gray-800 hover:bg-gray-100',
-  popular: 'bg-blue-100 text-blue-800 hover:bg-blue-100',
-  draft: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-100',
-};
+import { useAuthStore } from '@/store/authStore';
+import { SelectStatus } from '../design/status.change';
+import { toast } from 'sonner';
+import { VisibilityCategoryOption } from '@/types';
+import { statusColorMap } from './blog.table';
 
 export const ServiceTable: React.FC<ServiceTableProps> = ({
   services,
   isLoading,
   isError,
 }) => {
+  const userInfo = useAuthStore((state) => state.userInfo);
+
   const router = useRouter();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>();
 
   const { mutate: deleteService } = useDeleteService();
+  const { mutate: updateStatus } = useUpdateServiceStatus();
+
+  const handleStatusChange = (postId: string, newStatus: string) => {
+    if (!postId) {
+      toast.error('Invalid contact ID!');
+      return;
+    }
+
+    updateStatus({ postId, updateStatus: { status: newStatus } });
+  };
 
   const handleDeleteClick = (id: string) => {
     setSelectedService(id);
@@ -94,15 +104,24 @@ export const ServiceTable: React.FC<ServiceTableProps> = ({
                         {item.title}
                       </TableCell>
                       <TableCell>
-                        <Badge
-                          variant="secondary"
-                          className={
-                            statusColorMap[item.status] ||
-                            'bg-gray-100 text-gray-800'
-                          }
-                        >
-                          {item.status}
-                        </Badge>
+                        {userInfo?.role === 'admin' ? (
+                          <SelectStatus
+                            value={item.status as VisibilityCategoryOption}
+                            onChange={(newStatus) =>
+                              handleStatusChange(item._id, newStatus)
+                            }
+                          />
+                        ) : (
+                          <Badge
+                            variant="secondary"
+                            className={
+                              statusColorMap[item.status] ||
+                              'bg-gray-100 text-gray-800'
+                            }
+                          >
+                            {item.status}
+                          </Badge>
+                        )}
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">

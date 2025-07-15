@@ -138,7 +138,7 @@ export interface CreateManagerData {
  * ==========================
  */
 
-interface ProjectService {
+export interface ProjectService {
   _id: string;
   title: string;
 }
@@ -381,4 +381,13 @@ export interface ContactTableProps {
   isLoading: boolean;
   isError: boolean;
   onDelete: (id: string) => void;
+}
+
+export interface AdmimnFilter {
+  button: {
+    href: string;
+    title: string;
+  };
+  values: string;
+  type: string;
 }

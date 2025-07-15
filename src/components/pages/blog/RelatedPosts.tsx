@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { BlogList } from '@/lib';
 import { CustomImage, NoResultsFound } from '@/components';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
+import { truncateText } from '@/utils';
 
 export default function RelatedPosts() {
   const { blogs, isLoading, isError } = BlogList(1, { limit: 3 }, 0);
@@ -50,9 +51,9 @@ export default function RelatedPosts() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((post) => (
-            <div
+            <article
               key={post._id}
-              className=" overflow-hidden  shadow-sm hover:shadow-md transition-shadow relative"
+              className="overflow-hidden shadow-lg hover:shadow-md transition-shadow duration-300 hover:bg-main group hover:text-white"
             >
               <Link href={`/blog/${post._id}`}>
                 <div className="relative h-60 w-full overflow-hidden">
@@ -60,7 +61,7 @@ export default function RelatedPosts() {
                     src={post.file || '/placeholder.svg'}
                     alt={post.title}
                     fill
-                    className="object-cover"
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-6 space-y-4">
@@ -69,10 +70,14 @@ export default function RelatedPosts() {
                     {formatSmartDate(post.createdAt)}
                   </p>
                   <h3 className="text-xl font-bold">{post.title}</h3>
-                  <p className="text-gray-600">{post.content}</p>
+
+                  <p className="text-gray-600" text-sm line-clamp-3>
+                    {' '}
+                    {truncateText(post.content, 300)}
+                  </p>
                 </div>
               </Link>
-            </div>
+            </article>
           ))}
         </div>
       </div>

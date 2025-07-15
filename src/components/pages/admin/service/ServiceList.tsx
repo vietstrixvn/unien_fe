@@ -81,7 +81,7 @@ export default function ServiceListDataAdmin() {
       ) : isError ? (
         <NoResultsFound />
       ) : (
-        <>
+        <section>
           <AdminFilter
             filter={filter}
             handleRefresh={handleRefresh}
@@ -101,7 +101,7 @@ export default function ServiceListDataAdmin() {
               onPageChange={handlePageChange}
             />
           </section>
-        </>
+        </section>
       )}
     </Container>
   );

@@ -20,7 +20,7 @@ import {
 } from '@/components';
 
 import { ConfirmDialog } from '@/components/design/Dialog';
-import { ContactTable } from '@/components/pages/admin/table/ContactTable';
+import { ContactTable } from '@/components/table/contact.table';
 import SelectStatus from '@/components/pages/admin/contact/selectStatus';
 
 export default function ProductManager() {

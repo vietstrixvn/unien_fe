@@ -1,5 +1,6 @@
 'use client';
 
+import { Search, Filter } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -11,12 +12,28 @@ import {
   RefreshButton,
   LoadingSpin,
 } from '@/components';
-import { CategoryList } from '@/lib';
-import { useState, useMemo, useCallback, useRef } from 'react';
-import { AdminFilterProps } from '@/types';
-import { Icons } from '@/assetts/icons';
+import { ServiceList } from '@/lib';
+import { useState, useCallback, useRef } from 'react';
 
-export function AdminFilter({
+interface Filter {
+  button: {
+    href: string;
+    title: string;
+  };
+  values: string;
+  type: string;
+}
+
+type AdminFilterProps = {
+  filter: Filter;
+  onPageSizeChange?: (value: string) => void;
+  handleRefresh?: () => void;
+  onCategoryChange?: (value: string) => void;
+  onStatusChange?: (value: string) => void;
+  onSearchChange?: (value: string) => void;
+};
+
+export function ProjectFilter({
   filter,
   onPageSizeChange,
   handleRefresh,
@@ -31,17 +48,16 @@ export function AdminFilter({
   const [selectedSort, setSelectedSort] = useState('price');
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
-  const params = useMemo(
-    () => ({
-      limit: 10,
-      type: filter.type,
-    }),
-    [filter.type]
-  );
+  // Memoize params để tránh re-render không cần thiết
+  const params = {
+    limit: 10,
+  };
 
-  const { categories, isLoading, isError } = CategoryList(1, params, 0);
+  const { services, isLoading, isError } = ServiceList(1, params, 0);
 
+  // Handler cho refresh button
   const handleRefreshClick = useCallback(() => {
+    // Reset tất cả filters về giá trị mặc định
     setSelectedCategory('all');
     setSelectedStatus('show');
     setSelectedSort('price');
@@ -50,6 +66,7 @@ export function AdminFilter({
     handleRefresh?.();
   }, [handleRefresh]);
 
+  // Debounce search để tránh gọi API quá nhiều
   const handleSearchChange = useCallback(
     (value: string) => {
       setSearchValue(value);
@@ -60,7 +77,7 @@ export function AdminFilter({
 
       debounceRef.current = setTimeout(() => {
         onSearchChange?.(value);
-      }, 500);
+      }, 500); // Delay 500ms
     },
     [onSearchChange]
   );
@@ -75,31 +92,26 @@ export function AdminFilter({
   );
 
   return (
-    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 bg-main/60 border-b">
-      {/* Group các bộ lọc */}
-      <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full">
-        {/* Search */}
-        <div className="relative flex-1 min-w-[200px]">
-          <Icons.Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+    <div className="flex items-center justify-between p-4 bg-main/60 border-b">
+      <div className="flex items-center gap-4 flex-wrap">
+        <div className="relative flex-1 max-w-xs">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
             placeholder="Search.."
-            className="pl-10 bg-white border-gray-200 w-full"
+            className="pl-10 bg-white border-gray-200"
             value={searchValue}
             onChange={(e) => handleSearchChange(e.target.value)}
           />
         </div>
 
-        {/* Refresh Button */}
-        <div className="flex-shrink-0">
-          <RefreshButton onClick={handleRefreshClick} />
-        </div>
+        <RefreshButton onClick={handleRefreshClick} />
 
-        {/* Category Filter */}
-        <div className="flex items-center gap-2 min-w-[150px]">
+        <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600 whitespace-nowrap">
             Thể Loại
           </span>
+
           <Select
             value={selectedCategory}
             onValueChange={(value) => {
@@ -107,34 +119,40 @@ export function AdminFilter({
               onCategoryChange?.(value);
             }}
           >
-            <SelectTrigger className="w-full bg-white border-gray-200">
+            <SelectTrigger className="w-32 bg-white border-gray-200">
               <SelectValue placeholder="Chọn thể loại" />
             </SelectTrigger>
+
             <SelectContent>
               <SelectItem value="all">Tất cả</SelectItem>
+
+              {/* Loading state */}
               {isLoading && (
                 <SelectItem value="loading" disabled>
                   <LoadingSpin />
                 </SelectItem>
               )}
+
+              {/* Error state */}
               {isError && (
                 <SelectItem value="error" disabled>
                   Lỗi tải thể loại
                 </SelectItem>
               )}
+
+              {/* List từ API */}
               {!isLoading &&
                 !isError &&
-                categories?.map((category) => (
-                  <SelectItem key={category._id} value={category._id}>
-                    {category.name}
+                services?.map((services) => (
+                  <SelectItem key={services._id} value={services._id}>
+                    {services.slug}
                   </SelectItem>
                 ))}
             </SelectContent>
           </Select>
         </div>
 
-        {/* Page Size */}
-        <div className="flex items-center gap-2 min-w-[130px]">
+        <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600 whitespace-nowrap">
             Số Lượng:
           </span>
@@ -142,7 +160,7 @@ export function AdminFilter({
             value={pageSize.toString()}
             onValueChange={handlePageSizeChange}
           >
-            <SelectTrigger className="w-full bg-white border-gray-200">
+            <SelectTrigger className="w-32 bg-white border-gray-200">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -155,7 +173,7 @@ export function AdminFilter({
         </div>
 
         {/* Status Filter */}
-        <div className="flex items-center gap-2 min-w-[130px]">
+        <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600 whitespace-nowrap">
             Status:
           </span>
@@ -166,7 +184,7 @@ export function AdminFilter({
               onStatusChange?.(value);
             }}
           >
-            <SelectTrigger className="w-full bg-white border-gray-200">
+            <SelectTrigger className="w-32 bg-white border-gray-200">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -178,12 +196,27 @@ export function AdminFilter({
             </SelectContent>
           </Select>
         </div>
+
+        {/* Sort By Filter */}
+        {/* <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600 whitespace-nowrap">
+            Sort by:
+          </span>
+          <Select value={selectedSort}>
+            <SelectTrigger className="w-20 bg-white border-gray-200">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="price">Price</SelectItem>
+              <SelectItem value="name">Name</SelectItem>
+              <SelectItem value="date">Date</SelectItem>
+              <SelectItem value="stock">Stock</SelectItem>
+            </SelectContent>
+          </Select>
+        </div> */}
       </div>
 
-      {/* Push Button */}
-      <div className="flex justify-end mt-4 md:mt-0">
-        <PushButton href={filter.button.href} label={filter.button.title} />
-      </div>
+      <PushButton href={filter.button.href} label={filter.button.title} />
     </div>
   );
 }
