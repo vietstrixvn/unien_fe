@@ -10,7 +10,7 @@ import { NoResultsFound } from '@/components';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { Container } from '@/components/wrappers/Container';
 import Link from 'next/link';
-import RelatedProducts from '@/components/pages/admin/product/RelatedProduct';
+import RelatedProducts from '@/components/pages/product/RelatedProduct';
 
 export default function Page() {
   const { slug } = useParams();

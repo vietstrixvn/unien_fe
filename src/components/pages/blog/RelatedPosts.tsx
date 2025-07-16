@@ -71,8 +71,7 @@ export default function RelatedPosts() {
                   </p>
                   <h3 className="text-xl font-bold">{post.title}</h3>
 
-                  <p className="text-gray-600" text-sm line-clamp-3>
-                    {' '}
+                  <p className="text-sm text-gray-600 line-clamp-3">
                     {truncateText(post.content, 300)}
                   </p>
                 </div>

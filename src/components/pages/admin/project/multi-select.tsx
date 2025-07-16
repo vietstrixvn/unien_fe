@@ -11,13 +11,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/utils/helpers/utils';
+} from '@/components';
+import { cn } from '@/utils';
 
 type Option = {
   label: string;

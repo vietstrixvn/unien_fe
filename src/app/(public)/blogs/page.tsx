@@ -9,12 +9,10 @@ import {
   CategoryCard,
   LoadingSpin,
   ErrorLoading,
-  PostCard,
 } from '@/components';
 import React, { useState } from 'react';
 import blogData from '@/data/blog.data.json';
 import { BlogList } from '@/lib/responses/blogLib';
-import { Icons } from '@/assetts/icons';
 import { BlogListSection } from '@/components/pages/blog/BlogListSection';
 
 const Page = () => {

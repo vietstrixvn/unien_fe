@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout';
+import { DefaultLayout } from '@/components/layout/DefaultLayout/DefaultLayout';
 import { ROUTES } from '@/lib';
 import { Container } from '@/components';
 

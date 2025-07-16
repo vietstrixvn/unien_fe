@@ -18,6 +18,7 @@ import {
 import { ROUTES, ServiceDetailData } from '@/lib';
 import { Heading } from '@/components/design/Heading';
 import { ServiceRecent } from '@/components/card/service_recent.card';
+import DefaultBreadcrumb from '@/components/design/DefaultBreadCrumb';
 
 export default function Page() {
   const { slug } = useParams();
@@ -49,9 +50,12 @@ export default function Page() {
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 lg:col-span-8">
             <header className="mb-8">
-              <h1 className="text-4xl sm:text-5xl font-bold mb-8">
-                {service?.title}
-              </h1>
+              <div className="mb-6">
+                <h1 className="text-4xl sm:text-5xl font-bold mb-8">
+                  {service?.title}
+                </h1>
+                <DefaultBreadcrumb />
+              </div>
               <div className="mb-2 sm:mb-0 flex flex-wrap items-center gap-1 text-sm text-gray-600">
                 <span>Unien</span>
                 <span>-</span>
@@ -113,7 +117,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className=" col-span-12 lg:col-span-4  p-6 ">
+          <div className="col-span-12 lg:col-span-4 p-6 lg:sticky lg:top-24 h-fit">
             <div>
               <div className=" mb-4">
                 <Heading name="Dịch Vụ Liên Quan" />

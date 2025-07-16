@@ -3,18 +3,14 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { ProductList } from '@/lib';
-import { CustomImage, NoResultsFound } from '@/components';
+import { CustomImage, LoadingSpin, NoResultsFound } from '@/components';
 
 export default function RelatedProducts() {
   const { products, isLoading, isError } = ProductList(1, { limit: 4 }, 0);
 
   // Handle loading and error states
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-      </div>
-    );
+    return <LoadingSpin />;
   }
 
   if (isError) {
@@ -30,12 +26,12 @@ export default function RelatedProducts() {
       <div className="space-y-12">
         <div className="space-y-4">
           <p className="text-sm font-medium flex items-center gap-2">
-            <span className="w-2 h-2 bg-black rounded-full inline-block"></span>{' '}
+            <span className="w-2 h-2 bg-black rounded-full inline-block"></span>
             Sản Phẩm mới nhất
           </p>
           <h2 className="text-4xl md:text-5xl font-bold">
             Giới thiệu về các <br />
-            sản phẩm mới nhất{' '}
+            sản phẩm mới nhất
           </h2>
           <div>
             <Link
