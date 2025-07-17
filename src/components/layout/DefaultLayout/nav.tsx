@@ -3,18 +3,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, Phone, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/helpers/utils';
-import Image from 'next/image';
-
-const navItems = [
-  { name: 'Trang Chủ', href: '/' },
-  { name: 'Về Chúng tôi', href: '/company' },
-  { name: 'Dịch Vụ & Công Nghiệp', href: '/services' },
-  { name: 'Bài Viết', href: '/blogs' },
-  { name: 'Sản Phẩm', href: '/products' },
-];
+import { navItems } from '@/lib';
+import { Icons } from '@/assetts/icons';
+import { CustomImage } from '@/components/design/image.component';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,7 +48,12 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <div className="flex items-center">
-                <Image src="/logo.svg" alt="Logo" width={50} height={50} />
+                <CustomImage
+                  src="/logo.svg"
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                />
                 <span className="ml-2 text-white font-bold text-xl md:text-2xl lg:text-3xl">
                   UNIEN
                 </span>
@@ -69,7 +67,7 @@ export function Navbar() {
                 className="text-white p-2"
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMenuOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
               </button>
             </div>
 
@@ -77,7 +75,7 @@ export function Navbar() {
             <nav className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   className={cn(
                     'px-3 py-2 text-sm md:text-base lg:text-lg font-medium text-white hover:text-orange-400 transition-colors relative group',
@@ -99,7 +97,7 @@ export function Navbar() {
                 href="tel:+201001245741"
                 className="text-white flex items-center hover:text-orange-400"
               >
-                <Phone size={16} className="mr-2" />
+                <Icons.Phone size={16} className="mr-2" />
                 <span>+84 123456789</span>
               </a>
               <Button
@@ -126,14 +124,14 @@ export function Navbar() {
           className="absolute top-4 right-4 text-white p-2 z-[70]"
           aria-label="Close menu"
         >
-          <X size={24} />
+          <Icons.X size={24} />
         </button>
 
         <div className="container mx-auto px-4 h-full pt-24">
           <nav className="flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.href}
                 href={item.href}
                 className={cn(
                   'px-3 py-3 text-lg font-medium text-white border-b border-gray-700 hover:text-orange-400',
@@ -150,7 +148,7 @@ export function Navbar() {
               href="tel:+201001245741"
               className="text-white flex items-center hover:text-orange-400 py-2"
             >
-              <Phone size={16} className="mr-2" />
+              <Icons.Phone size={16} className="mr-2" />
               <span>+84 123456789</span>
             </a>
             <Button

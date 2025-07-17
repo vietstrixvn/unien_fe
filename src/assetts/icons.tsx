@@ -55,6 +55,10 @@ import {
   EyeClosed,
   Trash,
   Plus,
+  ArrowDown,
+  X,
+  Menu,
+  Phone,
 } from 'lucide-react';
 import { Box, ShoppingBag, ClipboardList } from 'lucide-react';
 
@@ -64,7 +68,7 @@ import { Box, ShoppingBag, ClipboardList } from 'lucide-react';
 //   logoNameW,
 // };
 
-export const Arrows = { ArrowRight, ArrowUp };
+export const Arrows = { ArrowRight, ArrowUp, ArrowDown };
 
 export const Icons = {
   Loader2,
@@ -77,6 +81,9 @@ export const Icons = {
   Trash,
   Plus,
   Search,
+  X,
+  Menu,
+  Phone,
 };
 
 export const ComponentsIcons = {

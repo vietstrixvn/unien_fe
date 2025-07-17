@@ -15,7 +15,7 @@ type Particle = {
 
 const COLORS = ['#FF5A5F', '#FFD25A', '#74BDCB', '#E67E22', '#FFF'];
 
-export default function ParticleOverlay() {
+export function ParticleOverlay() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>(0);
@@ -58,7 +58,6 @@ export default function ParticleOverlay() {
 
     createParticles();
 
-    // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -69,11 +68,9 @@ export default function ParticleOverlay() {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Update position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
 
-        // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.y < 0) particle.y = canvas.height;

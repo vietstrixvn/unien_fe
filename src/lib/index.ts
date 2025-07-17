@@ -35,3 +35,4 @@ export * from './responses/productLib';
 
 // routes.ts
 export * from './routes/routes';
+export * from './routes/navigation.route';

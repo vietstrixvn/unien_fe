@@ -19,45 +19,14 @@ export function Footer() {
               </div>
             </div>
             <p className="text-gray-300 max-w-md">{appData.AppData.footer}</p>
-            <div className="flex justify-between items-center">
-              <div className="flex space-x-4">
-                <Link
-                  href="#"
-                  className="hover:text-gray-400 transition-colors"
-                >
-                  <Facebook size={20} />
-                  <span className="sr-only">Facebook</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="hover:text-gray-400 transition-colors"
-                >
-                  <Twitter size={20} />
-                  <span className="sr-only">Twitter</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="hover:text-gray-400 transition-colors"
-                >
-                  <Instagram size={20} />
-                  <span className="sr-only">Instagram</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="hover:text-gray-400 transition-colors"
-                >
-                  <Linkedin size={20} />
-                  <span className="sr-only">LinkedIn</span>
-                </Link>
-              </div>
-              <div className="bg-main border  px-5 py-2 text-white font-semibold shadow-md hover:bg-[#e88410] transition-all duration-300 ease-in-out">
-                <Link
-                  href={ROUTES.CONTACT}
-                  className="hover:text-white transition-colors"
-                >
-                  Liên Hệ
-                </Link>
-              </div>
+
+            <div className="bg-main border  px-5 py-2 text-center text-white font-semibold shadow-md hover:bg-[#e88410] transition-all duration-300 ease-in-out">
+              <Link
+                href={ROUTES.CONTACT}
+                className="hover:text-white transition-colors"
+              >
+                Liên Hệ
+              </Link>
             </div>
           </div>
 

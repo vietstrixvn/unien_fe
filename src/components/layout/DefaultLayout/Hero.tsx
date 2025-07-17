@@ -1,20 +1,19 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/utils/helpers/utils';
-import ParticleOverlay from '@/components/design/ParticleOverlay';
-import Image from 'next/image';
+import { Button, CustomImage } from '@/components';
+import { cn } from '@/utils';
+import { ParticleOverlay } from '@/components/design/ParticleOverlay';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib';
 import AppData from '@/data/app.data.json';
+import { Arrows } from '@/assetts/icons';
 
 export function HeroBanner() {
   const heroRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
   const handleExploreClick = () => {
-    // Scroll to the next section
     window.scrollTo({
       top: window.innerHeight,
       behavior: 'smooth',
@@ -26,7 +25,7 @@ export function HeroBanner() {
       if (!heroRef.current) return;
 
       const scrollY = window.scrollY;
-      const blurAmount = Math.min(scrollY / 100, 5); // max 10px blur
+      const blurAmount = Math.min(scrollY / 100, 5);
       heroRef.current.style.filter = `blur(${blurAmount}px)`;
     };
 
@@ -51,7 +50,7 @@ export function HeroBanner() {
       </div>
 
       {/* Particle Overlay */}
-      <ParticleOverlay />
+      {/* <ParticleOverlay /> */}
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-end pb-20">
@@ -59,7 +58,12 @@ export function HeroBanner() {
           <div className="animate-fadeIn space-y-6">
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight max-w-3xl leading-tight">
               <span className="flex items-center gap-2">
-                <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+                <CustomImage
+                  src="/logo.svg"
+                  alt="Logo"
+                  width={40}
+                  height={40}
+                />
                 <span className="text-xl sm:text-2xl md:text-4xl lg:text-5xl">
                   UNIEN
                 </span>
@@ -83,7 +87,7 @@ export function HeroBanner() {
                 onClick={() => router.push(ROUTES.CONTACT)}
               >
                 Liên Hệ Ngay
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+                <Arrows.ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
               </Button>
 
               <Button
@@ -105,7 +109,7 @@ export function HeroBanner() {
         aria-label="Start Exploring"
       >
         <span className="text-sm font-medium">Start Exploring</span>
-        <ArrowDown className="h-5 w-5 animate-bounce" />
+        <Arrows.ArrowDown className="h-5 w-5 animate-bounce" />
       </button>
     </div>
   );
