@@ -1,7 +1,3 @@
-Say no more 😎! Dưới đây là bản **`intro.md` hoàn chỉnh**, bao gồm phần mở đầu mới giới thiệu **UNIEN** là dự án web blog công ty về **lò hơi, điện mặt trời, tủ điện,...**, và đã gộp luôn với các phần Team, Tech Stack, Roadmap – được cập nhật đầy đủ, chuyên nghiệp:
-
----
-
 # ⚡ UNIEN — Company Blog Platform
 
 **UNIEN** is a modern [Next.js](https://nextjs.org) project built to showcase a company's profile, services, and product offerings through a professional, fast-loading, and scalable blog platform.
