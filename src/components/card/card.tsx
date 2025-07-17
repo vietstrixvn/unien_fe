@@ -1,6 +1,6 @@
 'use client';
 
-import { CardProps } from '@/types';
+import type { CardProps } from '@/types';
 import Link from 'next/link';
 import { CustomImage } from '../design/image.component';
 import { Arrows } from '@/assetts/icons';

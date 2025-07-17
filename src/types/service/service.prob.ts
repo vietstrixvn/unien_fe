@@ -1,4 +1,4 @@
-import { ServiceList } from '../types';
+import type { ServiceList } from '../types';
 
 export interface Service {
   title: string;

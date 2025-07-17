@@ -1,8 +1,8 @@
 'use client';
 
 import { useServiceDetail, useServiceList } from '@/hooks/service/useService';
-import { Filters } from '@/types';
-import { ServiceDetail } from '@/types/types';
+import type { Filters } from '@/types';
+import type { ServiceDetail } from '@/types/types';
 
 export const ServiceList = (
   currentPage: number,

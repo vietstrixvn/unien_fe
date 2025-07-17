@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
-import BackButton from '@/components/button/back.button';
+import { BackButton } from '@/components/button/back.button';
 import { ProjectDetailData } from '@/lib/responses/projectLib';
 import { CardContent } from '@/components/ui/card';
 import { Calendar, Clock, Edit, Eye, Trash, User } from 'lucide-react';
@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@radix-ui/react-separator';
 import { useDeleteProject } from '@/hooks/project/useProject';
 import { useState } from 'react';
-import ConfirmDialog from '@/components/design/Dialog';
+import { ConfirmDialog } from '@/components/design/Dialog';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
@@ -59,7 +59,7 @@ export default function Page() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
-                <BackButton />
+                <BackButton href="/admin/project" />
                 <h1 className="text-2xl font-bold tracking-tight">
                   Project Details
                 </h1>
@@ -96,10 +96,10 @@ export default function Page() {
                   <Clock className="mr-1 h-4 w-4" />
                   Updated: {formatSmartDate(project.updatedAt)}
                 </div>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <Eye className="mr-1 h-4 w-4" />
                   {project.views} views
-                </div>
+                </div> */}
                 <div className="flex items-center">
                   <User className="mr-1 h-4 w-4" />
                   Posted by: {project.user.username}

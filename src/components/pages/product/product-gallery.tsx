@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/utils';
 import { Button, CustomImage } from '@/components';
-import { ProductGalleryProps } from '@/types';
+import type { ProductGalleryProps } from '@/types';
 
 export function ProductGallery({ images }: ProductGalleryProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

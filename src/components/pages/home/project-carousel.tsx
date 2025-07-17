@@ -10,7 +10,7 @@ import {
   NoResultsFound,
 } from '@/components';
 import { ProjectList } from '@/lib';
-import { ProjectListData } from '@/types';
+import type { ProjectListData } from '@/types';
 import Link from 'next/link';
 import { ROUTES } from '@/lib';
 

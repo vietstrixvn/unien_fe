@@ -13,7 +13,7 @@ import {
   LoadingSpin,
   ErrorLoading,
 } from '@/components';
-import { ServiceTableProps } from '@/types';
+import type { ServiceTableProps } from '@/types';
 import { ServiceColumns } from '@/types/service/service.colum';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/assetts/icons';
@@ -23,7 +23,7 @@ import { ConfirmDialog } from '../design/Dialog';
 import { useAuthStore } from '@/store/authStore';
 import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
-import { VisibilityCategoryOption } from '@/types';
+import type { VisibilityCategoryOption } from '@/types';
 import { statusColorMap } from './blog.table';
 
 export const ServiceTable: React.FC<ServiceTableProps> = ({

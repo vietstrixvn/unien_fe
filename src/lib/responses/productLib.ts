@@ -1,7 +1,7 @@
 'use client';
 
 import { useProductDetail, useProductList } from '@/hooks/product/useProduct';
-import { Filters } from '@/types/types';
+import type { Filters } from '@/types';
 
 export const ProductList = (
   currentPage: number,

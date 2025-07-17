@@ -4,8 +4,8 @@
  * ==========================
  */
 
-import { Pagination } from '../base/base.type';
-import { ChildCategory, UserDataComponents } from '../types';
+import type { Pagination } from '../base/base.type';
+import type { ChildCategory, UserDataComponents } from '../types';
 
 export interface BlogList {
   _id: string;

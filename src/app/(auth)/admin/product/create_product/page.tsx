@@ -6,15 +6,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from '@/components/ui/card';
-import {
   Form,
   FormControl,
   FormDescription,
@@ -22,24 +19,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Loader2, Trash2, Upload } from 'lucide-react';
-import { cn } from '@/utils/helpers/utils';
-import { CreateProductItem } from '@/types';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/store/authStore';
-import ContentSection from '@/components/richText/ContentSection';
-import { Heading } from '@/components/design/Heading';
-import Image from 'next/image';
-import { CategoryList } from '@/lib/responses/categoriesLib';
-import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { useCreateProduct } from '@/hooks/product/useProduct';
+  Heading,
+  Button,
+  Input,
+} from '@/components';
+import { Loader2, Trash2, Upload } from 'lucide-react';
+import { cn } from '@/utils';
+import type { CreateProductItem } from '@/types';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/store/authStore';
+import ContentSection from '@/components/richText/ContentSection';
+import Image from 'next/image';
+import { CategoryList } from '@/lib';
+import { useCreateProduct } from '@/hooks';
 
 // schema.ts
 const formSchema = z.object({

@@ -13,7 +13,7 @@ import {
 } from '@/components';
 import { CategoryList } from '@/lib';
 import { useState, useMemo, useCallback, useRef } from 'react';
-import { AdminFilterProps } from '@/types';
+import type { AdminFilterProps } from '@/types';
 import { Icons } from '@/assetts/icons';
 
 export function AdminFilter({
@@ -28,7 +28,6 @@ export function AdminFilter({
   const [searchValue, setSearchValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('show');
-  const [selectedSort, setSelectedSort] = useState('price');
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   const params = useMemo(
@@ -44,7 +43,6 @@ export function AdminFilter({
   const handleRefreshClick = useCallback(() => {
     setSelectedCategory('all');
     setSelectedStatus('show');
-    setSelectedSort('price');
     setSearchValue('');
 
     handleRefresh?.();

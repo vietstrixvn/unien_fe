@@ -2,7 +2,7 @@
 
 import { Icons } from '@/assetts/icons';
 import { Button } from '@/components';
-import { RefreshButtonProps } from '@/types';
+import type { RefreshButtonProps } from '@/types';
 
 export const RefreshButton: React.FC<RefreshButtonProps> = ({
   onClick,

@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { Button, CustomImage } from '@/components';
 import { cn } from '@/utils';
-import { ParticleOverlay } from '@/components/design/ParticleOverlay';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib';
 import AppData from '@/data/app.data.json';

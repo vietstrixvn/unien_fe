@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { SeoData, UpdateSeo } from '@/types/types';
+import type { SeoData, UpdateSeo } from '@/types/types';
 import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';

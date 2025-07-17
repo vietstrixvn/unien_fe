@@ -1,4 +1,4 @@
-import { Category } from './category/category.type';
+import type { Category } from './category/category.type';
 
 export interface HeaderProps {
   title: string;

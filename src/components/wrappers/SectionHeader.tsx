@@ -1,4 +1,4 @@
-import { SectionHeaderProps } from '@/types';
+import type { SectionHeaderProps } from '@/types';
 import React from 'react';
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({

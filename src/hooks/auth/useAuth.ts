@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ChangePassword, VerifyCode } from '@/types/types';
+import type { ChangePassword, VerifyCode } from '@/types/types';
 import { endpoints, handleAPI } from '@/api';
 
 const ChangePasswordAuth = async (changePassword: ChangePassword) => {

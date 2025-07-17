@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { BackButton, Container, Input, Button, Label } from '@/components';
-import { CreateManagerData } from '@/types/types';
+import type { CreateManagerData } from '@/types/types';
 import { toast } from 'sonner';
 import { useCreateManager } from '@/hooks/auth/useManager';
 import { Heading } from '@/components/design/Heading';

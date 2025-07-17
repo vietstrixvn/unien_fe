@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
-import { CreateContactItem } from '@/types';
+import type { CreateContactItem } from '@/types';
 import { useCreateContact } from '@/hooks/contact/useContact';
 import { logDebug } from '@/utils/logger';
 import { toast } from 'sonner';

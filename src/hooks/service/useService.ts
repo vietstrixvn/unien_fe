@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endpoints, handleAPI } from '@/api';
-import {
+import type {
   FetchServiceListResponse,
   CreateServiceItem,
   ServiceDetail,
 } from '@/types/types';
-import { UpdateStatus, Filters } from '@/types';
+import type { UpdateStatus, Filters } from '@/types';
 import { toast } from 'sonner';
 import { buildQueryParams } from '@/utils';
 

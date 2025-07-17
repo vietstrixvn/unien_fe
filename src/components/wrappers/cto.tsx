@@ -1,4 +1,4 @@
-import { ContactSectionProps } from '@/types';
+import type { ContactSectionProps } from '@/types';
 import Link from 'next/link';
 import contactData from '@/data/contact.data.json';
 import { Arrows } from '@/assetts/icons';

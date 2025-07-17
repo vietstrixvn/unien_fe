@@ -1,7 +1,5 @@
 'use client';
 import { ServiceList } from '@/lib';
-import Link from 'next/link';
-import { Service } from '@/types';
 import servicesData from '@/data/service.data.json';
 import { ROUTES } from '@/lib';
 import {

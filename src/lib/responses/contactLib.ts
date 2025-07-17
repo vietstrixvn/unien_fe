@@ -1,6 +1,6 @@
 'use client';
 
-import { Filters } from '@/types/types';
+import type { Filters } from '@/types';
 import { useContactList } from '@/hooks/contact/useContact';
 import { logDebug } from '@/utils/logger';
 

@@ -18,24 +18,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from '@/components/ui/card';
+} from '@/components';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { useCreateBlog } from '@/hooks/blog/useBlog';
-import { CreateBlogItem } from '@/types/types';
+import type { CreateBlogItem } from '@/types/types';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';

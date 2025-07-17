@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {
+import type {
   FetchProjectListResponse,
   ProjectDetailResponse,
   CreateProjectItem,
@@ -7,7 +7,7 @@ import {
 import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
-import { UpdateStatus, Filters } from '@/types';
+import type { UpdateStatus, Filters } from '@/types';
 import { buildQueryParams } from '@/utils';
 
 /**

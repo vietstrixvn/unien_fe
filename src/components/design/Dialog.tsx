@@ -8,7 +8,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from '@/components';
-import { ConfirmDialogProps } from '@/types';
+import type { ConfirmDialogProps } from '@/types';
 
 export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   open,

@@ -1,6 +1,7 @@
 'use client';
 
-import { Search, Filter } from 'lucide-react';
+import type { Filter } from 'lucide-react';
+import { Search } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -45,7 +46,6 @@ export function ProjectFilter({
   const [searchValue, setSearchValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('show');
-  const [selectedSort, setSelectedSort] = useState('price');
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   // Memoize params để tránh re-render không cần thiết
@@ -60,7 +60,7 @@ export function ProjectFilter({
     // Reset tất cả filters về giá trị mặc định
     setSelectedCategory('all');
     setSelectedStatus('show');
-    setSelectedSort('price');
+
     setSearchValue('');
 
     handleRefresh?.();

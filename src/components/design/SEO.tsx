@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { SEOProps } from '@/types';
+import type { SEOProps } from '@/types';
 import { PageMetadata, siteBaseUrl } from '@/constant/appInfos';
 
 export function SEO({ title, description, image }: SEOProps) {

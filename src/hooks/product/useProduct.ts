@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
-import {
+import type {
   UpdateStatus,
   Filters,
   FetchProductListResponse,

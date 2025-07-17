@@ -1,10 +1,10 @@
-import { Category } from './types';
-
 /**
  * ==========================
  * 📌 @Contact
  * ==========================
  */
+
+import { Category } from './category/category.type';
 
 export const ContactColumns = [
   { key: 'number', label: 'Id', className: 'font-medium' },

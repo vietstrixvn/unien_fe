@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { AdmimnFilter } from './types';
+import type { ReactNode } from 'react';
+import type { AdmimnFilter } from './types';
 
 export interface LoadingProps {
   size?: number;

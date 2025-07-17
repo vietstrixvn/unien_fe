@@ -1,7 +1,7 @@
 'use client';
 
-import { Filters } from '@/types';
-import { BlogDetail } from '@/types/types';
+import type { Filters } from '@/types';
+import type { BlogDetail } from '@/types/types';
 
 import { useBlogDetail, useBlogList } from '@/hooks/blog/useBlog';
 

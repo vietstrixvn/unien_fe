@@ -3,7 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { handleAPI, endpoints } from '@/api';
 import { toast } from 'sonner';
-import {
+import type {
   Filters,
   UpdateStatus,
   FetchCategoryListResponse,

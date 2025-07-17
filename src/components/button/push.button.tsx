@@ -3,7 +3,7 @@
 // components/button/PushButton.tsx
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { PushButtonProps } from '@/types';
+import type { PushButtonProps } from '@/types';
 import { Arrows } from '@/assetts/icons';
 
 export const PushButton: React.FC<PushButtonProps> = ({ href, label }) => {

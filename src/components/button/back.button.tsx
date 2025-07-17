@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ComponentsIcons } from '@/assetts/icons';
-import { BackButtonProps } from '@/types';
+import type { BackButtonProps } from '@/types';
 
 export const BackButton: React.FC<BackButtonProps> = ({ href }) => {
   const router = useRouter();

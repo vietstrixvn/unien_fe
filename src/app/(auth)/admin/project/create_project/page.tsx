@@ -31,7 +31,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/pages/admin/project/multi-select';
 import { ServiceList } from '@/lib/responses/serviceLib';
 import { useCreateProject } from '@/hooks/project/useProject';
-import { CreateProjectItem } from '@/types/types';
+import type { CreateProjectItem } from '@/types/types';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
 

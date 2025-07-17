@@ -45,26 +45,33 @@ type RouteMap = {
 export const ROUTES: Readonly<RouteMap> = deepFreeze({
   HOME: '/',
   COMPANY: '/company',
-
   CONTACT: '/contact',
+
   BLOG: {
     ROOT: '/blogs',
     DETAIL: (slug: string) => `/services/${slug}`,
-    // ID: ENV.VIA_ART_FAIR_ID,
+    ID: '123',
   },
   SERVICE: {
     ROOT: '/services',
     DETAIL: (slug: string) => `/services/${slug}`,
-    // ID: ENV.VIA_ART_FAIR_ID,
+    ID: '123',
   },
   PRODUCT: {
     ROOT: '/products',
     DETAIL: (slug: string) => `/services/${slug}`,
-    // ID: ENV.VIA_ART_FAIR_ID,
+    ID: '123',
   },
   PROJECT: {
     ROOT: '/company',
     DETAIL: (slug: string) => `/company/project/${slug}`,
-    // ID: ENV.VIA_ART_FAIR_ID,
+    ID: '123',
   },
+
+  LOGIN: '/admin/login',
+
+  DASHBOARD: '',
+  ADMIN_CATEGORY: '',
+  ADMIN_CONTACT: '',
+  ADMIN_SEO: '',
 } as const);

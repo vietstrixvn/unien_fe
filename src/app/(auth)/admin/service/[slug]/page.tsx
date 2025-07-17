@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import NoResultsFound from '@/components/design/NoResultsFound';
-import Container from '@/components/wrappers/Container';
+import { NoResultsFound } from '@/components/design/NoResultsFound';
+import { Container } from '@/components/wrappers/Container';
 import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
 import { ServiceDetailData } from '@/lib/responses/serviceLib';
-import BackButton from '@/components/button/back.button';
+import { BackButton } from '@/components/button/back.button';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <Container className="mt-18">
       <article className="mx-auto max-w-7xl">
-        <BackButton />
+        <BackButton href="/admin/service" />
         <header className="mb-8">
           <h1 className="text-4xl sm:text-5xl font-bold text-center mb-8">
             {service?.title}
@@ -59,14 +59,14 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="mb-2 sm:mb-0">
+            {/* <div className="mb-2 sm:mb-0">
               <span className="uppercase text-xs font-semibold tracking-wider text-gray-500">
                 VIEWS
               </span>
-              <p className="font-bold text-lime-500 text-xl">
+             <p className="font-bold text-lime-500 text-xl">
                 {service?.views}
-              </p>
-            </div>
+              </p> 
+            </div> */}
 
             <div>
               <span className="uppercase text-xs font-semibold tracking-wider text-gray-500">

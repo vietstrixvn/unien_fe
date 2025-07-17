@@ -16,10 +16,6 @@ export function ProductListingPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [activeSortOption, setActiveSortOption] = useState('newest');
-  const [expandedSections, setExpandedSections] = useState({
-    brands: false,
-    locations: false,
-  });
 
   const params = {
     category: selectedCategory ?? undefined,
@@ -37,13 +33,6 @@ export function ProductListingPage() {
     if (page > 0 && page <= pagination.total_page) {
       setCurrentPage(page);
     }
-  };
-
-  const toggleSection = (section: string) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
   };
 
   if (isLoading) {
@@ -64,8 +53,6 @@ export function ProductListingPage() {
       <SidebarFilters
         activeCategory={selectedCategory || ''}
         setActiveCategory={setSelectedCategory}
-        expandedSections={expandedSections}
-        toggleSection={toggleSection}
       />
 
       {/* Main Content */}

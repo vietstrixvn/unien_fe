@@ -7,8 +7,6 @@ function SidebarFilters({
 }: {
   activeCategory: string;
   setActiveCategory: (category: string) => void;
-  expandedSections: Record<string, boolean>;
-  toggleSection: (section: string) => void;
 }) {
   const { categories, isLoading, isError } = CategoryList(
     1,

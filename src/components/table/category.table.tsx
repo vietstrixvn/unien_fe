@@ -15,14 +15,17 @@ import {
 } from '@/components';
 
 //Types
-import { CategoryColumns, CategoryTableProps } from '@/types';
+import { CategoryColumns } from '@/types';
+import type { CategoryTableProps } from '@/types';
+
 //Hooks
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
+import type {
+  VisibilityCategoryOption} from '../pages/admin/categryStatus';
 import {
-  SelectCategoryStatus,
-  VisibilityCategoryOption,
+  SelectCategoryStatus
 } from '../pages/admin/categryStatus';
 import { useUpdateCategoryStatus } from '@/hooks';
 import { toast } from 'sonner';

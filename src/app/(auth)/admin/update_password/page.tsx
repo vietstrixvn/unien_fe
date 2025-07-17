@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useChangePassword, useGetVerifyCode } from '@/hooks/auth/useAuth';
-import { ChangePassword, VerifyCode } from '@/types/types';
+import type { ChangePassword, VerifyCode } from '@/types/types';
 import Link from 'next/link';
 
 // Password schema with validation

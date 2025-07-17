@@ -24,10 +24,6 @@ export function ProductShowcase() {
 
   const { products, isLoading, isError } = ProductList(1, params, refreshKey);
 
-  const handleRefresh = () => {
-    setRefreshKey((prev) => prev + 1);
-  };
-
   useEffect(() => {
     setRefreshKey((prev) => prev + 1);
   }, [selectedCategory]);

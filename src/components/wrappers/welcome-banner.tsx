@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
-import { WelcomeBannerProps } from '@/types/types';
+import type { WelcomeBannerProps } from '@/types/types';
 
 export default function WelcomeBanner({
   message = 'Chào mừng bạn đến với bảng điều khiển – nơi tập trung mọi dữ liệu và công cụ quản lý website của bạn',

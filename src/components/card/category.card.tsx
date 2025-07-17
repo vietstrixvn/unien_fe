@@ -1,7 +1,7 @@
 'use client';
 
 import { CategoryList } from '@/lib/responses/categoriesLib';
-import { CategoryCardProps } from '@/types';
+import type { CategoryCardProps } from '@/types';
 import type { Category } from '@/types';
 import React, { useState } from 'react';
 

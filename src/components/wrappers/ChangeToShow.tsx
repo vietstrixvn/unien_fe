@@ -1,6 +1,6 @@
 'use client';
 
-import { VisibilityOption } from './VisibilitySelect';
+import type { VisibilityOption } from './VisibilitySelect';
 
 export interface VisibilityChangeProps {
   label: string;

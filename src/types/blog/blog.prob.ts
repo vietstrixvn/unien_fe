@@ -1,4 +1,4 @@
-import { BlogList } from './blog.type';
+import type { BlogList } from './blog.type';
 
 export interface BlogTableProps {
   blogs: BlogList[];

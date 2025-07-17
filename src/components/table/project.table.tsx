@@ -19,12 +19,12 @@ import React, { useState } from 'react';
 import { useDeleteService, useUpdateProjectStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';
 import { ProjectColumns } from '@/types/project/project.colum';
-import { ProjectTableProps } from '@/types/project/project.prob';
+import type { ProjectTableProps } from '@/types/project/project.prob';
 import { statusColorMap } from './blog.table';
 import { useAuthStore } from '@/store/authStore';
 import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
-import { VisibilityCategoryOption } from '@/types';
+import type { VisibilityCategoryOption } from '@/types';
 
 export const ProjectTable: React.FC<ProjectTableProps> = ({
   projects,

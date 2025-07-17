@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { endpoints, handleAPI } from '@/api';
-import { UploadMedia } from '@/types/types';
+import type { UploadMedia } from '@/types/types';
 
 const CreateMedia = async (newMedia: UploadMedia) => {
   const formData = new FormData();

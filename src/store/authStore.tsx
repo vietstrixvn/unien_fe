@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { baseURL, endpoints } from '@/api/api';
 import { toast } from 'sonner';
 import { logDebug, logError, logWarn } from '@/utils/logger';
-import { PersistedUserInfo, UserData } from '@/types/types';
+import type { PersistedUserInfo, UserData } from '@/types/types';
 
 // Define the complete state type with proper typing
 interface AuthState {

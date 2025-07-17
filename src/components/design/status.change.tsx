@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from '@/components';
 import { statusColorMap } from '../table/blog.table';
-import { VisibilityCategoryOption, VisibilitySelectProps } from '@/types';
+import type { VisibilityCategoryOption, VisibilitySelectProps } from '@/types';
 
 export const SelectStatus = ({ value, onChange }: VisibilitySelectProps) => {
   const labelMap = {

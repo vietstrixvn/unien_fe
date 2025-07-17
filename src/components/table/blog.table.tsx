@@ -18,12 +18,12 @@ import { Icons } from '@/assetts/icons';
 import React, { useState } from 'react';
 import { useDeleteBlog, useUpdateBlogStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';
-import { BlogTableProps } from '@/types/blog/blog.prob';
+import type { BlogTableProps } from '@/types/blog/blog.prob';
 import { BlogColumns } from '@/types/blog/blog.colum';
 import { useAuthStore } from '@/store/authStore';
 import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
-import { VisibilityCategoryOption } from '@/types';
+import type { VisibilityCategoryOption } from '@/types';
 
 export const statusColorMap: Record<string, string> = {
   show: 'bg-green-100 text-green-800 hover:bg-green-100',

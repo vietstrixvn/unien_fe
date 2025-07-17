@@ -1,5 +1,5 @@
 import { useProjectDetail, useProjectList } from '@/hooks/project/useProject';
-import { Filters } from '@/types/types';
+import type { Filters } from '@/types';
 
 export const ProjectList = (
   currentPage: number,

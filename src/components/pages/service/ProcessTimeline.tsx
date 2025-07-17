@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { cn } from '@/utils';
 import { SectionHeader } from '@/components';
-import { ProcessStepProps } from '@/types';
+import type { ProcessStepProps } from '@/types';
 import servicesData from '@/data/service.data.json';
 
 const ProcessStep: React.FC<ProcessStepProps> = ({

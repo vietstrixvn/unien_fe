@@ -7,8 +7,14 @@ import {
 import { RxDragHandleDots2 } from 'react-icons/rx';
 import { useState, useRef } from 'react';
 
-const DragHandle = ({ updatePosition, getPos }) => {
-  const handleDragStart = (event) => {
+const DragHandle = ({
+  updatePosition,
+  getPos,
+}: {
+  updatePosition: any;
+  getPos: any;
+}) => {
+  const handleDragStart = (event: any) => {
     event.dataTransfer.setData('text/plain', getPos().toString());
   };
 
@@ -56,7 +62,7 @@ const DragItem = Node.create({
       const [, setUpdate] = useState(0);
       const lastPos = useRef(getPos());
 
-      const updatePosition = (from, to) => {
+      const updatePosition = (from: any, to: any) => {
         if (from === to) return; // Không làm gì nếu vị trí không thay đổi
 
         const transaction = editor.state.tr;

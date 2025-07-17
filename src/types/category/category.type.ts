@@ -4,8 +4,8 @@
  * ==========================
  */
 
-import { Pagination } from '../base/base.type';
-import { UserDataComponents } from '../types';
+import type { Pagination } from '../base/base.type';
+import type { UserDataComponents } from '../types';
 
 /*
   Category Attribute Declaration

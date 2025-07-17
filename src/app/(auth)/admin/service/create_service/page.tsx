@@ -6,15 +6,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from '@/components/ui/card';
-import {
   Form,
   FormControl,
   FormDescription,
@@ -22,24 +18,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { ImageIcon, Loader2 } from 'lucide-react';
-import { cn } from '@/utils/helpers/utils';
-import { useCreateService } from '@/hooks/service/useService';
-import { CreateServiceItem } from '@/types/types';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/store/authStore';
-import ContentSection from '@/components/richText/ContentSection';
-import { Heading } from '@/components/design/Heading';
-import Image from 'next/image';
-import { CategoryList } from '@/lib/responses/categoriesLib';
-import {
+  Input,
+  Button,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components';
+import { ImageIcon, Loader2 } from 'lucide-react';
+import { cn } from '@/utils';
+import { useCreateService } from '@/hooks/service/useService';
+import type { CreateServiceItem } from '@/types/types';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/store/authStore';
+import ContentSection from '@/components/richText/ContentSection';
+import { Heading } from '@/components/design/Heading';
+import Image from 'next/image';
+import { CategoryList } from '@/lib';
 
 const formSchema = z.object({
   title: z.string().min(2, { message: 'Title must be at least 2 characters.' }),

@@ -1,7 +1,7 @@
 'use client';
 
 import { useUserList, useUserStatistict } from '@/hooks/auth/useManager';
-import { Filters } from '@/types/types';
+import type { Filters } from '@/types';
 
 export const UserList = (
   currentPage: number,

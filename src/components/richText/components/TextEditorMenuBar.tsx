@@ -87,7 +87,7 @@ const Button = ({
   </button>
 );
 
-export default function TextEditorMenuBar({ editor }) {
+export default function TextEditorMenuBar({ editor }: any) {
   const { mutate: uploadMedia } = useUploadMedia();
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');

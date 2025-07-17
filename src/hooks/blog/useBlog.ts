@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { CreateBlogItem, BlogDetail } from '@/types/types';
-import { Filters, UpdateStatus, FetchBlogListResponse } from '@/types';
+import type { CreateBlogItem, BlogDetail } from '@/types/types';
+import type { Filters, UpdateStatus, FetchBlogListResponse } from '@/types';
 import { handleAPI, endpoints } from '@/api';
 import { toast } from 'sonner';
 import { buildQueryParams } from '@/utils';
