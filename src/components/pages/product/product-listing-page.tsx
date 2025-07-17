@@ -4,12 +4,11 @@ import type React from 'react';
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/utils/helpers/utils';
+import { cn } from '@/utils';
 import SidebarFilters from './product-side-filters';
 import ProductCard from './product-card';
-import { ProductList } from '@/lib/responses/productLib';
-import { NoResultsFound } from '@/components';
-import { LoadingSpin } from '@/components/loading/loading';
+import { ProductList } from '@/lib';
+import { NoResultsFound, LoadingSpin } from '@/components';
 
 export function ProductListingPage() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -20,7 +19,7 @@ export function ProductListingPage() {
   const params = {
     category: selectedCategory ?? undefined,
     limit: 20,
-    type: 'show,popular', // Fixed typo in 'status'
+    type: 'show,popular',
   };
 
   const { products, isLoading, isError, pagination } = ProductList(

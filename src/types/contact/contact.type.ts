@@ -11,7 +11,7 @@ interface ContactService {
   title: string;
 }
 
-interface ContactList {
+export interface ContactList {
   _id: string;
   name: string;
   email: string;

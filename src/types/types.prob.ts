@@ -98,3 +98,16 @@ export type AdminFilterProps = {
   onStatusChange?: (value: string) => void;
   onSearchChange?: (value: string) => void;
 };
+
+export interface CopyLinkButtonProps {
+  url?: string;
+}
+
+export interface HeaderProps {
+  title: string;
+  className?: string;
+}
+
+export interface WelcomeBannerProps {
+  message?: string;
+}

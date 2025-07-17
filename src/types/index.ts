@@ -20,6 +20,7 @@ export * from './types';
  * ==========================
  */
 export * from './category/category.colum';
+export * from './contact/contact.colum';
 
 /**
  * ==========================
@@ -34,3 +35,4 @@ export * from './service/service.prob';
 export * from './media/media.prop';
 export * from './seo/seo.prob';
 export * from './category/category.prob';
+export * from './contact/contact.prob';

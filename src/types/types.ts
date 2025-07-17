@@ -1,13 +1,4 @@
-import type { Category } from './category/category.type';
-
-export interface HeaderProps {
-  title: string;
-  className?: string;
-}
-
-export interface WelcomeBannerProps {
-  message?: string;
-}
+import { Pagination } from './base/base.type';
 
 /**
  * ==========================
@@ -18,19 +9,6 @@ export interface WelcomeBannerProps {
 export interface UploadMedia {
   path: string;
   file: File;
-}
-
-/**
- * ==========================
- *  @PAGINATION
- * ==========================
- */
-
-interface Pagination {
-  total_page: number;
-  page_size: number;
-  current_page: number;
-  total: number;
 }
 
 /**
@@ -351,36 +329,6 @@ export interface CreateBlogItem {
   description: string;
   status: string;
   link?: string | null;
-}
-
-export interface CopyLinkButtonProps {
-  url?: string;
-}
-
-/**
- * ==========================
- * 📌 @props CategoryTableProps
- * ==========================
- */
-
-export interface CategoryTableProps {
-  categories: Category[];
-  isLoading: boolean;
-  isError: boolean;
-  onDelete: (id: string) => void;
-}
-
-/**
- * ==========================
- * 📌 @props ContactTableProps
- * ==========================
- */
-
-export interface ContactTableProps {
-  contacts: any[];
-  isLoading: boolean;
-  isError: boolean;
-  onDelete: (id: string) => void;
 }
 
 export interface AdmimnFilter {
