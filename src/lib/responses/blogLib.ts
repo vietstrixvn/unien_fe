@@ -33,6 +33,7 @@ export const BlogDetailData = (slug: string, refreshKey: number) => {
   const { data, isLoading, isError } = useBlogDetail(slug, refreshKey);
 
   const blog = data ?? ({} as Partial<BlogDetail>);
+
   return {
     blog,
     isLoading,

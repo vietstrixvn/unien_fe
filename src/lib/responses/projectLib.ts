@@ -1,5 +1,5 @@
 import { useProjectDetail, useProjectList } from '@/hooks/project/useProject';
-import type { Filters } from '@/types';
+import type { Filters, ProjectDetail } from '@/types';
 
 export const ProjectList = (
   currentPage: number,
@@ -30,7 +30,7 @@ export const ProjectList = (
 export const ProjectDetailData = (slug: string, refreshKey: number) => {
   const { data, isLoading, isError } = useProjectDetail(slug, refreshKey);
 
-  const project = data?.result; // Changed from data?.data to data
+  const project = data ?? ({} as Partial<ProjectDetail>);
 
   return {
     project,

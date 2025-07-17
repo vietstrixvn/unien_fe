@@ -8,11 +8,13 @@ import {
   TabsContent,
   MoreButton,
   NoResultsFound,
+  CustomImage,
 } from '@/components';
 import { ProjectList } from '@/lib';
 import type { ProjectListData } from '@/types';
 import Link from 'next/link';
 import { ROUTES } from '@/lib';
+import { truncateText } from '@/utils';
 
 export function ProjectCarousel() {
   const prams = {
@@ -56,9 +58,12 @@ function ServiceCard({ service }: { service: ProjectListData }) {
       href={ROUTES.PROJECT.DETAIL(service.slug)}
       className="group relative overflow-hidden lg:aspect-[3/2]"
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 group-hover:blur-sm"
-        style={{ backgroundImage: `url(${service.file})` }}
+      <CustomImage
+        src={service.file}
+        alt={service.title}
+        fill
+        className="object-cover object-center transition-all duration-500 group-hover:scale-105 group-hover:blur-sm"
+        sizes="100vw"
       />
       <div className="absolute inset-0 bg-black/20 transition-all duration-500 group-hover:bg-black/50" />
       <div className="absolute inset-0 p-6 flex flex-col justify-end">
@@ -66,8 +71,8 @@ function ServiceCard({ service }: { service: ProjectListData }) {
           {service.title}
         </h3>
         {service.description && (
-          <p className="mt-2 text-sm text-white/90 opacity-0 -translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-            {service.description}
+          <p className="mt-2 text-sm text-white/90 opacity-0 -translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 line-clamp-3">
+            {truncateText(service.content, 300)}
           </p>
         )}
       </div>

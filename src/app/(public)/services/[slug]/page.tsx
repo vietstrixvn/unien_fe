@@ -42,7 +42,7 @@ export default function Page() {
       <SEO
         title={service?.title || 'Dịch Vụ'}
         description={service?.content || ''}
-        image={service?.file || '/logo.svg'}
+        image={service?.file || '/Logo.svg'}
       />
 
       <Container className="mt-26">
@@ -71,7 +71,7 @@ export default function Page() {
 
             <div className="mb-8  relative h-[400px] w-full overflow-hidden">
               <CustomImage
-                src={service?.file || '/logo.svg'}
+                src={service?.file || '/Logo.svg'}
                 alt={`Featured image for ${service?.title}`}
                 fill
                 className="object-contain"

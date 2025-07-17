@@ -49,7 +49,7 @@ export default function RelatedProducts() {
               key={post._id}
               className=" overflow-hidden  shadow-sm hover:shadow-md transition-shadow relative"
             >
-              <Link href={`/products/${post._id}`}>
+              <Link href={`/products/${post.slug}`}>
                 <div className="relative h-60 w-full overflow-hidden">
                   <CustomImage
                     src={post.file?.[0] || '/logo.svg'}

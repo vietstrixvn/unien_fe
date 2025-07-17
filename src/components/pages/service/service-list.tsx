@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { ServiceList } from '@/lib/responses/serviceLib';
-import { LoadingSpin, ErrorLoading } from '@/components';
+import { LoadingSpin, ErrorLoading, NoResultsFound } from '@/components';
 import { PostCard } from '@/components';
 
 export function ServiceListData({
@@ -49,19 +49,23 @@ export function ServiceListData({
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((post) => (
-          <PostCard
-            type="service"
-            key={post._id}
-            _id={post._id}
-            title={post.title}
-            slug={post.slug}
-            content={post.content}
-            file={post.file}
-          />
-        ))}
-      </div>
+      {services.length === 0 ? (
+        <NoResultsFound />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((post) => (
+            <PostCard
+              type="service"
+              key={post._id}
+              _id={post._id}
+              title={post.title}
+              slug={post.slug}
+              content={post.content}
+              file={post.file}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Load More Button */}
       {!allLoaded && pagination.total_page > 1 && (

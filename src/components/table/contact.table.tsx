@@ -24,7 +24,7 @@ import { toast } from 'sonner';
 import { useUpdateStatus } from '@/hooks';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 // Types
-import { ContactColumns } from '@/types/columns';
+import { ContactColumns } from '@/types';
 import type { ContactTableProps } from '@/types';
 
 const statusColors = {
@@ -118,7 +118,7 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                       {col.key === 'name' && contact.name}
                       {col.key === 'email' && contact.email}
                       {col.key === 'phone_number' && contact.phone_number}
-                      {col.key === 'service' && (contact.service?.name || '—')}
+                      {col.key === 'service' && (contact.service?.title || '—')}
                       {col.key === 'status' &&
                         (contact.status === 'pending' ? (
                           <Select

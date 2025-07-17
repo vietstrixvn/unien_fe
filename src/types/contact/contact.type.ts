@@ -6,7 +6,7 @@
 
 import type { Pagination } from '../base/base.type';
 
-interface ContactService {
+export interface ContactService {
   _id: string;
   title: string;
 }
@@ -18,6 +18,7 @@ export interface ContactList {
   phone_number: string;
   message: string;
   link?: string;
+  status: string;
   service?: ContactService;
   createdAt: Date | string;
   updatedAt: Date | string;

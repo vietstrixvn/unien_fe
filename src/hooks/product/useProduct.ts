@@ -8,6 +8,7 @@ import type {
   FetchProductListResponse,
   ProductDetailResponse,
   CreateProductItem,
+  ProductDetail,
 } from '@/types';
 import { buildQueryParams } from '@/utils';
 
@@ -74,9 +75,7 @@ const useProductList = (
  * @returns {Document} Detail of document
  */
 
-const fetchProductDetail = async (
-  slug: string
-): Promise<ProductDetailResponse> => {
+const fetchProductDetail = async (slug: string): Promise<ProductDetail> => {
   try {
     // Check if slug is valid
     if (!slug) {
@@ -101,7 +100,7 @@ const fetchProductDetail = async (
 
 // Custom hook to get detail of category
 const useProductDetail = (slug: string, refreshKey: number) => {
-  return useQuery<ProductDetailResponse, Error>({
+  return useQuery<ProductDetail, Error>({
     queryKey: ['productDetail', slug, refreshKey],
     queryFn: () => fetchProductDetail(slug),
     enabled: !!slug,

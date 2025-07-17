@@ -290,7 +290,7 @@ const Page = () => {
             {/* Pagination */}
             <div className="mt-4 flex justify-between items-center">
               <p className="text-sm text-gray-500">
-                Showing {users?.length || 0} of {pagination?.current_page || 0}{' '}
+                Showing {users?.length || 0} of {pagination?.total_page || 0}{' '}
                 pages
               </p>
               <CustomPagination

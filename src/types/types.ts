@@ -150,7 +150,7 @@ export interface FetchProjectListResponse {
  * ==========================
  */
 
-interface ProjectDetail {
+export interface ProjectDetail {
   _id: string;
   title: string;
   slug: string;

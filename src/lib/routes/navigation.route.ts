@@ -13,5 +13,5 @@ export const navItems = [
   { name: Name.COMPANY, href: ROUTES.COMPANY },
   { name: Name.SERVICE, href: ROUTES.SERVICE.ROOT },
   { name: Name.BLOG, href: ROUTES.BLOG.ROOT },
-  { name: Name.BLOG, href: ROUTES.PRODUCT.ROOT },
+  { name: Name.PRODUCT, href: ROUTES.PRODUCT.ROOT },
 ];

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { CopyLinkButtonProps } from '@/types/types';
+import type { CopyLinkButtonProps } from '@/types';
 import { toast } from 'sonner';
 import { ClipboardCopy, Check } from 'lucide-react';
 

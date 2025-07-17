@@ -3,11 +3,12 @@
 import { useParams, useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { ProductGallery } from '@/components/pages/product/product-gallery';
 import { ProductDetailData } from '@/lib';
 import { NoResultsFound } from '@/components';
-import { formatSmartDate } from '@/utils/formatTimeAgo';
+import { CodeBlockComponent } from '@/components/richText/ContentSection';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Container } from '@/components/wrappers/Container';
 import Link from 'next/link';
 import RelatedProducts from '@/components/pages/product/RelatedProduct';
@@ -59,12 +60,12 @@ export default function Page() {
           <div>
             <h1 className="text-3xl font-bold">{product?.title}</h1>
             <div className="flex items-center mt-2">
-              <span className="text-sm text-muted-foreground">
-                Added on{' '}
+              {/* <span className="text-sm text-muted-foreground">
+                {' '}
                 {product?.createdAt
                   ? formatSmartDate(product.createdAt)
                   : 'No date available'}
-              </span>
+              </span> */}
             </div>
           </div>
           <div className="text-3xl font-bold">
@@ -76,11 +77,11 @@ export default function Page() {
               </span>
             )}
           </div>
-          <p className="prose max-w-none">{product?.content}</p>\
-          <div>
+          <p className="prose max-w-none">{product?.content}</p>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-2">Category</h3>
             <Badge variant="secondary">{product?.category.name}</Badge>
-          </div>
+          </div> */}
           <div className="pt-4">
             <Button
               onClick={onClick}
@@ -91,7 +92,45 @@ export default function Page() {
             </Button>
             <div>
               <h3 className="text-lg font-semibold mb-2">Chi tiết</h3>
-              <p className="text-muted-foreground">{product?.description}</p>
+              <div className="prose prose-lg max-w-none">
+                <div className="leading-relaxed">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      blockquote: ({ children }) => (
+                        <blockquote className="custom-blockquote">
+                          {children}
+                        </blockquote>
+                      ),
+                      code: ({
+                        inline,
+                        className,
+                        children,
+                        ...props
+                      }: any) => {
+                        const match = /language-(\w+)/.exec(className || '');
+
+                        if (!inline) {
+                          return (
+                            <CodeBlockComponent
+                              value={String(children).replace(/\n$/, '')}
+                              language={match ? match[1] : undefined}
+                            />
+                          );
+                        }
+
+                        return (
+                          <code className="inline-code" {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  >
+                    {product?.description}
+                  </ReactMarkdown>
+                </div>
+              </div>
             </div>
           </div>
         </div>

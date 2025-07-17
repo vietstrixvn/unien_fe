@@ -3,6 +3,7 @@ import type {
   FetchProjectListResponse,
   ProjectDetailResponse,
   CreateProjectItem,
+  ProjectDetail,
 } from '@/types/types';
 import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
@@ -73,9 +74,7 @@ const useProjectList = (
  * @returns {Document} Detail of document
  */
 
-const fetchProjectDetail = async (
-  slug: string
-): Promise<ProjectDetailResponse> => {
+const fetchProjectDetail = async (slug: string): Promise<ProjectDetail> => {
   try {
     // Check if slug is valid
     if (!slug) {
@@ -100,7 +99,7 @@ const fetchProjectDetail = async (
 
 // Custom hook to get detail of category
 const useProjectDetail = (slug: string, refreshKey: number) => {
-  return useQuery<ProjectDetailResponse, Error>({
+  return useQuery<ProjectDetail, Error>({
     queryKey: ['projectDetail', slug, refreshKey],
     queryFn: () => fetchProjectDetail(slug),
     enabled: !!slug,

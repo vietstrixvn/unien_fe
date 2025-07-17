@@ -1,6 +1,6 @@
 'use client';
 import { Icons } from '@/assetts/icons';
-import { PostCard } from '@/components';
+import { NoResultsFound, PostCard } from '@/components';
 
 export function BlogListSection({
   blogs,
@@ -16,12 +16,16 @@ export function BlogListSection({
   allLoaded: boolean;
 }) {
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogs.map((post) => (
-          <PostCard key={post._id} {...post} />
-        ))}
-      </div>
+    <div className="container mx-auto px-4 py-12">
+      {blogs.length === 0 ? (
+        <NoResultsFound />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogs.map((post) => (
+            <PostCard key={post._id} {...post} />
+          ))}
+        </div>
+      )}
 
       {!allLoaded && pagination.total_page > 1 && (
         <div className="flex justify-center mt-12">
@@ -43,6 +47,6 @@ export function BlogListSection({
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }

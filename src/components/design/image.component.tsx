@@ -35,6 +35,7 @@ export function CustomImage({
       placeholder="blur"
       blurDataURL="/placeholder.png"
       {...rest}
+      unoptimized
     />
   );
 }

@@ -49,7 +49,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center">
               <div className="flex items-center">
                 <CustomImage
-                  src="/logo.svg"
+                  src="/Logo.svg"
                   alt="Logo"
                   width={50}
                   height={50}

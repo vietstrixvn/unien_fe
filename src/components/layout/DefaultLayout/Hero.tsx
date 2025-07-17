@@ -58,7 +58,7 @@ export function HeroBanner() {
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight max-w-3xl leading-tight">
               <span className="flex items-center gap-2">
                 <CustomImage
-                  src="/logo.svg"
+                  src="/Logo.svg"
                   alt="Logo"
                   width={40}
                   height={40}

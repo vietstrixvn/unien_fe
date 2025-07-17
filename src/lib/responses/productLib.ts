@@ -1,7 +1,7 @@
 'use client';
 
 import { useProductDetail, useProductList } from '@/hooks/product/useProduct';
-import type { Filters } from '@/types';
+import type { Filters, ProductDetail } from '@/types';
 
 export const ProductList = (
   currentPage: number,
@@ -35,7 +35,7 @@ export const ProductList = (
 export const ProductDetailData = (slug: string, refreshKey: number) => {
   const { data, isLoading, isError } = useProductDetail(slug, refreshKey);
 
-  const product = data?.result;
+  const product = data ?? ({} as Partial<ProductDetail>);
 
   return {
     product,

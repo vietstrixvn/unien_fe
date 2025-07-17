@@ -11,7 +11,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center">
-              <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+              <Image src="/Logo.svg" alt="Logo" width={40} height={40} />
               <div className="ml-2 col ">
                 <h2 className="text-2xl font-bold">Unien</h2>
                 <p className="text-lg">{appData.AppData.slogan}</p>

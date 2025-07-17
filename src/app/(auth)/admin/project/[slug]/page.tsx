@@ -7,16 +7,13 @@ import { BackButton } from '@/components/button/back.button';
 import { ProjectDetailData } from '@/lib/responses/projectLib';
 import { CardContent } from '@/components/ui/card';
 import { Calendar, Clock, Edit, Eye, Trash, User } from 'lucide-react';
-import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@radix-ui/react-separator';
-import { useDeleteProject } from '@/hooks/project/useProject';
-import { useState } from 'react';
-import { ConfirmDialog } from '@/components/design/Dialog';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
+import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center h-96">
@@ -26,31 +23,15 @@ const LoadingSpinner = () => (
 
 export default function Page() {
   const { slug } = useParams();
-  const router = useRouter();
   const blogSlug = Array.isArray(slug) ? slug[0] : slug || '';
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const userInfo = useAuthStore((state) => state.userInfo);
 
   const { project, isLoading, isError } = ProjectDetailData(blogSlug, 0);
-  const { mutate: deleteProject } = useDeleteProject();
 
   // Kiểm tra nếu blog là undefined
   if (isLoading) return <LoadingSpinner />;
   if (isError || !project)
     return <p className="text-red-500">Blog not found.</p>;
-
-  const handleDeleteClick = () => {
-    setDeleteDialogOpen(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    deleteProject(project._id, {
-      onSuccess: () => {
-        setDeleteDialogOpen(false);
-        router.back(); // hoặc router.push('/admin/project')
-      },
-    });
-  };
 
   return (
     <>
@@ -75,14 +56,14 @@ export default function Page() {
                     <Edit className="mr-2 h-4 w-4" />
                     Edit Project
                   </Button>
-                  <Button
+                  {/* <Button
                     variant="destructive"
                     size="sm"
                     onClick={handleDeleteClick}
                   >
                     <Trash className="mr-2 h-4 w-4" />
                     Delete
-                  </Button>
+                  </Button> */}
                 </div>
               )}
             </div>
@@ -90,11 +71,43 @@ export default function Page() {
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
                 <div className="flex items-center">
                   <Calendar className="mr-1 h-4 w-4" />
-                  Created: {formatSmartDate(project.createdAt)}
+                  Created:{' '}
+                  {(() => {
+                    if (!project?.createdAt) return '-';
+
+                    const date = new Date(project.createdAt);
+                    if (isNaN(date.getTime())) return '-';
+
+                    const hoursAgo = differenceInHours(new Date(), date);
+
+                    if (hoursAgo < 1) {
+                      return formatDistanceToNow(date, { addSuffix: true });
+                    } else if (hoursAgo < 24) {
+                      return `${hoursAgo}h ago`;
+                    } else {
+                      return format(date, 'yyyy/MM/dd');
+                    }
+                  })()}
                 </div>
                 <div className="flex items-center">
                   <Clock className="mr-1 h-4 w-4" />
-                  Updated: {formatSmartDate(project.updatedAt)}
+                  Updated:{' '}
+                  {(() => {
+                    if (!project?.updatedAt) return '-';
+
+                    const date = new Date(project.updatedAt);
+                    if (isNaN(date.getTime())) return '-';
+
+                    const hoursAgo = differenceInHours(new Date(), date);
+
+                    if (hoursAgo < 1) {
+                      return formatDistanceToNow(date, { addSuffix: true });
+                    } else if (hoursAgo < 24) {
+                      return `${hoursAgo}h ago`;
+                    } else {
+                      return format(date, 'yyyy/MM/dd');
+                    }
+                  })()}
                 </div>
                 {/* <div className="flex items-center">
                   <Eye className="mr-1 h-4 w-4" />
@@ -102,7 +115,7 @@ export default function Page() {
                 </div> */}
                 <div className="flex items-center">
                   <User className="mr-1 h-4 w-4" />
-                  Posted by: {project.user.username}
+                  Posted by: {project.user?.username}
                 </div>
               </div>
             </CardContent>
@@ -190,13 +203,6 @@ export default function Page() {
           {project.description}
         </ReactMarkdown>
       </div>
-      <ConfirmDialog
-        open={deleteDialogOpen}
-        onOpenChange={setDeleteDialogOpen}
-        question="Are you sure"
-        description="This action cannot be undone. This will permanently delete the project."
-        onConfirm={handleDeleteConfirm}
-      />
     </>
   );
 }

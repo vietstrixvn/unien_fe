@@ -46,7 +46,7 @@ export function RadiatingLoader({
       <div className="relative flex items-center justify-center">
         {/* Static center logo */}
         <CustomImage
-          src="/logo.svg"
+          src="/Logo.svg"
           alt="Logo"
           width={96}
           height={96}
