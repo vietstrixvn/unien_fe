@@ -30,6 +30,7 @@ import { ConfirmDialog } from '@/components/design/Dialog';
 import UserRolesChart from '@/components/pages/admin/chart/user-roles-chart';
 import { Badge } from '@/components/ui/badge';
 import { Heading } from '@/components/design/Heading';
+import { AdminBreadCrumb } from '@/components/layout/AdminLayout/admin.breadcrumb';
 
 const Page = () => {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -87,6 +88,7 @@ const Page = () => {
   return (
     <>
       <Container>
+        <AdminBreadCrumb title="Người Dùng" />
         {/* Stats Overview */}
         <Heading name="Quản lý người dùng" desc="Trang Quản Lý Quản Trị Viên" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">

@@ -7,7 +7,7 @@ export default function Footer() {
     <footer>
       <div className="container mx-auto mb-4 max-w-7xl text-gray-600 font-semibold text-sm">
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 ">
+        <div className="flex flex-col md:flex-row justify-between items-center  ">
           <footer className="text-center text-sm text-gray-500 py-4">
             © {new Date().getFullYear()} All rights reserved. — by{' '}
             <Link
@@ -19,13 +19,13 @@ export default function Footer() {
             </Link>
           </footer>
 
-          <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center ">
             <span>+84 265 847 483</span>
             <span className="hidden md:inline">|</span>
-            <span>unien@unien.com</span>
+            <span>unienvn@gmail.com</span>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center ">
             <span>Ho Chi Minh City, VietNam</span>
           </div>
         </div>

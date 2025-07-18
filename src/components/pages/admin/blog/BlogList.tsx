@@ -70,37 +70,31 @@ export default function BlogListData() {
   }, []);
 
   return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <Container className="mx-auto">
-        {isLoading ? (
-          <LoadingSpin />
-        ) : isError ? (
-          <NoResultsFound />
-        ) : (
-          <>
-            <AdminFilter
-              filter={filter}
-              handleRefresh={handleRefresh}
-              onPageSizeChange={handlePageSizeChange}
-              onCategoryChange={handleCategoryChange}
-              onStatusChange={handleStatusChange}
-            />
+    <Container className="mx-auto">
+      {isLoading ? (
+        <LoadingSpin />
+      ) : isError ? (
+        <NoResultsFound />
+      ) : (
+        <>
+          <AdminFilter
+            filter={filter}
+            handleRefresh={handleRefresh}
+            onPageSizeChange={handlePageSizeChange}
+            onCategoryChange={handleCategoryChange}
+            onStatusChange={handleStatusChange}
+          />
 
-            <section className="mb-12">
-              <BlogTable
-                blogs={blogs}
-                isLoading={isLoading}
-                isError={isError}
-              />
-              <CustomPagination
-                currentPage={currentPage}
-                totalPage={pagination.total_page}
-                onPageChange={handlePageChange}
-              />
-            </section>
-          </>
-        )}
-      </Container>
-    </main>
+          <section className="mb-12">
+            <BlogTable blogs={blogs} isLoading={isLoading} isError={isError} />
+            <CustomPagination
+              currentPage={currentPage}
+              totalPage={pagination.total_page}
+              onPageChange={handlePageChange}
+            />
+          </section>
+        </>
+      )}
+    </Container>
   );
 }

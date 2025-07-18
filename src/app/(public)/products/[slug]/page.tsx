@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ProductGallery } from '@/components/pages/product/product-gallery';
 import { ProductDetailData } from '@/lib';
-import { NoResultsFound } from '@/components';
+import { LoadingSpin, NoResultsFound } from '@/components';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -27,7 +27,7 @@ export default function Page() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        <LoadingSpin />
       </div>
     );
   }
@@ -50,23 +50,15 @@ export default function Page() {
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Product Gallery - Left Side */}
         <div>
           <ProductGallery images={product?.file || []} />
         </div>
 
-        {/* Product Details - Right Side */}
         <div className="flex flex-col space-y-6">
           <div>
             <h1 className="text-3xl font-bold">{product?.title}</h1>
-            <div className="flex items-center mt-2">
-              {/* <span className="text-sm text-muted-foreground">
-                {' '}
-                {product?.createdAt
-                  ? formatSmartDate(product.createdAt)
-                  : 'No date available'}
-              </span> */}
-            </div>
+            <p className="text-base text-gray-600">{product?.content}</p>
+            <div className="flex items-center mt-2"></div>
           </div>
           <div className="text-3xl font-bold">
             {product?.price && product.price > 0 ? (
@@ -77,11 +69,7 @@ export default function Page() {
               </span>
             )}
           </div>
-          <p className="prose max-w-none">{product?.content}</p>
-          {/* <div>
-            <h3 className="text-lg font-semibold mb-2">Category</h3>
-            <Badge variant="secondary">{product?.category.name}</Badge>
-          </div> */}
+
           <div className="pt-4">
             <Button
               onClick={onClick}

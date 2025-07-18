@@ -70,8 +70,8 @@ export const ROUTES: Readonly<RouteMap> = deepFreeze({
 
   LOGIN: '/admin/login',
 
-  DASHBOARD: '',
-  ADMIN_CATEGORY: '',
+  DASHBOARD: '/admin',
+  ADMIN_CATEGORY: '/admin/category',
   ADMIN_CONTACT: '',
   ADMIN_SEO: '',
 } as const);

@@ -22,6 +22,7 @@ import {
 import { ConfirmDialog } from '@/components/design/Dialog';
 import { ContactTable } from '@/components/table/contact.table';
 import SelectStatus from '@/components/pages/admin/contact/selectStatus';
+import { AdminBreadCrumb } from '@/components/layout/AdminLayout/admin.breadcrumb';
 
 export default function ProductManager() {
   const [selectedStatus, setSelectedStatus] = useState<string>();
@@ -79,6 +80,8 @@ export default function ProductManager() {
   return (
     <>
       <Container>
+        <AdminBreadCrumb title="Liên Hệ" />
+
         <Heading
           name="Quản lý liên hệ"
           desc="Quản lý danh sách những người liên hệ của bạn ở đây"

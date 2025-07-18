@@ -33,7 +33,6 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Container } from '@/components/wrappers/Container';
 import { CategoryList } from '@/lib';
 import { useCreateCategory, useDeleteCategory } from '@/hooks';
 import { ConfirmDialog } from '@/components/design/Dialog';
@@ -44,6 +43,8 @@ import { useAuthStore } from '@/store/authStore';
 import SelectCategoryFilter from '@/components/pages/admin/categoryFilter';
 import { Heading } from '@/components/design/Heading';
 import { Icons } from '@/assetts/icons';
+import { AdminBreadCrumb } from '@/components/layout/AdminLayout/admin.breadcrumb';
+import { AdminContainer } from '@/components/wrappers/admin.wrapper';
 
 const formSchema = z.object({
   name: z.string().min(1, 'name is required'),
@@ -166,7 +167,8 @@ export default function CategoryManager() {
 
   return (
     <>
-      <Container>
+      <AdminContainer>
+        <AdminBreadCrumb title="Thể Loại" />
         <Heading name="Categories Page" desc="Manage your categories here" />
 
         <div className="md:flex col flex-col-2 md:flex-row justify-between items-center mb-6">
@@ -318,7 +320,7 @@ export default function CategoryManager() {
           totalPage={pagination.total_page}
           onPageChange={handlePageChange}
         />
-      </Container>
+      </AdminContainer>
       {/* Edit role */}
       {/* <ConfirmDialog
         open={deleteDialogOpen}

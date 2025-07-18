@@ -25,13 +25,18 @@ export default function Page() {
   const blogSlug = Array.isArray(slug) ? slug[0] : slug || '';
 
   const { blog, isLoading, isError } = BlogDetailData(blogSlug, 0);
+
   if (isLoading) {
-    return <LoadingSpin />;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <LoadingSpin />
+      </div>
+    );
   }
 
   if (isError) {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center min-h-screen">
         <NoResultsFound />
       </div>
     );

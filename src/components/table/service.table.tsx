@@ -25,6 +25,7 @@ import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
 import type { VisibilityCategoryOption } from '@/types';
 import { statusColorMap } from './blog.table';
+import { truncateText } from '@/utils';
 
 export const ServiceTable: React.FC<ServiceTableProps> = ({
   services,
@@ -68,151 +69,147 @@ export const ServiceTable: React.FC<ServiceTableProps> = ({
 
   return (
     <>
-      <div className="w-full mx-auto ">
-        <div className="border overflow-hidden">
-          <Table>
-            <TableHeader className="bg-main/60">
+      <div className="border overflow-hidden">
+        <Table>
+          <TableHeader className="bg-main/60">
+            <TableRow>
+              {ServiceColumns.map((col) => (
+                <TableHead key={col.key} className={col.className}>
+                  {col.label}
+                </TableHead>
+              ))}
+              <TableHead>Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {isLoading ? (
               <TableRow>
-                {ServiceColumns.map((col) => (
-                  <TableHead key={col.key} className={col.className}>
-                    {col.label}
-                  </TableHead>
-                ))}
-                <TableHead>Action</TableHead>
+                <TableCell colSpan={ServiceColumns.length + 1}>
+                  <LoadingSpin />
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isLoading ? (
-                <TableRow>
-                  <TableCell colSpan={ServiceColumns.length + 1}>
-                    <LoadingSpin />
-                  </TableCell>
-                </TableRow>
-              ) : isError ? (
-                <TableRow>
-                  <TableCell colSpan={ServiceColumns.length + 1}>
-                    <ErrorLoading />
-                  </TableCell>
-                </TableRow>
-              ) : services && services.length > 0 ? (
-                services.map((item, index) => (
-                  <React.Fragment key={item._id}>
-                    <TableRow key={item._id} className="border-b">
-                      <TableCell className="font-medium">{index + 1}</TableCell>
+            ) : isError ? (
+              <TableRow>
+                <TableCell colSpan={ServiceColumns.length + 1}>
+                  <ErrorLoading />
+                </TableCell>
+              </TableRow>
+            ) : services && services.length > 0 ? (
+              services.map((item, index) => (
+                <React.Fragment key={item._id}>
+                  <TableRow key={item._id} className="border-b">
+                    <TableCell className="font-medium">{index + 1}</TableCell>
 
-                      <TableCell className="font-medium">
-                        {item.title}
-                      </TableCell>
-                      <TableCell>
-                        {userInfo?.role === 'admin' ? (
-                          <SelectStatus
-                            value={item.status as VisibilityCategoryOption}
-                            onChange={(newStatus) =>
-                              handleStatusChange(item._id, newStatus)
-                            }
-                          />
-                        ) : (
-                          <Badge
-                            variant="secondary"
-                            className={
-                              statusColorMap[item.status] ||
-                              'bg-gray-100 text-gray-800'
-                            }
-                          >
-                            {item.status}
-                          </Badge>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <span>{item.category.name}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="flex items-center gap-1 text-sm text-blue-600 hover:underline"
-                          onClick={() => handleViewDetail(item.slug)}
+                    <TableCell className="font-medium">{item.title}</TableCell>
+                    <TableCell>
+                      {userInfo?.role === 'admin' ? (
+                        <SelectStatus
+                          value={item.status as VisibilityCategoryOption}
+                          onChange={(newStatus) =>
+                            handleStatusChange(item._id, newStatus)
+                          }
+                        />
+                      ) : (
+                        <Badge
+                          variant="secondary"
+                          className={
+                            statusColorMap[item.status] ||
+                            'bg-gray-100 text-gray-800'
+                          }
                         >
-                          <Icons.Eye className="w-4 h-4" />
-                          Chi tiết
-                        </Button>
-                      </TableCell>
-                      <TableCell>{item.price}</TableCell>
+                          {item.status}
+                        </Badge>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <span>{item.category.name}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="flex items-center gap-1 text-sm text-blue-600 hover:underline"
+                        onClick={() => handleViewDetail(item.slug)}
+                      >
+                        <Icons.Eye className="w-4 h-4" />
+                        Chi tiết
+                      </Button>
+                    </TableCell>
+                    <TableCell>{item.price}</TableCell>
 
-                      <TableCell>
-                        <Button
-                          variant="destructive"
-                          size="icon"
-                          onClick={() => handleDeleteClick(item._id)}
-                        >
-                          <Icons.Trash className="w-4 h-4" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow
-                      key={`${item._id}-details`}
-                      className="bg-gray-50/50 border-b"
-                    >
-                      <TableCell colSpan={8}>
-                        <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 py-2">
-                          <div>
-                            <div className="font-medium text-gray-500 mb-1">
-                              Mô tả ngắn
-                            </div>
-                            <div className="flex items-start gap-1">
-                              <div className="w-2 h-2 mt-1 bg-gray-400 rounded-full"></div>
-                              <div className="line-clamp-3">{item.content}</div>
-                            </div>
+                    <TableCell>
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => handleDeleteClick(item._id)}
+                      >
+                        <Icons.Trash className="w-4 h-4" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    key={`${item._id}-details`}
+                    className="bg-gray-50/50 border-b"
+                  >
+                    <TableCell colSpan={8}>
+                      <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 py-2">
+                        <div>
+                          <div className="font-medium text-gray-500 mb-1">
+                            Mô tả ngắn
                           </div>
-
-                          <div>
-                            <div className="font-medium text-gray-500 mb-1">
-                              Mô tả chi tiết
-                            </div>
-                            <div className="line-clamp-3">
-                              {item.description}
-                            </div>
-                          </div>
-                          <div>
-                            <div className="font-medium text-gray-500 mb-1">
-                              Ngày tạo
-                            </div>
-                            <div>
-                              {item.createdAt instanceof Date
-                                ? item.createdAt.toLocaleString()
-                                : item.createdAt}
-                            </div>
-                          </div>
-
-                          <div>
-                            <div className="font-medium text-gray-500 mb-1">
-                              Ngày sửa
-                            </div>
-                            <div>
-                              {item.updatedAt instanceof Date
-                                ? item.updatedAt.toLocaleString()
-                                : item.updatedAt}
-                            </div>
+                          <div className="flex items-start gap-1">
+                            <div className="w-2 h-2 mt-1 bg-gray-400 rounded-full"></div>
+                            {truncateText(item.content, 100)}
                           </div>
                         </div>
-                      </TableCell>
-                    </TableRow>
-                  </React.Fragment>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={ServiceColumns.length + 1}>
-                    <div className="flex justify-center items-center py-16">
-                      <NoResultsFound />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
+
+                        <div>
+                          <div className="font-medium text-gray-500 mb-1">
+                            Mô tả chi tiết
+                          </div>
+                          <div className="line-clamp-3">
+                            {truncateText(item.description, 100)}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-medium text-gray-500 mb-1">
+                            Ngày tạo
+                          </div>
+                          <div>
+                            {item.createdAt instanceof Date
+                              ? item.createdAt.toLocaleString()
+                              : item.createdAt}
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="font-medium text-gray-500 mb-1">
+                            Ngày sửa
+                          </div>
+                          <div>
+                            {item.updatedAt instanceof Date
+                              ? item.updatedAt.toLocaleString()
+                              : item.updatedAt}
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                </React.Fragment>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={ServiceColumns.length + 1}>
+                  <div className="flex justify-center items-center py-16">
+                    <NoResultsFound />
+                  </div>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </div>
       <ConfirmDialog
         open={deleteDialogOpen}

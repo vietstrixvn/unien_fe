@@ -75,7 +75,7 @@ export default function LoginPage() {
               </label>
               <Input
                 id="username"
-                placeholder="Hust4l account"
+                placeholder="UNIEN account"
                 className="w-full p-2 border rounded"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}

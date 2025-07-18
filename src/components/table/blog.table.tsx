@@ -24,6 +24,7 @@ import { useAuthStore } from '@/store/authStore';
 import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
 import type { VisibilityCategoryOption } from '@/types';
+import { truncateText } from '@/utils';
 
 export const statusColorMap: Record<string, string> = {
   show: 'bg-green-100 text-green-800 hover:bg-green-100',
@@ -168,7 +169,10 @@ export const BlogTable: React.FC<BlogTableProps> = ({
                             </div>
                             <div className="flex items-start gap-1">
                               <div className="w-2 h-2 mt-1 bg-gray-400 rounded-full"></div>
-                              <div className="line-clamp-3">{item.content}</div>
+                              <div className="line-clamp-3">
+                                {' '}
+                                {truncateText(item.content, 100)}
+                              </div>
                             </div>
                           </div>
 
@@ -177,7 +181,7 @@ export const BlogTable: React.FC<BlogTableProps> = ({
                               Mô tả chi tiết
                             </div>
                             <div className="line-clamp-3">
-                              {item.description}
+                              {truncateText(item.description, 100)}
                             </div>
                           </div>
                           <div>

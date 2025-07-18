@@ -14,12 +14,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
 import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
-
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center h-96">
-    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-);
+import { LoadingSpin } from '@/components';
 
 export default function Page() {
   const { slug } = useParams();
@@ -29,7 +24,7 @@ export default function Page() {
   const { project, isLoading, isError } = ProjectDetailData(blogSlug, 0);
 
   // Kiểm tra nếu blog là undefined
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpin />;
   if (isError || !project)
     return <p className="text-red-500">Blog not found.</p>;
 

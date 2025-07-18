@@ -60,7 +60,10 @@ export default function AuthProtectedLayout({
       <Head>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      <AdminLayout>{children}</AdminLayout>;
+      <main className="bg-[#FDEAD4]">
+        <AdminLayout>{children}</AdminLayout>
+      </main>
+      ;
     </>
   ) : null;
 
