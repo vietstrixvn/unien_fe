@@ -14,11 +14,15 @@ import {
   CustomImage,
   LoadingSpin,
   SEO,
+  CopyLinkButton,
 } from '@/components';
 import { ROUTES, ServiceDetailData } from '@/lib';
 import { Heading } from '@/components/design/Heading';
 import { ServiceRecent } from '@/components/card/service_recent.card';
 import DefaultBreadcrumb from '@/components/design/DefaultBreadCrumb';
+import { FacebookShareButton } from '@/components/button/share.button';
+import { SEOHead } from '@/components/design/SEOHead';
+import { siteBaseUrl } from '@/constant/appInfos';
 
 export default function Page() {
   const { slug } = useParams();
@@ -43,10 +47,11 @@ export default function Page() {
   }
   return (
     <>
-      <SEO
-        title={service?.title || 'Dịch Vụ'}
-        description={service?.content || ''}
-        image={service?.file || '/Logo.svg'}
+      <SEOHead
+        title={service.title || ''}
+        description={service.description || ''}
+        image={service.file || '/Logo.svg'}
+        url={`${siteBaseUrl}/services/${service.slug}`}
       />
 
       <Container className="mt-26">
@@ -60,16 +65,23 @@ export default function Page() {
                 </h1>
                 <DefaultBreadcrumb />
               </div>
-              <div className="mb-2 sm:mb-0 flex flex-wrap items-center gap-1 text-sm text-gray-600">
-                <span>Unien</span>
-                <span>-</span>
-                <span>
-                  {service?.createdAt
-                    ? formatSmartDate(service.createdAt)
-                    : 'No date available'}
-                </span>
-                <span>-</span>
-                <span>{service?.category?.name}</span>
+              <div className="flex justify-between">
+                <div className="mb-2 sm:mb-0 flex flex-wrap items-center gap-1 text-sm text-gray-600">
+                  <span>Unien</span>
+                  <span>-</span>
+                  <span>
+                    {service?.createdAt
+                      ? formatSmartDate(service.createdAt)
+                      : 'No date available'}
+                  </span>
+                  <span>-</span>
+                  <span>{service?.category?.name}</span>
+                </div>
+
+                <div className="flex">
+                  <CopyLinkButton />
+                  <FacebookShareButton />
+                </div>
               </div>
             </header>
 

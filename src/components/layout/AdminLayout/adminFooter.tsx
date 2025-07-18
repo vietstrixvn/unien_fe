@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer>
       <div className="container mx-auto mb-4 max-w-7xl text-gray-600 font-semibold text-sm">

@@ -1,6 +1,6 @@
 'use client';
 
-import AdminLayout from '@/components/layout/AdminLayout/AdminLayout';
+import { AdminLayout } from '@/components/layout/AdminLayout/AdminLayout';
 import { RadiatingLoader } from '@/components/loading/radiating-loader';
 import { useAuthStore } from '@/store/authStore';
 import Head from 'next/head';

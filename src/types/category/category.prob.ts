@@ -1,8 +1,9 @@
 import type { Category } from './category.type';
 
 export interface CategoryCardProps {
-  onCategorySelect?: (categoryId: string | null) => void;
+  onCategorySelect?: (categoryId: string | null, categoryName?: string) => void;
   type: string;
+  selectedCategory?: string | null;
 }
 
 /**

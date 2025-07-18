@@ -1,21 +1,13 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import React from 'react';
 import { AppSidebar } from './app-sidebar';
 import { Separator } from '@/components/ui/separator';
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from '@/components/ui/sidebar';
-import Footer from './adminFooter';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components';
+import { Footer } from './adminFooter';
+import { DefaultLayoutProps } from '@/types';
 
-interface DefaultLayoutProps {
-  children: ReactNode; // Khai báo kiểu cho children
-}
-
-const AdminLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
+export const AdminLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
     // Trong DefaultLayout.tsx
     <SidebarProvider>
@@ -34,5 +26,3 @@ const AdminLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
     </SidebarProvider>
   );
 };
-
-export default AdminLayout;

@@ -11,7 +11,7 @@ const Page = () => {
       <div className="mb-5">
         <WelcomeBanner />
       </div>
-      <Header title="Hust4l Area" />
+      <Header title="UNIEN Area" />
 
       <Card className="mb-4">
         <CardHeader className="flex flex-row items-center justify-between">

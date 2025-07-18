@@ -14,11 +14,13 @@ import {
   CustomImage,
   LoadingSpin,
   SEO,
+  CopyLinkButton,
 } from '@/components';
 import { ROUTES } from '@/lib';
 import { Heading } from '@/components/design/Heading';
 import { PostRecent } from '@/components/card/post_recent.card';
 import DefaultBreadcrumb from '@/components/design/DefaultBreadCrumb';
+import { FacebookShareButton } from '@/components/button/share.button';
 
 export default function Page() {
   const { slug } = useParams();
@@ -62,16 +64,23 @@ export default function Page() {
                 </h1>
                 <DefaultBreadcrumb />
               </div>
-              <div className="mb-2 sm:mb-0 flex flex-wrap items-center gap-1 text-sm text-gray-600">
-                <span>Unien</span>
-                <span>-</span>
-                <span>
-                  {blog?.createdAt
-                    ? formatSmartDate(blog.createdAt)
-                    : 'No date available'}
-                </span>
-                <span>-</span>
-                <span>{blog?.category?.name}</span>
+              <div className="flex justify-between">
+                <div className="mb-2 sm:mb-0 flex flex-wrap items-center gap-1 text-sm text-gray-600">
+                  <span>Unien</span>
+                  <span>-</span>
+                  <span>
+                    {blog?.createdAt
+                      ? formatSmartDate(blog.createdAt)
+                      : 'No date available'}
+                  </span>
+                  <span>-</span>
+                  <span>{blog?.category?.name}</span>
+                </div>
+
+                <div className="flex">
+                  <CopyLinkButton />
+                  <FacebookShareButton />
+                </div>
               </div>
             </header>
 

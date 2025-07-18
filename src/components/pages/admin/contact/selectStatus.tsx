@@ -17,7 +17,7 @@ const status = [
 ];
 
 const SelectStatus = ({
-  selectedStatus = 'all', // Mặc định là 'pending' nếu không có giá trị
+  selectedStatus = 'all',
   onStatusChange,
 }: {
   selectedStatus?: string;

@@ -17,63 +17,7 @@ import { NavService } from './nav-services';
 import { NavSupport } from './nav-support';
 import { NavAdmin } from './nav-admin';
 import { useAuthStore } from '@/store/authStore';
-
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '/admin',
-      icon: ComponentsIcons.LayoutDashboard,
-    },
-  ],
-  navAdmin: [
-    {
-      title: 'User',
-      url: '/admin/user',
-      icon: ComponentsIcons.LayoutDashboard,
-    },
-    {
-      title: 'SEO',
-      url: '/admin/seo',
-      icon: ComponentsIcons.Search,
-    },
-  ],
-  navService: [
-    {
-      title: 'Thể Loại',
-      url: '/admin/category',
-      icon: ComponentsIcons.ChartBarStacked,
-    },
-    {
-      title: 'Bài Viết',
-      url: '/admin/blog',
-      icon: ComponentsIcons.List,
-    },
-    {
-      title: 'Sản Phẩm',
-      url: '/admin/product',
-      icon: ComponentsIcons.Package,
-    },
-    {
-      title: 'Dịch Vụ',
-      url: '/admin/service',
-      icon: ComponentsIcons.Package,
-    },
-    {
-      title: 'Dự Án',
-      url: '/admin/project',
-      icon: ComponentsIcons.SquareChartGantt,
-    },
-  ],
-  navSupport: [
-    {
-      title: 'Liên Hệ',
-      url: '/admin/contact',
-      icon: ComponentsIcons.Contact,
-    },
-  ],
-};
+import { data } from '@/lib';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const userInfo = useAuthStore((state) => state.userInfo);
