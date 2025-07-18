@@ -31,11 +31,11 @@ export function ServiceListData({
     setLoading(true);
     setTimeout(() => {
       const nextPage = currentPage + 1;
-      if (nextPage > 0 && nextPage <= pagination.total_page) {
+      if (nextPage <= pagination.total_page) {
         setCurrentPage(nextPage);
+        setAllLoaded(nextPage >= pagination.total_page);
       }
       setLoading(false);
-      setAllLoaded(true);
     }, 1500);
   };
 

@@ -21,11 +21,11 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
 
   const { categories, isLoading, isError } = CategoryList(1, params, 0);
 
-  // Sử dụng useCallback để tối ưu performance
+  // Update để truyền cả categoryName
   const handleCategoryClick = useCallback(
-    (categoryId: string | null) => {
+    (categoryId: string | null, categoryName?: string) => {
       if (onCategorySelect) {
-        onCategorySelect(categoryId);
+        onCategorySelect(categoryId, categoryName);
       }
     },
     [onCategorySelect]
@@ -50,7 +50,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
     return categories.map((category: Category) => (
       <button
         key={category._id}
-        onClick={() => handleCategoryClick(category._id)}
+        onClick={() => handleCategoryClick(category._id, category.name)}
         className={`pb-4 px-1 whitespace-nowrap flex-shrink-0 transition-colors duration-200 ${
           selectedCategory === category._id
             ? 'text-main border-b-2 border-primary font-bold'

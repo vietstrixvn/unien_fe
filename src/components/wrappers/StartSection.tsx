@@ -30,20 +30,13 @@ export function StatsSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="w-full bg-main py-16 px-4 ">
-      <Container className="mx-auto">
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 pt-10">
+    <div ref={sectionRef} className="w-full bg-main py-16 px-4">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-10 text-center">
           <StatCounter
             value={50}
             suffix="+"
             label="Dự án hoàn thành"
-            isVisible={isVisible}
-          />
-          <StatCounter
-            value={5}
-            suffix="+"
-            label="Thành viên"
             isVisible={isVisible}
           />
           <StatCounter
@@ -65,7 +58,7 @@ export function StatsSection() {
             isVisible={isVisible}
           />
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

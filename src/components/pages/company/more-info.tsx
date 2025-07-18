@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import Image from 'next/image';
 import { SectionHeader } from '@/components/wrappers/SectionHeader';
+import { CustomImage } from '@/components/design/image.component';
 
 export default function CompanyPortfolio() {
   const missionRef = useRef<HTMLDivElement>(null);
@@ -83,8 +83,8 @@ export default function CompanyPortfolio() {
             </div>
             <div className="relative group">
               <div className="relative  overflow-hidden transform transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/img/boiler2.jpg"
+                <CustomImage
+                  src="/img/boiler1.jpg"
                   alt="Team meeting"
                   width={500}
                   height={500}

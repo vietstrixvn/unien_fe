@@ -60,14 +60,6 @@ const Page = () => {
     []
   );
 
-  if (isLoading) {
-    return <LoadingSpin />;
-  }
-
-  if (isError) {
-    return <ErrorLoading />;
-  }
-
   return (
     <>
       <SEO
@@ -87,13 +79,21 @@ const Page = () => {
               type="blogs"
               selectedCategory={selectedCategory}
             />
-            <BlogListSection
-              blogs={blogs}
-              pagination={pagination}
-              loading={loading}
-              handleLoadMore={handleLoadMore}
-              allLoaded={allLoaded}
-            />
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <LoadingSpin />
+              </div>
+            ) : isError ? (
+              <ErrorLoading />
+            ) : (
+              <BlogListSection
+                blogs={blogs}
+                pagination={pagination}
+                loading={loading}
+                handleLoadMore={handleLoadMore}
+                allLoaded={allLoaded}
+              />
+            )}
           </div>
           <ContactSection title="Dịch Vụ" href="/services" />
           <ContactComponent />
