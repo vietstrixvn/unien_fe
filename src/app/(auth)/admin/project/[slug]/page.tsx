@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@radix-ui/react-separator';
 
 import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
-import { LoadingSpin } from '@/components';
+import { CustomImage, LoadingSpin } from '@/components';
 
 export default function Page() {
   const { slug } = useParams();
@@ -102,10 +102,7 @@ export default function Page() {
                     }
                   })()}
                 </div>
-                {/* <div className="flex items-center">
-                  <Eye className="mr-1 h-4 w-4" />
-                  {project.views} views
-                </div> */}
+
                 <div className="flex items-center">
                   <User className="mr-1 h-4 w-4" />
                   Posted by: {project.user?.username}
@@ -140,8 +137,8 @@ export default function Page() {
           </div>
           <div className="mb-12 bg-gray-200 rounded-md overflow-hidden">
             <div className="aspect-video relative">
-              <Image
-                src={project?.file || '/placeholder.svg?height=400&width=800'}
+              <CustomImage
+                src={project?.file || '/Logo.svg?height=400&width=800'}
                 alt="Project feature image"
                 fill
                 className="object-cover"

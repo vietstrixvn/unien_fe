@@ -28,28 +28,9 @@ import { Input } from '@/components/ui/input';
 import { useChangePassword, useGetVerifyCode } from '@/hooks/auth/useAuth';
 import type { ChangePassword, VerifyCode } from '@/types/types';
 import Link from 'next/link';
+import { passwordSchema, verificationSchema } from '@/utils';
 
 // Password schema with validation
-const passwordSchema = z
-  .object({
-    currentPassword: z.string().min(1, 'Current password is required'),
-    newPassword: z
-      .string()
-      .min(8, 'Password must be at least 8 characters')
-      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-      .regex(/[0-9]/, 'Password must contain at least one number'),
-    confirmPassword: z.string().min(1, 'Please confirm your password'),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  });
-
-// Verification code schema
-const verificationSchema = z.object({
-  code: z.string().length(6, 'Verification code must be 6 digits'),
-});
 
 export default function UpdatePasswordPage() {
   const [step, setStep] = useState<'password' | 'verification' | 'success'>(
