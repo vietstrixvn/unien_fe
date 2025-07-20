@@ -3,37 +3,60 @@
 import { Button, CustomImage, Input, RadiatingLoader } from '@/components';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import type { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginFormSchema } from '@/utils';
 
 export default function LoginPage() {
   const { login, checkAuth } = useAuthStore();
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<z.infer<typeof loginFormSchema>>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
+    const { username, password } = values;
+
+    if (password.length < 8) {
+      setError('password', {
+        type: 'manual',
+        message: 'Password must be at least 8 characters.',
+      });
+      return;
+    }
 
     try {
       await login(username, password);
       await checkAuth();
 
       if (!useAuthStore.getState().isAuthenticated) {
-        setIsSubmitting(false);
+        setError('root', {
+          type: 'manual',
+          message: 'Invalid username or password',
+        });
         return;
       }
 
-      setTimeout(() => {
-        setIsSubmitting(false);
-        router.push('/admin');
-      }, 2000);
-    } catch {
-      setIsSubmitting(false);
+      router.push('/admin');
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('root', {
+        type: 'manual',
+        message: 'Login failed. Please try again.',
+      });
     }
   };
-
   if (isSubmitting) {
     return (
       <div>
@@ -68,7 +91,7 @@ export default function LoginPage() {
             </h2>
           </div>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-2">
               <label className="text-sm text-gray-500" htmlFor="email">
                 Tên đăng nhập
@@ -77,9 +100,13 @@ export default function LoginPage() {
                 id="username"
                 placeholder="UNIEN account"
                 className="w-full p-2 border rounded"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                {...register('username')}
               />
+              {errors.username && (
+                <p className="text-sm text-red-500">
+                  {errors.username.message}
+                </p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -91,16 +118,21 @@ export default function LoginPage() {
                 type="password"
                 placeholder="password"
                 className="w-full p-2 border rounded"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+                {...register('password')}
+              />{' '}
+              {errors.password && (
+                <p className="text-sm text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             <Button
+              type="submit"
               className="w-full font-bold text-xl bg-orange-500 hover:bg-orange-700 text-white"
               disabled={isSubmitting}
             >
-              Đăng nhập
+              {isSubmitting ? 'Loading...' : 'Login'}
             </Button>
           </form>
         </div>

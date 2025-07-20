@@ -33,7 +33,7 @@ import { ServiceList } from '@/lib/responses/serviceLib';
 import { useCreateProject } from '@/hooks/project/useProject';
 import type { CreateProjectItem } from '@/types/types';
 import { useAuthStore } from '@/store/authStore';
-import ContentSection from '@/components/richText/ContentSection';
+import { RichTextEditor } from '@/components/tiptap/rich-text-editor';
 
 // Maximum file size: 5MB
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -361,9 +361,10 @@ export default function CreateProjectPage() {
                   <FormItem>
                     <FormLabel>Mô tả chi tiết dự án</FormLabel>
                     <FormControl>
-                      <ContentSection
-                        value={field.value}
-                        onChange={field.onChange}
+                      <RichTextEditor
+                        initialContent={field.value}
+                        onChange={(val) => field.onChange(val.html)}
+                        className="w-full rounded-none cursor-text"
                       />
                     </FormControl>
                     <FormMessage />

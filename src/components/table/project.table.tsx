@@ -14,7 +14,7 @@ import {
   ErrorLoading,
 } from '@/components';
 import { useRouter } from 'next/navigation';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import React, { useState } from 'react';
 import { useDeleteService, useUpdateProjectStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';

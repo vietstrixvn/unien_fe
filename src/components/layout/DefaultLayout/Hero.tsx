@@ -6,7 +6,7 @@ import { cn } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib';
 import AppData from '@/data/app.data.json';
-import { Arrows } from '@/assetts/icons';
+import { Arrows } from '@/assets/icons';
 
 export function HeroBanner() {
   const heroRef = useRef<HTMLDivElement>(null);

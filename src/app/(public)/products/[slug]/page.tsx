@@ -6,9 +6,6 @@ import { Button } from '@/components/ui/button';
 import { ProductGallery } from '@/components/pages/product/product-gallery';
 import { ProductDetailData } from '@/lib';
 import { LoadingSpin, NoResultsFound } from '@/components';
-import { CodeBlockComponent } from '@/components/richText/ContentSection';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { Container } from '@/components/wrappers/Container';
 import Link from 'next/link';
 import RelatedProducts from '@/components/pages/product/RelatedProduct';
@@ -80,45 +77,12 @@ export default function Page() {
             </Button>
             <div>
               <h3 className="text-lg font-semibold mb-2">Chi tiết</h3>
-              <div className="prose prose-lg max-w-none">
-                <div className="leading-relaxed">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      blockquote: ({ children }) => (
-                        <blockquote className="custom-blockquote">
-                          {children}
-                        </blockquote>
-                      ),
-                      code: ({
-                        inline,
-                        className,
-                        children,
-                        ...props
-                      }: any) => {
-                        const match = /language-(\w+)/.exec(className || '');
-
-                        if (!inline) {
-                          return (
-                            <CodeBlockComponent
-                              value={String(children).replace(/\n$/, '')}
-                              language={match ? match[1] : undefined}
-                            />
-                          );
-                        }
-
-                        return (
-                          <code className="inline-code" {...props}>
-                            {children}
-                          </code>
-                        );
-                      },
-                    }}
-                  >
-                    {product?.description}
-                  </ReactMarkdown>
-                </div>
-              </div>
+              <div
+                className="rich-text-content mt-4"
+                dangerouslySetInnerHTML={{
+                  __html: product.content ?? '',
+                }}
+              />
             </div>
           </div>
         </div>

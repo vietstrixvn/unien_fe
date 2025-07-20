@@ -1,4 +1,4 @@
-import { Pagination } from './base/base.type';
+import type { Pagination } from './base/base.type';
 
 /**
  * ==========================

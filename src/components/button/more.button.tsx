@@ -1,6 +1,6 @@
 'use client';
 
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import Link from 'next/link';
 import React from 'react';
 

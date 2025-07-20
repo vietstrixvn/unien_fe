@@ -14,7 +14,7 @@ import {
   ErrorLoading,
 } from '@/components';
 import { useRouter } from 'next/navigation';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import React, { useState } from 'react';
 import { useDeleteBlog, useUpdateBlogStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';
@@ -24,7 +24,7 @@ import { useAuthStore } from '@/store/authStore';
 import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
 import type { VisibilityCategoryOption } from '@/types';
-import { truncateText } from '@/utils';
+import { truncateText, truncateHtmlToText } from '@/utils';
 
 export const statusColorMap: Record<string, string> = {
   show: 'bg-green-100 text-green-800 hover:bg-green-100',
@@ -179,10 +179,13 @@ export const BlogTable: React.FC<BlogTableProps> = ({
                           <div>
                             <div className="font-medium text-gray-500 mb-1">
                               Mô tả chi tiết
-                            </div>
-                            <div className="line-clamp-3">
-                              {truncateText(item.description, 100)}
-                            </div>
+                            </div>{' '}
+                            <div
+                              className="rich-text-content mt-4"
+                              dangerouslySetInnerHTML={{
+                                __html: truncateHtmlToText(item.content, 80),
+                              }}
+                            />
                           </div>
                           <div>
                             <div className="font-medium text-gray-500 mb-1">

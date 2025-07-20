@@ -2,11 +2,11 @@
 
 import type React from 'react';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
+import type { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { Loader2, Upload, X } from 'lucide-react';
+import { Upload, X } from 'lucide-react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
@@ -35,35 +35,9 @@ import type { CreateBlogItem } from '@/types/types';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
-import ContentSection from '@/components/richText/ContentSection';
 import { Heading } from '@/components/design/Heading';
-
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-];
-
-const formSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  content: z.string().min(1, 'Content is required'),
-  description: z.string().min(1, 'Description is required'),
-  category: z.string().min(1, 'Category is required'),
-  status: z.string().optional(),
-  file: z
-    .instanceof(File)
-    .refine(
-      (file) => file.size <= MAX_FILE_SIZE,
-      'File size must be less than 20MB'
-    )
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
-      'Only .jpg, .jpeg, .png and .webp formats are supported'
-    )
-    .optional(),
-});
+import { blogFormSchema } from '@/utils';
+import { RichTextEditor } from '@/components/tiptap/rich-text-editor';
 
 export default function NewBlogPost() {
   const userInfo = useAuthStore((state) => state.userInfo);
@@ -77,8 +51,8 @@ export default function NewBlogPost() {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof blogFormSchema>>({
+    resolver: zodResolver(blogFormSchema),
     defaultValues: {
       title: '',
       content: '',
@@ -89,7 +63,7 @@ export default function NewBlogPost() {
   });
 
   const onSubmit = async (
-    values: z.infer<typeof formSchema>,
+    values: z.infer<typeof blogFormSchema>,
     status: 'draft' | 'show'
   ) => {
     setIsSubmitting(true);
@@ -107,6 +81,7 @@ export default function NewBlogPost() {
 
       createBlog(blogData, {
         onSuccess: () => {
+          form.reset();
           router.push('/admin/blog');
         },
         onError: (error: any) => {
@@ -224,9 +199,10 @@ export default function NewBlogPost() {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <ContentSection
-                        value={field.value}
-                        onChange={field.onChange}
+                      <RichTextEditor
+                        initialContent={field.value}
+                        onChange={(val) => field.onChange(val.html)}
+                        className="w-full rounded-none cursor-text"
                       />
                     </FormControl>
                     <FormMessage />
@@ -372,20 +348,12 @@ export default function NewBlogPost() {
                     variant="outline"
                     onClick={() => {
                       const values = form.getValues();
-                      onSubmit(values, 'draft'); // Set status to 'draft'
+                      onSubmit(values, 'draft');
                     }}
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Saving...' : 'Save as Draft'}
+                    {isSubmitting ? 'Đang Tạo...' : 'Tạo Bài Viết'}
                   </Button>
-                  {userInfo?.role === 'admin' && (
-                    <Button type="submit" disabled={isSubmitting}>
-                      {isSubmitting && (
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      )}
-                      {isSubmitting ? 'Creating...' : 'Create Blog'}
-                    </Button>
-                  )}
                 </div>
               </CardFooter>
             </form>

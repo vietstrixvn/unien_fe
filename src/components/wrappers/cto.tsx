@@ -1,7 +1,7 @@
 import type { ContactSectionProps } from '@/types';
 import Link from 'next/link';
 import contactData from '@/data/contact.data.json';
-import { Arrows } from '@/assetts/icons';
+import { Arrows } from '@/assets/icons';
 
 export function ContactSection({ href, title }: ContactSectionProps) {
   return (

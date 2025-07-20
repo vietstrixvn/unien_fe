@@ -5,7 +5,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import type * as z from 'zod';
 
 import {
   Card,
@@ -29,28 +29,16 @@ import {
   Input,
 } from '@/components';
 import { Loader2, Trash2, Upload } from 'lucide-react';
-import { cn } from '@/utils';
+import { cn, ProductFormSchema } from '@/utils';
 import type { CreateProductItem } from '@/types';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
-import ContentSection from '@/components/richText/ContentSection';
 import Image from 'next/image';
 import { CategoryList } from '@/lib';
 import { useCreateProduct } from '@/hooks';
+import { RichTextEditor } from '@/components/tiptap/rich-text-editor';
 
 // schema.ts
-const formSchema = z.object({
-  title: z.string().min(2, { message: 'Title must be at least 2 characters.' }),
-  content: z.string().min(1, { message: 'Content is required.' }),
-  price: z.string().refine((val) => !isNaN(Number(val)), {
-    message: 'Price must be a number.',
-  }),
-  category: z.string().min(1, 'Category is required'),
-  status: z.string().optional(),
-  description: z
-    .string()
-    .min(10, { message: 'Description must be at least 10 characters.' }),
-});
 
 export default function Page() {
   const userInfo = useAuthStore((state) => state.userInfo);
@@ -65,8 +53,8 @@ export default function Page() {
     { limit: 20, type: 'products' },
     0
   );
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof ProductFormSchema>>({
+    resolver: zodResolver(ProductFormSchema),
     defaultValues: {
       title: '',
       content: '',
@@ -78,7 +66,7 @@ export default function Page() {
   });
 
   function onSubmit(
-    values: z.infer<typeof formSchema>,
+    values: z.infer<typeof ProductFormSchema>,
     status: 'draft' | 'show'
   ) {
     setIsSubmitting(true);
@@ -272,9 +260,10 @@ export default function Page() {
                       <FormItem>
                         <FormLabel>Description</FormLabel>
                         <FormControl>
-                          <ContentSection
-                            value={field.value}
-                            onChange={field.onChange}
+                          <RichTextEditor
+                            initialContent={field.value}
+                            onChange={(val) => field.onChange(val.html)}
+                            className="w-full rounded-none cursor-text"
                           />
                         </FormControl>
                         <FormMessage />

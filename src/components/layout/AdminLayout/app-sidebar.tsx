@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { ComponentsIcons } from '@/assetts/icons';
 
 import { NavMain } from './nav-main';
 import { NavUser } from './nav-user';

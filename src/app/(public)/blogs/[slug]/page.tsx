@@ -4,9 +4,6 @@ import { BlogDetailData } from '@/lib/responses/blogLib';
 import { useParams } from 'next/navigation';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
-import { CodeBlockComponent } from '@/components/richText/ContentSection';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import {
   BackButton,
   Container,
@@ -94,40 +91,12 @@ export default function Page() {
             </div>
             <h2 className="text-xl mt-12 mb-6">{blog?.content}</h2>
 
-            <div className="prose prose-lg max-w-none">
-              <div className="leading-relaxed">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    blockquote: ({ children }) => (
-                      <blockquote className="custom-blockquote">
-                        {children}
-                      </blockquote>
-                    ),
-                    code: ({ inline, className, children, ...props }: any) => {
-                      const match = /language-(\w+)/.exec(className || '');
-
-                      if (!inline) {
-                        return (
-                          <CodeBlockComponent
-                            value={String(children).replace(/\n$/, '')}
-                            language={match ? match[1] : undefined}
-                          />
-                        );
-                      }
-
-                      return (
-                        <code className="inline-code" {...props}>
-                          {children}
-                        </code>
-                      );
-                    },
-                  }}
-                >
-                  {blog?.description}
-                </ReactMarkdown>
-              </div>
-            </div>
+            <div
+              className="rich-text-content mt-4"
+              dangerouslySetInnerHTML={{
+                __html: blog.content ?? '',
+              }}
+            />
           </div>
           <div className="col-span-12 lg:col-span-4 p-6 lg:sticky lg:top-24 h-fit">
             <div>

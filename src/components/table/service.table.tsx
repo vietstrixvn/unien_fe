@@ -16,7 +16,7 @@ import {
 import type { ServiceTableProps } from '@/types';
 import { ServiceColumns } from '@/types/service/service.colum';
 import { useRouter } from 'next/navigation';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import React, { useState } from 'react';
 import { useDeleteService, useUpdateServiceStatus } from '@/hooks';
 import { ConfirmDialog } from '../design/Dialog';
@@ -25,7 +25,7 @@ import { SelectStatus } from '../design/status.change';
 import { toast } from 'sonner';
 import type { VisibilityCategoryOption } from '@/types';
 import { statusColorMap } from './blog.table';
-import { truncateText } from '@/utils';
+import { truncateText, truncateHtmlToText } from '@/utils';
 
 export const ServiceTable: React.FC<ServiceTableProps> = ({
   services,
@@ -155,16 +155,15 @@ export const ServiceTable: React.FC<ServiceTableProps> = ({
                   >
                     <TableCell colSpan={8}>
                       <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 py-2">
-                        <div>
-                          <div className="font-medium text-gray-500 mb-1">
-                            Mô tả ngắn
-                          </div>
-                          <div className="flex items-start gap-1">
-                            <div className="w-2 h-2 mt-1 bg-gray-400 rounded-full"></div>
-                            {truncateText(item.content, 100)}
-                          </div>
-                        </div>
-
+                        <div className="font-medium text-gray-500 mb-1">
+                          Mô tả chi tiết
+                        </div>{' '}
+                        <div
+                          className="rich-text-content mt-4"
+                          dangerouslySetInnerHTML={{
+                            __html: truncateHtmlToText(item.content, 80),
+                          }}
+                        />
                         <div>
                           <div className="font-medium text-gray-500 mb-1">
                             Mô tả chi tiết
@@ -183,7 +182,6 @@ export const ServiceTable: React.FC<ServiceTableProps> = ({
                               : item.createdAt}
                           </div>
                         </div>
-
                         <div>
                           <div className="font-medium text-gray-500 mb-1">
                             Ngày sửa

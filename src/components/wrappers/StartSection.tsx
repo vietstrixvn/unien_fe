@@ -31,7 +31,7 @@ export function StatsSection() {
 
   return (
     <div ref={sectionRef} className="w-full bg-main py-16 px-4">
-      <div className="max-w-7xl mx-auto px-4">
+      <Container className=" mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-10 text-center">
           <StatCounter
             value={50}
@@ -58,7 +58,7 @@ export function StatsSection() {
             isVisible={isVisible}
           />
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

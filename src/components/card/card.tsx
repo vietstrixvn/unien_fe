@@ -3,7 +3,7 @@
 import type { CardProps } from '@/types';
 import Link from 'next/link';
 import { CustomImage } from '../design/image.component';
-import { Arrows } from '@/assetts/icons';
+import { Arrows } from '@/assets/icons';
 import { truncateText } from '@/utils';
 
 export function PostCard({ _id, title, slug, content, file, type }: CardProps) {

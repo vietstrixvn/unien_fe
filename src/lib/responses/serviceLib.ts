@@ -1,6 +1,6 @@
 'use client';
 
-import { useServiceDetail, useServiceList } from '@/hooks/service/useService';
+import { useServiceDetail, useServiceList } from '@/hooks';
 import type { Filters } from '@/types';
 import type { ServiceDetail } from '@/types/types';
 
@@ -15,10 +15,8 @@ export const ServiceList = (
     refreshKey
   );
 
-  // Đảm bảo có giá trị mặc định cho pagination
   const pagination = data?.pagination ?? { current_page: 1, total_page: 1 };
 
-  // Lấy danh sách tài liệu (docs) từ API
   const services = data?.results ?? [];
 
   return {

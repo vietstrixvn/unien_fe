@@ -10,7 +10,7 @@ export function RecentInvoices() {
     limit: 5,
   };
   const { contacts, isLoading, isError } = ContactList(1, params, 0);
-
+  console.log(contacts);
   if (isLoading) {
     return <LoadingSpin />;
   }

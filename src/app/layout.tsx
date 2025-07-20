@@ -1,5 +1,5 @@
 import { Montserrat } from 'next/font/google';
-import '../assetts/style/globals.css';
+import '../assets/style/globals.css';
 import {
   metadata as siteMetadata,
   viewport as siteViewport,

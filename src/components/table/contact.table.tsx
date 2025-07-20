@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 // UI Components
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import {
   Button,
   Table,

@@ -34,7 +34,7 @@ export default function BlogListData() {
   const filter = useMemo(
     () => ({
       button: {
-        href: '/admin/blog/create-blog',
+        href: '/admin/blog/create_blog',
         title: 'Tạo Bài Viết',
       },
       values: 'vll',

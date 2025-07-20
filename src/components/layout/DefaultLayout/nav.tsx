@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/helpers/utils';
 import { navItems } from '@/lib';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import { CustomImage } from '@/components/design/image.component';
 
 export function Navbar() {

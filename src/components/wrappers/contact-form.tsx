@@ -1,71 +1,66 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useState } from 'react';
 import type { CreateContactItem } from '@/types';
 import { useCreateContact } from '@/hooks/contact/useContact';
-import { logDebug } from '@/utils/logger';
-import { toast } from 'sonner';
 import contactInfo from '@/data/contact.data.json';
 import appInfo from '@/data/app.data.json';
 import { SectionHeader } from './SectionHeader';
+import { contactSentFormSchema } from '@/utils';
+import { useForm } from 'react-hook-form';
+import type { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export function ContactComponent() {
-  const [loading, setLoading] = useState(false);
+  const formRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [contactData, setContactData] = useState<CreateContactItem>({
-    name: '',
-    email: '',
-    phone_number: '',
-    message: '',
+  const form = useForm<z.infer<typeof contactSentFormSchema>>({
+    resolver: zodResolver(contactSentFormSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone_number: '',
+      message: '',
+    },
   });
 
   const { mutate: createContact } = useCreateContact();
 
-  const handleSentContact = async () => {
-    logDebug('Final Product Data:', contactData);
-    setLoading(true);
-    try {
-      if (contactData.name.trim() === '') {
-        toast.error('Name is required');
-        setLoading(false);
-        return;
-      }
+  const handleSentContact = (values: z.infer<typeof contactSentFormSchema>) => {
+    setIsLoading(true);
 
-      if (contactData.email.trim() === '') {
-        toast.error('Email is required');
-        setLoading(false);
-        return;
-      }
+    const contactData: CreateContactItem = {
+      name: values.name,
+      email: values.email,
+      phone_number: values.phone_number,
+      message: values.message,
+    };
 
-      if (contactData.message.trim() === '') {
-        toast.error('Message is required');
-        setLoading(false);
-        return;
-      }
+    createContact(contactData, {
+      onSuccess: () => {
+        form.reset({
+          name: '',
+          email: '',
+          phone_number: '',
+          message: '',
+        });
+        setIsLoading(false);
 
-      const productDataToSend: CreateContactItem = {
-        ...contactData,
-      };
-
-      createContact(productDataToSend);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // Reset state mà không gây re-render liên tục
-      setContactData({
-        name: '',
-        email: '',
-        phone_number: '',
-        message: '',
-      });
-    } catch (error) {
-      console.error(error);
-      toast.error('Error sent contact.');
-    } finally {
-      setLoading(false);
-    }
+        form.clearErrors();
+      },
+      onError: (error: any) => {
+        form.setError('root', {
+          type: 'manual',
+          message: error.message || 'Error',
+        });
+        setIsLoading(false);
+      },
+    });
   };
 
   return (
@@ -116,19 +111,16 @@ export function ContactComponent() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <form className="grid gap-4">
+          <div className="lg:col-span-2" ref={formRef}>
+            <form
+              className="grid gap-4"
+              onSubmit={form.handleSubmit(handleSentContact)}
+            >
               <div className="space-y-2">
                 <Input
                   id="Name"
                   placeholder="Tên"
-                  value={contactData.name}
-                  onChange={(e) =>
-                    setContactData((prevData) => ({
-                      ...prevData,
-                      name: e.target.value,
-                    }))
-                  }
+                  {...form.register('name')}
                   required
                   className="border-gray-300"
                 />
@@ -139,13 +131,7 @@ export function ContactComponent() {
                     id="email"
                     type="email"
                     placeholder="unien@unien.com"
-                    value={contactData.email}
-                    onChange={(e) =>
-                      setContactData((prevData) => ({
-                        ...prevData,
-                        email: e.target.value,
-                      }))
-                    }
+                    {...form.register('email')}
                     required
                     className="border-gray-300"
                   />
@@ -155,13 +141,7 @@ export function ContactComponent() {
                     id="phone_number"
                     type="tel"
                     placeholder="(+00)000000"
-                    value={contactData.phone_number}
-                    onChange={(e) =>
-                      setContactData((prevData) => ({
-                        ...prevData,
-                        phone_number: e.target.value,
-                      }))
-                    }
+                    {...form.register('phone_number')}
                     className="border-gray-300"
                   />
                 </div>
@@ -170,23 +150,17 @@ export function ContactComponent() {
                 <Textarea
                   id="message"
                   placeholder="Message"
-                  value={contactData.message}
-                  onChange={(e) =>
-                    setContactData((prevData) => ({
-                      ...prevData,
-                      message: e.target.value,
-                    }))
-                  }
+                  {...form.register('message')}
                   className="min-h-[120px] border-gray-300"
                 />
               </div>
               <Button
                 type="submit"
-                disabled={loading}
-                onClick={handleSentContact}
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-medium"
+                variant="outline"
+                disabled={isLoading}
+                className="w-full bg-main hover:bg-yellow-600 text-black font-medium"
               >
-                {loading ? 'Đang Gửi...' : 'Gửi'}
+                {isLoading ? 'Đang Gửi...' : 'Gửi'}
               </Button>
             </form>
           </div>

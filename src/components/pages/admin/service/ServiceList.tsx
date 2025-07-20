@@ -29,7 +29,7 @@ export default function ServiceListDataAdmin() {
   const filter = useMemo(
     () => ({
       button: {
-        href: '/admin/service/create-service',
+        href: '/admin/service/create_service',
         title: 'Tạo Dịch Vụ',
       },
       values: 'vll',

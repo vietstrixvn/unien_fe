@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { cn } from '@/utils/helpers/utils';
+import { cn } from '@/utils';
 
 type Particle = {
   x: number;

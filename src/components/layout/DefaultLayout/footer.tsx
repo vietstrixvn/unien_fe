@@ -76,7 +76,7 @@ export function Footer() {
                 <span className="text-white"> {appData.AppData.mail}</span>
               </p>
               <p className="text-gray-400 ">
-                Tel: <span className="text-white">"+84 (358)-823-228"</span>
+                Tel: <span className="text-white"> {appData.AppData.tel}</span>
               </p>
               <p className="text-gray-400 ">
                 MST : <span className="text-white"> 3703266418</span>

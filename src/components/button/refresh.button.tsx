@@ -1,6 +1,6 @@
 // components/button/RefreshButton.tsx
 
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import { Button } from '@/components';
 import type { RefreshButtonProps } from '@/types';
 

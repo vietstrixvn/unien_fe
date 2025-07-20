@@ -1,6 +1,5 @@
 'use client';
 
-import { PushButton } from '@/components';
 import { Container } from '@/components';
 import { Heading } from '@/components/design/Heading';
 import { AdminBreadCrumb } from '@/components/layout/AdminLayout/admin.breadcrumb';

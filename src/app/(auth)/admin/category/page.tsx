@@ -42,7 +42,7 @@ import { Form } from '@/components/ui/form';
 import { useAuthStore } from '@/store/authStore';
 import SelectCategoryFilter from '@/components/pages/admin/categoryFilter';
 import { Heading } from '@/components/design/Heading';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import { AdminBreadCrumb } from '@/components/layout/AdminLayout/admin.breadcrumb';
 import { AdminContainer } from '@/components/wrappers/admin.wrapper';
 

@@ -3,9 +3,6 @@
 import { useParams } from 'next/navigation';
 import { BackButton } from '@/components/button/back.button';
 import { BlogDetailData } from '@/lib';
-import remarkGfm from 'remark-gfm';
-import { CodeBlockComponent } from '@/components/richText/ContentSection';
-import ReactMarkdown from 'react-markdown';
 import { CustomImage, LoadingSpin } from '@/components';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
 
@@ -41,7 +38,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="space-y-6 mb-12">
+          {/* <div className="space-y-6 mb-12">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -72,7 +69,7 @@ export default function Page() {
             >
               {blog.description}
             </ReactMarkdown>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

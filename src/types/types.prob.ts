@@ -111,3 +111,31 @@ export interface HeaderProps {
 export interface WelcomeBannerProps {
   message?: string;
 }
+
+// Richtext
+
+export interface RichTextEditorProps {
+  className?: string;
+  initialContent?: string;
+  onContentChange?: (html: string, text: string) => void;
+  onChange?: (content: { html: string; text: string; json: any }) => void;
+}
+
+/**
+ * ==========================
+ *  @MEDIA PROPS
+ *  @DESCRIPTION : This file exports all the media props used in the application.
+ *  @VERSION 1.0.0
+ * ==========================
+ */
+
+export interface ImagePlaceholderOptions {
+  HTMLAttributes: Record<string, any>;
+  onUpload?: (url: string) => void;
+  onError?: (error: string) => void;
+}
+
+export interface ImageUploadPreviewProps {
+  onImageUploaded?: (imageUrl: string, imageId: string) => void;
+  type?: string;
+}

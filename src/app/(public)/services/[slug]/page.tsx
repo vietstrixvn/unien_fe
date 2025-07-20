@@ -4,16 +4,12 @@ import { useParams } from 'next/navigation';
 import { NoResultsFound } from '@/components/design/NoResultsFound';
 import RelatedPosts from '@/components/pages/blog/RelatedPosts';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
-import { CodeBlockComponent } from '@/components/richText/ContentSection';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import {
   BackButton,
   Container,
   ContactSection,
   CustomImage,
   LoadingSpin,
-  SEO,
   CopyLinkButton,
 } from '@/components';
 import { ROUTES, ServiceDetailData } from '@/lib';
@@ -94,43 +90,16 @@ export default function Page() {
               />
             </div>
 
-            <div className="prose prose-lg max-w-none">
+            <div>
               <h2 className="text-3xl font-bold mt-12 mb-6">
                 {service?.content}
               </h2>
-
-              <div className="leading-relaxed">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    blockquote: ({ children }) => (
-                      <blockquote className="custom-blockquote">
-                        {children}
-                      </blockquote>
-                    ),
-                    code: ({ inline, className, children, ...props }: any) => {
-                      const match = /language-(\w+)/.exec(className || '');
-
-                      if (!inline) {
-                        return (
-                          <CodeBlockComponent
-                            value={String(children).replace(/\n$/, '')}
-                            language={match ? match[1] : undefined}
-                          />
-                        );
-                      }
-
-                      return (
-                        <code className="inline-code" {...props}>
-                          {children}
-                        </code>
-                      );
-                    },
-                  }}
-                >
-                  {service?.description}
-                </ReactMarkdown>
-              </div>
+              <div
+                className="rich-text-content mt-4"
+                dangerouslySetInnerHTML={{
+                  __html: service.content ?? '',
+                }}
+              />
             </div>
           </div>
           <div className="col-span-12 lg:col-span-4 p-6 lg:sticky lg:top-24 h-fit">

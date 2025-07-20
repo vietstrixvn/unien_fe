@@ -7,9 +7,6 @@ import { Container } from '@/components/wrappers/Container';
 import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
 import { ServiceDetailData } from '@/lib/responses/serviceLib';
 import { BackButton } from '@/components/button/back.button';
-import { CodeBlockComponent } from '@/components/richText/ContentSection';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 export default function Page() {
   const { slug } = useParams();
@@ -106,37 +103,6 @@ export default function Page() {
 
         <div className="prose prose-lg max-w-none">
           <h2 className="text-3xl font-bold mt-12 mb-6">{service?.content}</h2>
-
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              blockquote: ({ children }) => (
-                <blockquote className="custom-blockquote">
-                  {children}
-                </blockquote>
-              ),
-              code: ({ inline, className, children, ...props }: any) => {
-                const match = /language-(\w+)/.exec(className || '');
-
-                if (!inline) {
-                  return (
-                    <CodeBlockComponent
-                      value={String(children).replace(/\n$/, '')}
-                      language={match ? match[1] : undefined}
-                    />
-                  );
-                }
-
-                return (
-                  <code className="inline-code" {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          >
-            {service?.description}
-          </ReactMarkdown>
         </div>
       </article>
     </Container>

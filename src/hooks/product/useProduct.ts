@@ -6,7 +6,6 @@ import type {
   UpdateStatus,
   Filters,
   FetchProductListResponse,
-  ProductDetailResponse,
   CreateProductItem,
   ProductDetail,
 } from '@/types';

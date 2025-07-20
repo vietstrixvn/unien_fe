@@ -1,5 +1,5 @@
 'use client';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 import { NoResultsFound, PostCard } from '@/components';
 
 export function BlogListSection({

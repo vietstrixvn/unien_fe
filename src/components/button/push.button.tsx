@@ -4,7 +4,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import type { PushButtonProps } from '@/types';
-import { Arrows } from '@/assetts/icons';
+import { Arrows } from '@/assets/icons';
 
 export const PushButton: React.FC<PushButtonProps> = ({ href, label }) => {
   const router = useRouter();

@@ -1,18 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { BackButton } from '@/components/button/back.button';
 import { ProjectDetailData } from '@/lib/responses/projectLib';
 import { CardContent } from '@/components/ui/card';
-import { Calendar, Clock, Edit, Eye, Trash, User } from 'lucide-react';
+import { Calendar, Clock, Edit, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@radix-ui/react-separator';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { CodeBlockComponent } from '@/components/richText/ContentSection';
+
 import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
 import { LoadingSpin } from '@/components';
 
@@ -169,34 +167,6 @@ export default function Page() {
         </div>
 
         <h3 className="text-sm font-medium">Description</h3>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            blockquote: ({ children }) => (
-              <blockquote className="custom-blockquote">{children}</blockquote>
-            ),
-            code: ({ inline, className, children, ...props }: any) => {
-              const match = /language-(\w+)/.exec(className || '');
-
-              if (!inline) {
-                return (
-                  <CodeBlockComponent
-                    value={String(children).replace(/\n$/, '')}
-                    language={match ? match[1] : undefined}
-                  />
-                );
-              }
-
-              return (
-                <code className="inline-code" {...props}>
-                  {children}
-                </code>
-              );
-            },
-          }}
-        >
-          {project.description}
-        </ReactMarkdown>
       </div>
     </>
   );

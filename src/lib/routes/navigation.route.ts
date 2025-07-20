@@ -1,4 +1,4 @@
-import { ComponentsIcons } from '@/assetts/icons';
+import { ComponentsIcons } from '@/assets/icons';
 import { ROUTES } from './routes';
 
 export const Name = {

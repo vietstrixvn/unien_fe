@@ -14,7 +14,7 @@ import {
 import { CategoryList } from '@/lib';
 import { useState, useMemo, useCallback, useRef } from 'react';
 import type { AdminFilterProps } from '@/types';
-import { Icons } from '@/assetts/icons';
+import { Icons } from '@/assets/icons';
 
 export function AdminFilter({
   filter,

@@ -157,7 +157,6 @@ const CreateContact = async (newContact: CreateContactItem) => {
     return response.data;
   } catch (error: any) {
     console.error('Error creating contact:', error.response?.data);
-    logDebug('🐞 Data:', error.response?.data);
     throw new Error(
       error.response?.data?.message || 'Failed to create contact'
     );
@@ -172,12 +171,11 @@ const useCreateContact = () => {
       return CreateContact(newContact);
     },
     onSuccess: () => {
-      toast.success(' Contact sent successfully!');
+      toast.success('Đã gửi liên hệ thành công!');
       queryClient.invalidateQueries({ queryKey: ['contactList'] });
     },
     onError: (error: any) => {
       console.error(error.message || 'Failed to create  contact.');
-      logDebug('🐞 Data:', error.message);
     },
   });
 };

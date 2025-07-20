@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentsIcons } from '@/assetts/icons';
+import { ComponentsIcons } from '@/assets/icons';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {

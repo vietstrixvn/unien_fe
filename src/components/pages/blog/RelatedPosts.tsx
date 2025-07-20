@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { BlogList } from '@/lib';
 import { CustomImage, NoResultsFound } from '@/components';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { truncateText } from '@/utils';
+import { Arrows } from '@/assets/icons';
 
 export default function RelatedPosts() {
   const { blogs, isLoading, isError } = BlogList(1, { limit: 3 }, 0);
@@ -44,7 +44,7 @@ export default function RelatedPosts() {
               href="/blog"
               className="inline-flex items-center gap-2 bg-orange-200 hover:bg-orange-300 transition-colors px-4 py-2 rounded-full text-sm font-medium"
             >
-              View all blog <ArrowRight size={16} />
+              Xem thêm <Arrows.ArrowRight size={16} />
             </Link>
           </div>
         </div>

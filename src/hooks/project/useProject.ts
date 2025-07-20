@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type {
   FetchProjectListResponse,
-  ProjectDetailResponse,
   CreateProjectItem,
   ProjectDetail,
 } from '@/types/types';

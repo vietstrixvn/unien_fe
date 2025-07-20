@@ -5,7 +5,7 @@ import { AppSidebar } from './app-sidebar';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components';
 import { Footer } from './adminFooter';
-import { DefaultLayoutProps } from '@/types';
+import type { DefaultLayoutProps } from '@/types';
 
 export const AdminLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
